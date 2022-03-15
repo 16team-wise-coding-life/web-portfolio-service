@@ -1,5 +1,7 @@
 import React from 'react';
 
-export default function Award() {
+function Award() {
   return <div>Award</div>;
 }
+
+export default Award;
