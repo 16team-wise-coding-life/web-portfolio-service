@@ -1,7 +1,8 @@
 import React, { useState } from 'react';
 import { Button, Form } from 'react-bootstrap';
+import * as Api from '../../api';
 
-function EducationEditForm() {
+const EducationEditForm = () => {
   const [school, setSchool] = useState('');
   const [major, setMajor] = useState('');
   const [degree, setDegree] = useState('');
@@ -33,6 +34,6 @@ function EducationEditForm() {
       </Button>
     </Form>
   );
-}
+};
 
 export default EducationEditForm;
