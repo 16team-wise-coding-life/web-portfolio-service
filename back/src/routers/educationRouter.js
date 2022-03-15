@@ -29,6 +29,22 @@ educationRouter.post('/education/create', login_required, async (req, res, next)
   } catch (error) {
     next(error);
   }
+
+  educationRouter.get('/educations/:id', login_required, async (req, res, next) => {
+    try {
+      const education_id = req.params.id;
+      const currentEducationInfo = await EducationService.getEducationInfo({
+        education_id,
+      });
+
+      if (currentEducationInfo.errorMessage) {
+        throw new Error(currentEducationInfo.errorMessage);
+      }
+      res.status(200).send(currentEducationInfo);
+    } catch (error) {
+      next(error);
+    }
+  });
 });
 
 export { educationRouter };

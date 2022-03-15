@@ -17,6 +17,17 @@ class EducationService {
 
     return createdNewEducation;
   }
+
+  static async getEducationInfo({ education_id }) {
+    const education = await Education.findById({ education_id });
+
+    if (!education) {
+      const errorMessage = '해당 이메일은 학력이 없습니다.';
+      return { errorMessage };
+    }
+
+    return education;
+  }
 }
 
 export { EducationService };
