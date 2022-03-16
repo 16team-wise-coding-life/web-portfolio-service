@@ -26,6 +26,36 @@ class certificateAuthService {
     }
     return certificate;
   }
+
+  // 수정
+  static async setCertificate({ certificate_id, toUpdate }) {
+    let certificate = await Certificate.findById({ certificate_id });
+
+    if (!certificate) {
+      const errorMessage = '자격증 내역이 없습니다. 다시 한 번 확인해 주세요.';
+      return { errorMessage };
+    }
+
+    if (toUpdate.title) {
+      const fieldToUpdate = 'title';
+      const newValue = toUpdate.title;
+      certificate = await Certificate.update({ certificate_id, fieldToUpdate, newValue });
+    }
+
+    if (toUpdate.description) {
+      const fieldToUpdate = 'description';
+      const newValue = toUpdate.description;
+      certificate = await Certificate.update({ certificate_id, fieldToUpdate, newValue });
+    }
+
+    if (toUpdate.when_date) {
+      const fieldToUpdate = 'when_date';
+      const newValue = toUpdate.when_date;
+      certificate = await Certificate.update({ certificate_id, fieldToUpdate, newValue });
+    }
+
+    return certificate;
+  }
 }
 
 export { certificateAuthService };
