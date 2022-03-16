@@ -2,19 +2,14 @@ import React, { useState } from 'react';
 import { Button, Form, Card, Col, Row } from 'react-bootstrap';
 import * as Api from '../../api';
 
-function AwardEditForm({ setIsEditing }) {
-  const testObj = {
-    title: '개근상',
-    description: '빠짐없이 출석하였음',
-  };
-
-  const [title, setTitle] = useState(testObj.title);
-  const [description, setDescription] = useState(testObj.description);
-
-  const handleSubmit = e => {
+function AwardEditForm({ title, setTitle, description, setDescription, id, setIsEditing }) {
+  const handleSubmit = async e => {
     e.preventDefault();
-    console.log(title, description);
     // title, description 정보 서버에 보내서 변경하기 (PUT -> awards/:id)
+    const res = await Api.put(`awards/${id}`, { title, description });
+    console.log(res.data);
+    setTitle(res.data.title);
+    setDescription(res.data.description);
     setIsEditing(false);
   };
 
