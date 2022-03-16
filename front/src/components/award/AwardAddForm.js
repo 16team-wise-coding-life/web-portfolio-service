@@ -8,10 +8,15 @@ function AwardAddForm({ portfolioOwnerId, setIsAdding }) {
 
   const handleSubmit = e => {
     e.preventDefault();
-    console.log(title, description);
-    // portfolioOwnerId, title, description 정보 서버에 보내서 변경하기
-    // (POST -> award/create)
-    setIsAdding(false);
+
+    Api.post('award/create', {
+      user_id: portfolioOwnerId,
+      title,
+      description,
+    }).then(res => {
+      setIsAdding(false);
+      console.log(res.data);
+    });
   };
 
   return (
