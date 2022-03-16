@@ -1,14 +1,14 @@
 import React from 'react';
 import { Button, Card, Col, Row } from 'react-bootstrap';
 
-const EducationCard = ({education, setIsEditing, isEditable}) => {
+function EducationCard({ education, setIsEditing, isEditable }) {
   return (
     <Card.Text>
       <Row>
         <Col>
           <span>{education.school}</span>
           <br />
-          <span className="text-muted">{education.major}</span>
+          <span className="text-muted">{`${education.major} ${education.value}`}</span>
         </Col>
         {isEditable && (
           <Col>
@@ -20,5 +20,5 @@ const EducationCard = ({education, setIsEditing, isEditable}) => {
       </Row>
     </Card.Text>
   );
-};
+}
 export default EducationCard;

@@ -2,7 +2,7 @@ import React, { useState } from 'react';
 import { Button, Col, Form, Row } from 'react-bootstrap';
 import * as Api from '../../api';
 
-const EducationEditForm = ({currentEducation, setEducations, setIsEditing}) => {
+function EducationEditForm({ currentEducation, setEducations, setIsEditing }) {
   const [school, setSchool] = useState(currentEducation.school);
   const [major, setMajor] = useState(currentEducation.major);
   const [position, setPosition] = useState(currentEducation.position);
@@ -54,6 +54,6 @@ const EducationEditForm = ({currentEducation, setEducations, setIsEditing}) => {
       </Form.Group>
     </Form>
   );
-};
+}
 
 export default EducationEditForm;

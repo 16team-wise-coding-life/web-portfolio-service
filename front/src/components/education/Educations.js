@@ -4,12 +4,14 @@ import * as Api from '../../api';
 import Education from './Education';
 import EducationAddForm from './EducationAddForm';
 
-const Educations = (portfolioOwnerId, isEditable) => {
+function Educations(portfolioOwnerId, isEditable) {
   const [educations, setEducation] = useState([]);
   const [isAdding, setIsAdding] = useState(false);
 
   useEffect(() => {
-    Api.get('educationlist', portfolioOwnerId).then(res => setEducation(res.data));
+    const {portfolioOwnerId: id} = portfolioOwnerId
+    console.log('portfolioOwnerId', portfolioOwnerId);
+    Api.get('educationlist', id).then(res => setEducation(res.data));
   }, [portfolioOwnerId]);
 
   return (
@@ -26,7 +28,9 @@ const Educations = (portfolioOwnerId, isEditable) => {
           {isEditable && (
             <Row>
               <Col>
-                <Button className="mt-3" onClick={() => setIsAdding(true)}>+</Button>
+                <Button className="mt-3" onClick={() => setIsAdding(true)}>
+                  +
+                </Button>
               </Col>
             </Row>
           )}
@@ -35,5 +39,5 @@ const Educations = (portfolioOwnerId, isEditable) => {
       </Card>
     </>
   );
-};
+}
 export default Educations;

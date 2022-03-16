@@ -2,7 +2,7 @@ import React, { useState } from 'react';
 import { Button, Col, Form, Row } from 'react-bootstrap';
 import * as Api from '../../api';
 
-const EducationAddForm = ({ portfolioOwnerId, setEducation, setIsAdding }) => {
+function EducationAddForm({ portfolioOwnerId, setEducation, setIsAdding }) {
   const [school, setSchool] = useState('');
   const [major, setMajor] = useState('');
   const [position, setPosition] = useState('');
@@ -53,6 +53,6 @@ const EducationAddForm = ({ portfolioOwnerId, setEducation, setIsAdding }) => {
       </Form.Group>
     </Form>
   );
-};
+}
 
 export default EducationAddForm;
