@@ -1,20 +1,21 @@
 import { Schema, model } from 'mongoose';
 
-const UserSchema = new Schema(
+const EducationSchema = new Schema(
   {
-    id: {
+    user_id: {
       type: String,
       required: true,
     },
-    email: {
+
+    school: {
       type: String,
       required: true,
     },
-    name: {
+    major: {
       type: String,
       required: true,
     },
-    password: {
+    position: {
       type: String,
       required: true,
     },
@@ -29,6 +30,6 @@ const UserSchema = new Schema(
   }
 );
 
-const UserModel = model('User', UserSchema);
+const EducationModel = model('Education', EducationSchema);
 
-export { UserModel };
+export { EducationModel };
