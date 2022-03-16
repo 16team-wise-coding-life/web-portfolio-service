@@ -2,7 +2,7 @@ import React, { useState } from 'react';
 import { Button, Col, Form, Row } from 'react-bootstrap';
 import * as Api from '../../api';
 
-const EducationAddForm = (portfolioOwnerId, setEducation, setIsAdding) => {
+const EducationAddForm = ({ portfolioOwnerId, setEducation, setIsAdding }) => {
   const [school, setSchool] = useState('');
   const [major, setMajor] = useState('');
   const [position, setPosition] = useState('');
@@ -25,10 +25,10 @@ const EducationAddForm = (portfolioOwnerId, setEducation, setIsAdding) => {
 
   return (
     <Form onSubmit={handleSubmit}>
-      <Form.Group controlId="educationAddSchool">
+      <Form.Group controlId="educationAddSchool" className="mt-3">
         <Form.Control type="text" placeholder="학교 이름" value={school} onChange={e => setSchool(e.target.value)} />
       </Form.Group>
-      <Form.Group controlId="educationAddMajor">
+      <Form.Group controlId="educationAddMajor" className="mt-3">
         <Form.Control type="text" placeholder="전공" value={major} onChange={e => setMajor(e.target.value)} />
       </Form.Group>
 
@@ -39,10 +39,10 @@ const EducationAddForm = (portfolioOwnerId, setEducation, setIsAdding) => {
         <Form.Check inline label="박사졸업" id="radio-add4" type="radio" name="position" value="박사졸업" checked={position === '박사졸업'} onChange={e => setPosition(e.target.value)} />
       </div>
 
-      <Form.Group>
+      <Form.Group as={Row} className="mt-3">
         <Row>
           <Col>
-            <Button variant="primary" type="submit">
+            <Button variant="primary" type="submit" className="me-2">
               확인
             </Button>
             <Button variant="secondary" type="submit" onClick={() => setIsAdding(false)}>
