@@ -29,8 +29,13 @@ class EducationService {
     return education;
   }
 
+  static async getEducations({ user_id }) {
+    const educations = await Education.findById({ user_id });
+    return educations;
+  }
+
   static async setEducation({ education_id, toUpdate }) {
-    let education = await Education.findById({ education_id });
+    let education = await Education.findAllById({ education_id });
 
     if (!education) {
       const errorMessage = '학력이 존재하지 않습니다.';
