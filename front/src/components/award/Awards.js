@@ -20,8 +20,8 @@ function Awards({ portfolioOwnerId, isEditable }) {
       <Card>
         <Card.Body>
           <Card.Title>수상이력</Card.Title>
-          {awards.map(a => {
-            return <AwardCard key={a._id} awardCard={a} isEditable={isEditable} />;
+          {awards.map(award => {
+            return <AwardCard key={award._id} awardCard={award} isEditable={isEditable} />;
           })}
           <Row className='mt-3 text-center mb-4'>
             <Col>

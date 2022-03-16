@@ -10,7 +10,9 @@ function AwardCard({ awardCard, isEditable }) {
   // const [description, setDescription] = useState(award.description);
   // const [id, setId] = useState(award._id);
 
-  return <>{isEditing ? <AwardEditForm award={award} setAward={setAward} setIsEditing={setIsEditing} /> : <Award award={award} setAward={setAward} isEditable={isEditable} />}</>;
+  return (
+    <>{isEditing ? <AwardEditForm award={award} setAward={setAward} setIsEditing={setIsEditing} /> : <Award award={award} setAward={setAward} setIsEditing={setIsEditing} isEditable={isEditable} />}</>
+  );
 }
 
 export default AwardCard;
