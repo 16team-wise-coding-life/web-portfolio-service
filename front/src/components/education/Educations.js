@@ -5,8 +5,8 @@ import Education from './Education';
 import EducationAddForm from './EducationAddForm';
 
 const Educations = (portfolioOwnerId, isEditable) => {
-  const [isAdding, setIsAdding] = useState(false);
   const [educations, setEducation] = useState([]);
+  const [isAdding, setIsAdding] = useState(false);
 
   useEffect(() => {
     Api.get('educationlist', portfolioOwnerId).then(res => setEducation(res.data));
@@ -26,7 +26,7 @@ const Educations = (portfolioOwnerId, isEditable) => {
           {isEditable && (
             <Row>
               <Col>
-                <Button onClick={() => setIsAdding(true)}>+</Button>
+                <Button className="mt-3" onClick={() => setIsAdding(true)}>+</Button>
               </Col>
             </Row>
           )}
