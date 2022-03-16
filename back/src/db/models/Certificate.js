@@ -19,6 +19,11 @@ class Certificate {
     const certificate = await CertificateModel.findOneAndUpdate(filter, update, option);
     return certificate;
   }
+
+  static async findAllByUserId({ user_id }) {
+    const certificates = await CertificateModel.find({ user_id: user_id });
+    return certificates;
+  }
 }
 
 export { Certificate };

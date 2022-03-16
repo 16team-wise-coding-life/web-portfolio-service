@@ -74,4 +74,16 @@ certificateAuthRouter.put('/certificates/:id', async function (req, res, next) {
   }
 });
 
+// 특정 유저 자격증 목록 조회 API
+certificateAuthRouter.get('/certificatelist/:user_id', async function (req, res, next) {
+  try {
+    const user_id = req.params.user_id;
+    const certificates = await certificateAuthService.getCertificates({ user_id });
+
+    res.status(200).send(certificates);
+  } catch (error) {
+    next(error);
+  }
+});
+
 export { certificateAuthRouter };
