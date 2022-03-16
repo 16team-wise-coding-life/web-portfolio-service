@@ -5,7 +5,10 @@ import { certificateAuthService } from '../services/certificateService';
 
 const certificateAuthRouter = Router();
 
-certificateAuthRouter.post('/certificate/create', login_required, async function (req, res, next) {
+certificateAuthRouter.use(login_required);
+
+// create API
+certificateAuthRouter.post('/certificate/create', async function (req, res, next) {
   try {
     if (is.emptyObject(req.body)) {
       throw new Error('headers의 Content-Type을 application/json으로 설정해주세요');
