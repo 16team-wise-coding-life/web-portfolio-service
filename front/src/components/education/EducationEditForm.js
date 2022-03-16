@@ -2,13 +2,26 @@ import React, { useState } from 'react';
 import { Button, Form } from 'react-bootstrap';
 import * as Api from '../../api';
 
-const EducationEditForm = () => {
-  const [school, setSchool] = useState('');
-  const [major, setMajor] = useState('');
-  const [degree, setDegree] = useState('');
+const EducationEditForm = (currentEducation, setEducations, setIsEditing) => {
+  const [school, setSchool] = useState(currentEducation.school);
+  const [major, setMajor] = useState(currentEducation.major);
+  const [position, setPosition] = useState(currentEducation.position);
 
-  const handleSubmit = e => {
+  const handleSubmit = async e => {
     e.preventDefault();
+
+    const user_id = currentEducation.user_id;
+
+    await Api.put(`educations/${currentEducation.id}`, {
+      user_id,
+      school,
+      major,
+      position,
+    });
+
+    const res = await Api.get('educationlist', user_id);
+    setEducations(res.data);
+    setIsEditing(false);
   };
 
   return (
@@ -21,15 +34,15 @@ const EducationEditForm = () => {
       </Form.Group>
 
       <div key={`inline-radio`} className="mb-3 mt-3">
-        <Form.Check inline label="재학중" id="radio1" type="radio" name="position" value="재학중" checked={degree === '재학중'} onChange={e => setDegree(e.target.value)} />
-        <Form.Check inline label="학사졸업" id="radio2" type="radio" name="position" value="학사졸업" checked={degree === '학사졸업'} onChange={e => setDegree(e.target.value)} />
-        <Form.Check inline label="석사졸업" id="radio3" type="radio" name="position" value="석사졸업" checked={degree === '석사졸업'} onChange={e => setDegree(e.target.value)} />
-        <Form.Check inline label="박사졸업" id="radio4" type="radio" name="position" value="박사졸업" checked={degree === '박사졸업'} onChange={e => setDegree(e.target.value)} />
+        <Form.Check inline label="재학중" id="radio-edit1" type="radio-e" name="position" value="재학중" checked={position === '재학중'} onChange={e => setPosition(e.target.value)} />
+        <Form.Check inline label="학사졸업" id="radio-edit2" type="radio" name="position" value="학사졸업" checked={position === '학사졸업'} onChange={e => setPosition(e.target.value)} />
+        <Form.Check inline label="석사졸업" id="radio-edit3" type="radio" name="position" value="석사졸업" checked={position === '석사졸업'} onChange={e => setPosition(e.target.value)} />
+        <Form.Check inline label="박사졸업" id="radio-edit4" type="radio" name="position" value="박사졸업" checked={position === '박사졸업'} onChange={e => setPosition(e.target.value)} />
       </div>
       <Button variant="primary" type="submit">
         확인
       </Button>
-      <Button variant="secondary" type="submit">
+      <Button variant="secondary" type="submit" onClick={() => setIsEditing(false)}>
         취소
       </Button>
     </Form>
