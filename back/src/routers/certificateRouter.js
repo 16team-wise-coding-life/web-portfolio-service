@@ -35,4 +35,20 @@ certificateAuthRouter.post('/certificate/create', async function (req, res, next
   }
 });
 
+// 특정 게시글 조회 API
+certificateAuthRouter.get('/certificates/:id', async function (req, res, next) {
+  try {
+    const certificate_id = req.params.id;
+    const currentCertificateInfo = await certificateAuthService.getCertificateInfo({ certificate_id });
+
+    if (currentCertificateInfo.errorMessage) {
+      throw new Error(currentUserInfo.errorMessage);
+    }
+
+    res.status(200).send(currentCertificateInfo);
+  } catch (error) {
+    next(error);
+  }
+});
+
 export { certificateAuthRouter };

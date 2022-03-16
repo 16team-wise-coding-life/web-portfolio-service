@@ -1,18 +1,30 @@
 import { Certificate } from '../db'; // from을 폴더(db) 로 설정 시, 디폴트로 index.js 로부터 import함.
 
 class certificateAuthService {
+  // db에 저장
   static async addCertificate({ user_id, title, description, when_date }) {
     if (!title || !description) {
       const errorMessage = '제목과 상세내역을 입력해 주세요.';
       return { errorMessage };
     }
+
     const newCertificate = { user_id, title, description, when_date };
 
-    // db에 저장
     const createdCertificate = await Certificate.create({ newCertificate });
-    createdCertificate.errorMessage = null; // 문제 없이 db 저장 완료되었으므로 에러가 없음.
+    createdCertificate.errorMessage = null;
 
     return createdCertificate;
+  }
+
+  // db 조회
+  static async getCertificateInfo({ certificate_id }) {
+    const certificate = await Certificate.findById({ certificate_id });
+
+    if (!certificate) {
+      const errorMessage = '해당 자격증 내역이 없습니다. 다시 한 번 확인해 주세요.';
+      return { errorMessage };
+    }
+    return certificate;
   }
 }
 
