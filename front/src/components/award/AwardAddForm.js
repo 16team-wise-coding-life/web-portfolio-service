@@ -2,7 +2,7 @@ import React, { useState } from 'react';
 import { Button, Form, Card, Col, Row } from 'react-bootstrap';
 import * as Api from '../../api';
 
-function AwardAddForm({ portfolioOwnerId, setIsAdding }) {
+function AwardAddForm({ awards, setAwards, portfolioOwnerId, setIsAdding }) {
   const [title, setTitle] = useState('');
   const [description, setDescription] = useState('');
 
@@ -14,8 +14,8 @@ function AwardAddForm({ portfolioOwnerId, setIsAdding }) {
       title,
       description,
     }).then(res => {
+      setAwards([...awards, res.data]);
       setIsAdding(false);
-      console.log(res.data);
     });
   };
 

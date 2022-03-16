@@ -2,14 +2,17 @@ import React, { useState } from 'react';
 import { Button, Form, Card, Col, Row } from 'react-bootstrap';
 import * as Api from '../../api';
 
-function AwardEditForm({ title, setTitle, description, setDescription, id, setIsEditing }) {
+function AwardEditForm({ award, setAward, setIsEditing }) {
   const handleSubmit = async e => {
     e.preventDefault();
     // title, description 정보 서버에 보내서 변경하기 (PUT -> awards/:id)
-    const res = await Api.put(`awards/${id}`, { title, description });
+    const res = await Api.put(`awards/${award.id}`, { title: award.title, description: award.description });
     console.log(res.data);
-    setTitle(res.data.title);
-    setDescription(res.data.description);
+    setAward({
+      ...award,
+      title: res.data.title,
+      description: res.data.description,
+    });
     setIsEditing(false);
   };
 
@@ -19,11 +22,11 @@ function AwardEditForm({ title, setTitle, description, setDescription, id, setIs
         <Card.Body>
           <Form onSubmit={handleSubmit}>
             <Form.Group controlId='useEditTitle'>
-              <Form.Control type='text' placeholder='수상내역' value={title} onChange={e => setTitle(e.target.value)} />
+              <Form.Control type='text' placeholder='수상내역' value={award.title} onChange={e => setAward({ ...award, title: e.target.value })} />
             </Form.Group>
 
             <Form.Group controlId='userEditDescription'>
-              <Form.Control type='text' placeholder='상세내역' value={description} onChange={e => setDescription(e.target.value)} />
+              <Form.Control type='text' placeholder='상세내역' value={award.description} onChange={e => setAward({ ...award, description: e.target.value })} />
             </Form.Group>
 
             <Form.Group as={Row} className='mt-3 text-center'>

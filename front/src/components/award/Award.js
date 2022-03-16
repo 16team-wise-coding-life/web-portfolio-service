@@ -2,7 +2,7 @@ import React, { useState, useEffect } from 'react';
 import { Card, Col, Row, Button } from 'react-bootstrap';
 import * as Api from '../../api';
 
-function Award({ title, description, setIsEditing, isEditable }) {
+function Award({ award, setIsEditing, isEditable }) {
   const handleClick = e => {
     e.preventDefault();
     setIsEditing(true);
@@ -13,9 +13,9 @@ function Award({ title, description, setIsEditing, isEditable }) {
       <Card.Text>
         <Row className='align-items-center'>
           <Col className='mr-4'>
-            <span>{title}</span>
+            <span>{award.title}</span>
             <br />
-            <span className='text-muted'>{description}</span>
+            <span className='text-muted'>{award.description}</span>
           </Col>
           <Col>
             {isEditable && (

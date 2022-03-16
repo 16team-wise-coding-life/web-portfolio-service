@@ -3,21 +3,14 @@ import React, { useState, useEffect } from 'react';
 import Award from './Award';
 import AwardEditForm from './AwardEditForm';
 
-function AwardCard({ award, isEditable }) {
+function AwardCard({ awardCard, isEditable }) {
   const [isEditing, setIsEditing] = useState(false);
-  const [title, setTitle] = useState(award.title);
-  const [description, setDescription] = useState(award.description);
-  const [id, setId] = useState(award._id);
+  const [award, setAward] = useState({ title: awardCard.title, description: awardCard.description, id: awardCard._id });
+  // const [title, setTitle] = useState(award.title);
+  // const [description, setDescription] = useState(award.description);
+  // const [id, setId] = useState(award._id);
 
-  return (
-    <>
-      {isEditing ? (
-        <AwardEditForm title={title} setTitle={setTitle} description={description} setDescription={setDescription} id={id} setIsEditing={setIsEditing} />
-      ) : (
-        <Award title={title} description={description} setIsEditing={setIsEditing} isEditable={isEditable} />
-      )}
-    </>
-  );
+  return <>{isEditing ? <AwardEditForm award={award} setAward={setAward} setIsEditing={setIsEditing} /> : <Award award={award} setAward={setAward} isEditable={isEditable} />}</>;
 }
 
 export default AwardCard;

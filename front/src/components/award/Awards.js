@@ -25,14 +25,14 @@ function Awards({ portfolioOwnerId, isEditable }) {
         <Card.Body>
           <Card.Title>수상이력</Card.Title>
           {awards.map(a => {
-            return <AwardCard key={a._id} award={a} isEditable={isEditable} />;
+            return <AwardCard key={a._id} awardCard={a} isEditable={isEditable} />;
           })}
           <Row className='mt-3 text-center mb-4'>
             <Col>
               <Button onClick={() => setIsAdding(true)}>+</Button>
             </Col>
           </Row>
-          {isAdding && <AwardAddForm portfolioOwnerId={portfolioOwnerId} setIsAdding={setIsAdding} />}
+          {isAdding && <AwardAddForm awards={awards} setAwards={setAwards} portfolioOwnerId={portfolioOwnerId} setIsAdding={setIsAdding} />}
         </Card.Body>
       </Card>
     </>
