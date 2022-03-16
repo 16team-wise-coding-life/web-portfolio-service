@@ -1,18 +1,22 @@
 import React from 'react';
 import { Button, Card, Col, Row } from 'react-bootstrap';
 
-const EducationCard = () => {
+const EducationCard = ({education, setIsEditing, isEditable}) => {
   return (
     <Card.Text>
       <Row>
         <Col>
-          <span>//학교명</span>
+          <span>{education.school}</span>
           <br />
-          <span className="text-muted">//전공, 현재상태</span>
+          <span className="text-muted">{education.major}</span>
         </Col>
-        <Col>
-          <Button variant="outline-info">편집</Button>
-        </Col>
+        {isEditable && (
+          <Col>
+            <Button variant="outline-info" onClick={() => setIsEditing(a => !a)}>
+              편집
+            </Button>
+          </Col>
+        )}
       </Row>
     </Card.Text>
   );
