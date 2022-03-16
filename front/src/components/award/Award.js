@@ -2,7 +2,7 @@ import React, { useState, useEffect } from 'react';
 import { Card, Col, Row, Button } from 'react-bootstrap';
 import * as Api from '../../api';
 
-function Award({ title, description, setIsEditing }) {
+function Award({ title, description, setIsEditing, isEditable }) {
   const handleClick = e => {
     e.preventDefault();
     setIsEditing(true);
@@ -18,10 +18,11 @@ function Award({ title, description, setIsEditing }) {
             <span className='text-muted'>{description}</span>
           </Col>
           <Col>
-            {/* isEditable && 버튼*/}
-            <Button variant='outline-info' onClick={handleClick}>
-              편집
-            </Button>
+            {isEditable && (
+              <Button variant='outline-info' onClick={handleClick}>
+                편집
+              </Button>
+            )}
           </Col>
         </Row>
       </Card.Text>

@@ -25,7 +25,7 @@ function Awards({ portfolioOwnerId, isEditable }) {
         <Card.Body>
           <Card.Title>수상이력</Card.Title>
           {awards.map(a => {
-            return <AwardCard key={a._id} award={a} />;
+            return <AwardCard key={a._id} award={a} isEditable={isEditable} />;
           })}
           <Row className='mt-3 text-center mb-4'>
             <Col>

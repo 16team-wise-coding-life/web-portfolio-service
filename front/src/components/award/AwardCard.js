@@ -3,7 +3,7 @@ import React, { useState, useEffect } from 'react';
 import Award from './Award';
 import AwardEditForm from './AwardEditForm';
 
-function AwardCard({ award }) {
+function AwardCard({ award, isEditable }) {
   const [isEditing, setIsEditing] = useState(false);
   const [title, setTitle] = useState(award.title);
   const [description, setDescription] = useState(award.description);
@@ -14,7 +14,7 @@ function AwardCard({ award }) {
       {isEditing ? (
         <AwardEditForm title={title} setTitle={setTitle} description={description} setDescription={setDescription} id={id} setIsEditing={setIsEditing} />
       ) : (
-        <Award title={title} description={description} setIsEditing={setIsEditing} />
+        <Award title={title} description={description} setIsEditing={setIsEditing} isEditable={isEditable} />
       )}
     </>
   );
