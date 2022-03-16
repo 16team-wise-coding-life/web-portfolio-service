@@ -75,10 +75,6 @@ educationRouter.get('/educationlist/:user_id', login_required, async (req, res, 
     const user_id = req.params.id;
     const educations = await EducationService.getEducations({ user_id });
 
-    if (educations.errorMessage) {
-      throw new Error(educations.errorMessage);
-    }
-
     res.status(200).send(educations);
   } catch (error) {
     next(error);

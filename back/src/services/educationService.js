@@ -30,7 +30,7 @@ class EducationService {
   }
 
   static async getEducations({ user_id }) {
-    const educations = await Education.findById({ user_id });
+    const educations = await Education.findAllById({ user_id });
     return educations;
   }
 
