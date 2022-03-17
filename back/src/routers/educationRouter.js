@@ -72,7 +72,7 @@ educationRouter.put('/educations/:id', login_required, async (req, res, next) =>
 
 educationRouter.get('/educationlist/:user_id', login_required, async (req, res, next) => {
   try {
-    const user_id = req.params.id;
+    const user_id = req.params.user_id;
     const educations = await EducationService.getEducations({ user_id });
 
     res.status(200).send(educations);
