@@ -8,10 +8,14 @@ function CertificateCard({ certificateCard, isEditable }) {
 
   const [isEditing, setIsEditing] = useState(false);
   const [certificate, setCertificate] = useState({ title, description, when_date, _id });
+
   return (
     <>
-      <span>{console.log(certificate)}</span>
-      <Certificate certificate={certificate} setIsEditing={setIsEditing} isEditable={isEditable} />
+      {isEditing ? (
+        <CertificateEditForm certificate={certificate} setCertificate={setCertificate} setIsEditing={setIsEditing} />
+      ) : (
+        <Certificate certificate={certificate} setIsEditing={setIsEditing} isEditable={isEditable} />
+      )}
     </>
   );
 }
