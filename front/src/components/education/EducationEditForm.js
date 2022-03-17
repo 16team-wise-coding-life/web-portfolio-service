@@ -25,10 +25,10 @@ function EducationEditForm({ currentEducation, setEducations, setIsEditing }) {
 
   return (
     <Form onSubmit={handleSubmit}>
-      <Form.Group controlId="educationEditSchool">
+      <Form.Group controlId="educationEditSchool" className="mt-3">
         <Form.Control type="text" placeholder="학교 이름" value={school} onChange={e => setSchool(e.target.value)} />
       </Form.Group>
-      <Form.Group controlId="educationEditMajor">
+      <Form.Group controlId="educationEditMajor" className="mt-3">
         <Form.Control type="text" placeholder="전공" value={major} onChange={e => setMajor(e.target.value)} />
       </Form.Group>
 
@@ -45,7 +45,7 @@ function EducationEditForm({ currentEducation, setEducations, setIsEditing }) {
             <Button variant="primary" type="submit">
               확인
             </Button>
-            <Button variant="secondary" type="submit" onClick={() => setIsEditing(false)}>
+            <Button variant="secondary" onClick={() => setIsEditing(false)}>
               취소
             </Button>
           </Col>
