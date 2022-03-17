@@ -2,16 +2,21 @@ import React, { useState } from 'react';
 import { Button, Form, Card, Col, Row } from 'react-bootstrap';
 import * as Api from '../../api';
 
-function AwardAddForm({ portfolioOwnerId, setIsAdding }) {
+function AwardAddForm({ awards, setAwards, portfolioOwnerId, setIsAdding }) {
   const [title, setTitle] = useState('');
   const [description, setDescription] = useState('');
 
   const handleSubmit = e => {
     e.preventDefault();
-    console.log(title, description);
-    // portfolioOwnerId, title, description 정보 서버에 보내서 변경하기
-    // (POST -> award/create)
-    setIsAdding(false);
+
+    Api.post('award/create', {
+      user_id: portfolioOwnerId,
+      title,
+      description,
+    }).then(res => {
+      setAwards([...awards, res.data]);
+      setIsAdding(false);
+    });
   };
 
   return (
