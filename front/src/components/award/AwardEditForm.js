@@ -5,15 +5,20 @@ import * as Api from '../../api';
 function AwardEditForm({ award, setAward, setIsEditing }) {
   const handleSubmit = async e => {
     e.preventDefault();
-    // title, description 정보 서버에 보내서 변경하기 (PUT -> awards/:id)
-    const res = await Api.put(`awards/${award.id}`, { title: award.title, description: award.description });
-    console.log(res.data);
-    setAward({
-      ...award,
-      title: res.data.title,
-      description: res.data.description,
-    });
-    setIsEditing(false);
+
+    try {
+      // title, description 정보 서버에 보내서 변경하기 (PUT -> awards/:id)
+      const res = await Api.put(`awards/${award.id}`, { title: award.title, description: award.description });
+      console.log(res.data);
+      setAward({
+        ...award,
+        title: res.data.title,
+        description: res.data.description,
+      });
+      setIsEditing(false);
+    } catch (error) {
+      console.log(error);
+    }
   };
 
   return (
