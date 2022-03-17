@@ -7,10 +7,6 @@ function CertificateEditForm({ certificate, setCertificate, setIsEditing }) {
   const { _id, title, description, when_date } = certificate;
   const [startDate, setStartDate] = useState(new Date());
 
-  useEffect(() => {
-    convertDate();
-  }, [convertDate, startDate]); // fix react-hooks/exhaustive-deps warning
-
   const convertDate = () => {
     const seperatedDate = startDate.toISOString().split(/T|-/);
     const [year, month, day] = seperatedDate;
@@ -18,6 +14,10 @@ function CertificateEditForm({ certificate, setCertificate, setIsEditing }) {
 
     setCertificate({ ...certificate, when_date: convertedDate });
   };
+
+  useEffect(() => {
+    convertDate();
+  }, [convertDate, startDate]); // fix react-hooks/exhaustive-deps warning
 
   const handleSubmit = async e => {
     e.preventDefault();
