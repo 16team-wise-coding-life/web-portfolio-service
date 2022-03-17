@@ -11,8 +11,7 @@ function CertificateCard({ certificateCard, isEditable }) {
   return (
     <>
       <span>{console.log(certificate)}</span>
-      {/* <Award award={award} setAward={setAward} setIsEditing={setIsEditing} isEditable={isEditable} /> */}
-      <Certificate certificate={certificate} setCertificate={setCertificate} setIsEditing={setIsEditing} isEditable={isEditable} />
+      <Certificate certificate={certificate} setIsEditing={setIsEditing} isEditable={isEditable} />
     </>
   );
 }
