@@ -17,7 +17,7 @@ function CertificateEditForm({ certificate, setCertificate, setIsEditing }) {
 
   useEffect(() => {
     convertDate();
-  }, [convertDate, startDate]); // fix react-hooks/exhaustive-deps warning
+  }, [startDate]); // react-hooks/exhaustive-deps warning
 
   const handleSubmit = async e => {
     e.preventDefault();
