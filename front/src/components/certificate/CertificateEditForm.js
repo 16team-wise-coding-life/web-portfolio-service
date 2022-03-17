@@ -9,7 +9,7 @@ function CertificateEditForm({ certificate, setCertificate, setIsEditing }) {
 
   useEffect(() => {
     convertDate();
-  }, [startDate]);
+  }, [convertDate, startDate]); // fix react-hooks/exhaustive-deps warning
 
   const convertDate = () => {
     const seperatedDate = startDate.toISOString().split(/T|-/);
