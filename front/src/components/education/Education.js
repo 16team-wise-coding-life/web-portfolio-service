@@ -3,7 +3,7 @@ import EducationCard from './EducationCard';
 import EducationEditForm from './EducationEditForm';
 
 function Education({ education, setEducations, isEditable }) {
-  const [isEditing, setIsEditing] = useState('false');
+  const [isEditing, setIsEditing] = useState(false);
   return (
     <>
       {isEditing ? (
