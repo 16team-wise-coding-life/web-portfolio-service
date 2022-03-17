@@ -12,9 +12,7 @@ awardRouter.post('/award/create', async (req, res, next) => {
       throw new Error('headers의 Content-Type을 application/json으로 설정해주세요');
     }
 
-    const user_id = req.body.user_id;
-    const title = req.body.title;
-    const description = req.body.description;
+    const { user_id, title, description } = req.body;
 
     // Add db
     const newAward = await awardService.addAward({

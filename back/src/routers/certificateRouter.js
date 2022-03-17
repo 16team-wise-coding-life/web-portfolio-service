@@ -14,10 +14,8 @@ certificateAuthRouter.post('/certificate/create', async (req, res, next) => {
       throw new Error('headers의 Content-Type을 application/json으로 설정해주세요');
     }
 
-    // req (request) 에서 데이터 가져오기
     const { user_id, title, description, when_date } = req.body;
 
-    // 위 데이터를 유저 db에 추가하기
     const newCertificate = await certificateAuthService.addCertificate({
       user_id,
       title,
