@@ -28,8 +28,8 @@ awardRouter.post('/award/create', async (req, res, next) => {
     }
 
     res.status(201).json(newAward);
-  } catch (e) {
-    next(e);
+  } catch (error) {
+    next(error);
   }
 });
 
@@ -43,8 +43,8 @@ awardRouter.get('/awards/:id', async (req, res, next) => {
     }
 
     res.status(200).send(currentAwardInfo);
-  } catch (e) {
-    next(e);
+  } catch (error) {
+    next(error);
   }
 });
 
@@ -63,8 +63,8 @@ awardRouter.put('/awards/:id', async (req, res, next) => {
     }
 
     res.status(200).json(updatedAward);
-  } catch (e) {
-    next(e);
+  } catch (error) {
+    next(error);
   }
 });
 
@@ -73,8 +73,8 @@ awardRouter.get('/awardlist/:user_id', async (req, res, next) => {
     const user_id = req.params.user_id;
     const awards = await awardService.getAwards({ user_id });
     res.status(200).send(awards);
-  } catch (e) {
-    next(e);
+  } catch (error) {
+    next(error);
   }
 });
 
