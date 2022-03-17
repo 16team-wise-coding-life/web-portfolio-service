@@ -8,7 +8,7 @@ const certificateAuthRouter = Router();
 certificateAuthRouter.use(login_required);
 
 // create API
-certificateAuthRouter.post('/certificate/create', async function (req, res, next) {
+certificateAuthRouter.post('/certificate/create', async (req, res, next) => {
   try {
     if (is.emptyObject(req.body)) {
       throw new Error('headers의 Content-Type을 application/json으로 설정해주세요');
@@ -36,7 +36,7 @@ certificateAuthRouter.post('/certificate/create', async function (req, res, next
 });
 
 // 특정 게시글 조회 API
-certificateAuthRouter.get('/certificates/:id', async function (req, res, next) {
+certificateAuthRouter.get('/certificates/:id', async (req, res, next) => {
   try {
     const certificate_id = req.params.id;
     const currentCertificateInfo = await certificateAuthService.getCertificateInfo({ certificate_id });
@@ -52,7 +52,7 @@ certificateAuthRouter.get('/certificates/:id', async function (req, res, next) {
 });
 
 // 특정 게시글 수정 API
-certificateAuthRouter.put('/certificates/:id', async function (req, res, next) {
+certificateAuthRouter.put('/certificates/:id', async (req, res, next) => {
   try {
     const certificate_id = req.params.id;
     const title = req.body.title ?? null;
@@ -75,7 +75,7 @@ certificateAuthRouter.put('/certificates/:id', async function (req, res, next) {
 });
 
 // 특정 유저 자격증 목록 조회 API
-certificateAuthRouter.get('/certificatelist/:user_id', async function (req, res, next) {
+certificateAuthRouter.get('/certificatelist/:user_id', async (req, res, next) => {
   try {
     const user_id = req.params.user_id;
     const certificates = await certificateAuthService.getCertificates({ user_id });
