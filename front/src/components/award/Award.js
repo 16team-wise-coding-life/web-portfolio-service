@@ -1,6 +1,5 @@
-import React, { useState, useEffect } from 'react';
+import React from 'react';
 import { Card, Col, Row, Button } from 'react-bootstrap';
-import * as Api from '../../api';
 
 function Award({ award, setIsEditing, isEditable }) {
   const handleClick = e => {

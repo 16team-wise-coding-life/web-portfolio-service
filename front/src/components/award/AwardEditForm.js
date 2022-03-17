@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React from 'react';
 import { Button, Form, Card, Col, Row } from 'react-bootstrap';
 import * as Api from '../../api';
 
@@ -26,11 +26,11 @@ function AwardEditForm({ award, setAward, setIsEditing }) {
       <Card className='mb-2'>
         <Card.Body>
           <Form onSubmit={handleSubmit}>
-            <Form.Group controlId='useEditTitle'>
+            <Form.Group controlId='awardEditTitle'>
               <Form.Control type='text' placeholder='수상내역' value={award.title} onChange={e => setAward({ ...award, title: e.target.value })} />
             </Form.Group>
 
-            <Form.Group controlId='userEditDescription'>
+            <Form.Group controlId='awardEditDescription'>
               <Form.Control type='text' placeholder='상세내역' value={award.description} onChange={e => setAward({ ...award, description: e.target.value })} />
             </Form.Group>
 
