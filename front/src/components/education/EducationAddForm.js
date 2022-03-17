@@ -5,7 +5,7 @@ import * as Api from '../../api';
 function EducationAddForm({ portfolioOwnerId, setEducations, setIsAdding }) {
   const [school, setSchool] = useState('');
   const [major, setMajor] = useState('');
-  const [position, setPosition] = useState('');
+  const [position, setPosition] = useState('재학중');
 
   const handleSubmit = async e => {
     e.preventDefault();

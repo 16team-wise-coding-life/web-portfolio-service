@@ -4,15 +4,15 @@ import { Button, Card, Col, Row } from 'react-bootstrap';
 function EducationCard({ education, setIsEditing, isEditable }) {
   return (
     <Card.Text>
-      <Row>
+      <Row className="align-items-center">
         <Col>
           <span>{education.school}</span>
           <br />
-          <span className="text-muted">{`${education.major} ${education.value}`}</span>
+          <span className="text-muted">{`${education.major} ${education.position}`}</span>
         </Col>
         {isEditable && (
-          <Col>
-            <Button variant="outline-info" onClick={() => setIsEditing(a => !a)}>
+          <Col xs lg="1">
+            <Button variant="outline-info" onClick={() => setIsEditing(edit => !edit)}>
               편집
             </Button>
           </Col>
