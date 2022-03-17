@@ -1,9 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import { Card, Button, Row, Col } from 'react-bootstrap';
 
-import Award from './Award';
 import AwardCard from './AwardCard';
-import AwardEditForm from './AwardEditForm';
 import AwardAddForm from './AwardAddForm';
 import * as Api from '../../api';
 
