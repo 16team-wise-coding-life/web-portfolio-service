@@ -24,6 +24,11 @@ class Award {
     const updatedAward = await AwardModel.findOneAndUpdate(filter, update, option);
     return updatedAward;
   }
+
+  static async delete({ award_id }) {
+    await AwardModel.deleteOne({ _id: award_id });
+    return '삭제가 완료 되었습니다.';
+  }
 }
 
 export { Award };
