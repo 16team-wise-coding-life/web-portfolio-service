@@ -16,7 +16,7 @@ function Award({ award, setIsEditing, isEditable }) {
             <br />
             <span className='text-muted'>{award.description}</span>
           </Col>
-          <Col>
+          <Col xs lg='1'>
             {isEditable && (
               <Button variant='outline-info' onClick={handleClick}>
                 편집
