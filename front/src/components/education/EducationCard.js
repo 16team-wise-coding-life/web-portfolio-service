@@ -12,7 +12,7 @@ function EducationCard({ education, setIsEditing, isEditable }) {
         </Col>
         {isEditable && (
           <Col xs lg="1">
-            <Button variant="outline-info" onClick={() => setIsEditing(edit => !edit)}>
+            <Button variant="outline-info" size="sm" onClick={() => setIsEditing(edit => !edit)}>
               편집
             </Button>
           </Col>
