@@ -19,7 +19,6 @@ function ProjectEditForm({ currentProject, setProjects, setIsEditing }) {
     const to_date = toDate.toISOString().split('T')[0];
 
     await Api.put(`projects/${currentProject.user_id}`, {
-      user_id,
       title,
       description,
       from_date,
