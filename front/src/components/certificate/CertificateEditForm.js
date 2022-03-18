@@ -5,35 +5,17 @@ import * as Api from '../../api';
 
 function CertificateEditForm({ certificate, setCertificate, setIsEditing }) {
   const { _id, title, description, when_date } = certificate;
-  const [startDate, setStartDate] = useState(new Date());
-
-  const convertDate = () => {
-    const seperatedDate = startDate.toISOString().split(/T|-/);
-    const [year, month, day] = seperatedDate;
-    const convertedDate = `${year}-${month}-${day}`;
-
-    setCertificate({ ...certificate, when_date: convertedDate });
-  };
-
-  useEffect(() => {
-    convertDate();
-  }, [startDate]); // react-hooks/exhaustive-deps warning
+  const [selectedDate, setSelectedDate] = useState(new Date(when_date));
 
   const handleSubmit = async e => {
     e.preventDefault();
 
-    try {
-      const res = await Api.put(`certificates/${_id}`, { title, description, when_date });
-      setCertificate({
-        ...certificate,
-        title,
-        description,
-        when_date,
-      });
-      setIsEditing(false);
-    } catch (error) {
-      console.log(error);
-    }
+    Api.put(`certificates/${_id}`, { title, description, when_date: selectedDate })
+      .then(res => {
+        setCertificate(res.data);
+        setIsEditing(false);
+      })
+      .catch(error => console.log(error));
   };
 
   return (
@@ -50,7 +32,7 @@ function CertificateEditForm({ certificate, setCertificate, setIsEditing }) {
             </Form.Group>
 
             <Form.Group controlId='certificateEditDate'>
-              <DatePicker selected={startDate} dateFormat='yyyy/MM/dd' onChange={date => setStartDate(date)} />
+              <DatePicker selected={selectedDate} dateFormat='yyyy/MM/dd' onChange={date => setSelectedDate(date)} />
             </Form.Group>
 
             <Form.Group as={Row} className='mt-3 text-center'>
