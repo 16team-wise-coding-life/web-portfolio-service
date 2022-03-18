@@ -59,11 +59,6 @@ class EducationService {
 
     return education;
   }
-
-  static async deleteEducation({ education_id }) {
-    const education = await Education.delete({ education_id });
-    return education;
-  }
 }
 
 export { EducationService };

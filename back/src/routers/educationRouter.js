@@ -77,18 +77,4 @@ educationRouter.get('/educationlist/:user_id', login_required, async (req, res, 
   }
 });
 
-educationRouter.delete('/educations/:id', login_required, async (req, res, next) => {
-  try {
-    const education_id = req.params.id;
-    const deletedEducation = await EducationService.deleteEducation({ education_id });
-
-    if (deletedEducation.errorMessage) {
-      throw new Error(deletedEducation.errorMessage);
-    }
-    res.status(200).send(deletedEducation);
-  } catch (error) {
-    next(error);
-  }
-});
-
 export { educationRouter };
