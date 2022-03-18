@@ -24,6 +24,10 @@ class Education {
     const updatedEducation = await EducationModel.findOneAndUpdate(filter, update, option);
     return updatedEducation;
   }
+  static async delete({ education_id }) {
+    const deletedEducation = await EducationModel.deleteOne({ _id: education_id });
+    return deletedEducation;
+  }
 }
 
 export { Education };

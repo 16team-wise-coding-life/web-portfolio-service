@@ -22,7 +22,7 @@ class EducationService {
     const education = await Education.findById({ education_id });
 
     if (!education) {
-      const errorMessage = '해당 이메일은 학력이 없습니다.';
+      const errorMessage = '학력이 존재하지 않습니다.';
       return { errorMessage };
     }
 
@@ -60,6 +60,11 @@ class EducationService {
       education = await Education.update({ education_id, fieldToUpdate, newValue });
     }
 
+    return education;
+  }
+
+  static async deleteEducation({ education_id }) {
+    const education = await Education.delete({ education_id });
     return education;
   }
 }
