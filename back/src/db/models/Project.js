@@ -1,0 +1,29 @@
+import { ProjectModel } from '../schemas/project';
+
+class Project {
+  static async create({ newProject }) {
+    const createdNewproject = await ProjectModel.create(newProject);
+    return createdNewproject;
+  }
+
+  static async findById({ project_id }) {
+    const project = await ProjectModel.findOne({ _id: project_id });
+    return project;
+  }
+
+  static async findAllByUserId({ user_id }) {
+    const projects = await ProjectModel.find({ user_id: user_id });
+    return projects;
+  }
+
+  static async update({ project_id, fieldToUpdate, newValue }) {
+    const filter = { _id: project_id };
+    const update = { [fieldToUpdate]: newValue };
+    const option = { returnOriginal: false };
+
+    const updatedProject = await ProjectModel.findOneAndUpdate(filter, update, option);
+    return updatedProject;
+  }
+}
+
+export { Project };

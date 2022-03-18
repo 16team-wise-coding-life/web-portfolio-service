@@ -21,8 +21,8 @@ class Award {
     const update = { [fieldToUpdate]: newValue };
     const option = { returnOriginal: false };
 
-    const updateAward = await AwardModel.findOneAndUpdate(filter, update, option);
-    return updateAward;
+    const updatedAward = await AwardModel.findOneAndUpdate(filter, update, option);
+    return updatedAward;
   }
 }
 

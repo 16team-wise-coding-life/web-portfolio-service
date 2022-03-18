@@ -1,10 +1,8 @@
 import { Award } from '../db';
-import { v4 as uuidv4 } from 'uuid';
 
 class awardService {
   static async addAward({ user_id, title, description }) {
-    const award_id = uuidv4();
-    const newAward = { id: award_id, user_id, title, description };
+    const newAward = { user_id, title, description };
     const createdNewAward = await Award.create({ newAward });
     createdNewAward.errorMessage = null;
     return createdNewAward;
