@@ -84,21 +84,4 @@ certificateAuthRouter.get('/certificatelist/:user_id', async (req, res, next) =>
   }
 });
 
-// delete 기능 API
-certificateAuthRouter.delete('/certificates/:id', async (req, res, next) => {
-  try {
-    const certificate_id = req.params.id;
-    console.log(certificate_id);
-    const deletedCertificate = await certificateAuthService.deleteCertificate({ certificate_id });
-
-    if (deletedCertificate.errorMessage) {
-      throw new Error(deletedCertificate.errorMessage);
-    }
-
-    res.status(200).send(deletedCertificate);
-  } catch (error) {
-    next(error);
-  }
-});
-
 export { certificateAuthRouter };
