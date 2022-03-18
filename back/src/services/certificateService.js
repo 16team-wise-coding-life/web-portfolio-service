@@ -61,6 +61,19 @@ class certificateAuthService {
     const certificates = await Certificate.findAllByUserId({ user_id });
     return certificates;
   }
+
+  // 삭제
+  static async deleteCertificate({ certificate_id }) {
+    let certificate = await Certificate.findById({ certificate_id });
+
+    if (!certificate) {
+      const errorMessage = '자격증 내역이 없습니다. 다시 한 번 확인해 주세요.';
+      return { errorMessage };
+    }
+    const res = await Certificate.delete({ certificate_id });
+
+    return res;
+  }
 }
 
 export { certificateAuthService };
