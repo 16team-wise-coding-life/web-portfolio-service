@@ -82,4 +82,20 @@ projectRouter.get('/projectlist/:user_id', async (req, res, next) => {
   }
 });
 
+// delete 기능 API
+projectRouter.delete('/projects/:id', async (req, res, next) => {
+  try {
+    const project_id = req.params.id;
+    const deletedProject = await projectService.deleteProject({ project_id });
+
+    if (deletedProject.errorMessage) {
+      throw new Error(deletedProject.errorMessage);
+    }
+
+    res.status(200).send(deletedProject);
+  } catch (error) {
+    next(error);
+  }
+});
+
 export { projectRouter };
