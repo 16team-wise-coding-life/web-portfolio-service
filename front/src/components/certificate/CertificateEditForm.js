@@ -20,34 +20,30 @@ function CertificateEditForm({ certificate, setCertificate, setIsEditing }) {
 
   return (
     <>
-      <Card className='mb-2'>
-        <Card.Body>
-          <Form onSubmit={handleSubmit}>
-            <Form.Group controlId='certificateEditTitle'>
-              <Form.Control type='text' placeholder='자격증 제목' value={title} onChange={e => setCertificate({ ...certificate, title: e.target.value })} />
-            </Form.Group>
+      <Form onSubmit={handleSubmit}>
+        <Form.Group controlId='certificateEditTitle'>
+          <Form.Control type='text' placeholder='자격증 제목' value={title} onChange={e => setCertificate({ ...certificate, title: e.target.value })} />
+        </Form.Group>
 
-            <Form.Group controlId='certificateEditDescription'>
-              <Form.Control type='text' placeholder='상세내역' value={description} onChange={e => setCertificate({ ...certificate, description: e.target.value })} />
-            </Form.Group>
+        <Form.Group controlId='certificateEditDescription'>
+          <Form.Control type='text' placeholder='상세내역' value={description} onChange={e => setCertificate({ ...certificate, description: e.target.value })} />
+        </Form.Group>
 
-            <Form.Group controlId='certificateEditDate'>
-              <DatePicker selected={selectedDate} dateFormat='yyyy/MM/dd' onChange={date => setSelectedDate(date)} />
-            </Form.Group>
+        <Form.Group controlId='certificateEditDate'>
+          <DatePicker selected={selectedDate} dateFormat='yyyy/MM/dd' onChange={date => setSelectedDate(date)} />
+        </Form.Group>
 
-            <Form.Group as={Row} className='mt-3 text-center'>
-              <Col>
-                <Button variant='primary' type='submit'>
-                  확인
-                </Button>
-                <Button variant='secondary' onClick={() => setIsEditing(false)}>
-                  취소
-                </Button>
-              </Col>
-            </Form.Group>
-          </Form>
-        </Card.Body>
-      </Card>
+        <Form.Group as={Row} className='mt-3 text-center'>
+          <Col>
+            <Button variant='primary' type='submit'>
+              확인
+            </Button>
+            <Button variant='secondary' onClick={() => setIsEditing(false)}>
+              취소
+            </Button>
+          </Col>
+        </Form.Group>
+      </Form>
     </>
   );
 }
