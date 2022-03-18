@@ -4,14 +4,12 @@ import * as Api from '../../api';
 import Education from './Education';
 import EducationAddForm from './EducationAddForm';
 
-function Educations(portfolioOwnerId, isEditable) {
-  const [educations, setEducation] = useState([]);
+function Educations({ portfolioOwnerId, isEditable }) {
+  const [educations, setEducations] = useState([]);
   const [isAdding, setIsAdding] = useState(false);
 
   useEffect(() => {
-    const {portfolioOwnerId: id} = portfolioOwnerId
-    console.log('portfolioOwnerId', portfolioOwnerId);
-    Api.get('educationlist', id).then(res => setEducation(res.data));
+    Api.get('educationlist', portfolioOwnerId).then(res => setEducations(res.data));
   }, [portfolioOwnerId]);
 
   return (
@@ -21,20 +19,17 @@ function Educations(portfolioOwnerId, isEditable) {
           <Card.Title>학력</Card.Title>
           <Card.Text>
             {educations.map(education => (
-              <Education key={education.id} setEducation={setEducation} isEditable={isEditable} />
+              <Education key={education.id} education={education} setEducations={setEducations} isEditable={isEditable} />
             ))}
           </Card.Text>
-
           {isEditable && (
-            <Row>
-              <Col>
-                <Button className="mt-3" onClick={() => setIsAdding(true)}>
-                  +
-                </Button>
+            <Row className="mt-3 text-center mb-4">
+              <Col sm={{ span: 20 }}>
+                <Button onClick={() => setIsAdding(true)}>+</Button>
               </Col>
             </Row>
           )}
-          {isAdding && <EducationAddForm portfolioOwnerId={portfolioOwnerId} setIsAdding={setIsAdding} setEducation={setEducation}></EducationAddForm>}
+          {isAdding && <EducationAddForm portfolioOwnerId={portfolioOwnerId} setEducations={setEducations} setIsAdding={setIsAdding} />}
         </Card.Body>
       </Card>
     </>

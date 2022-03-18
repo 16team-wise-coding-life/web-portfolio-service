@@ -11,25 +11,23 @@ function EducationEditForm({ currentEducation, setEducations, setIsEditing }) {
     e.preventDefault();
 
     const user_id = currentEducation.user_id;
-
-    await Api.put(`educations/${currentEducation.id}`, {
-      user_id,
+    console.log('user_id', user_id);
+    await Api.put(`educations/${currentEducation.user_id}`, {
       school,
       major,
       position,
     });
 
-    const res = await Api.get('educationlist', user_id);
-    setEducations(res.data);
+    await Api.get('educationlist', user_id).then(res => setEducations(res.data));
     setIsEditing(false);
   };
 
   return (
     <Form onSubmit={handleSubmit}>
-      <Form.Group controlId="educationEditSchool">
+      <Form.Group controlId="educationEditSchool" className="mt-3">
         <Form.Control type="text" placeholder="학교 이름" value={school} onChange={e => setSchool(e.target.value)} />
       </Form.Group>
-      <Form.Group controlId="educationEditMajor">
+      <Form.Group controlId="educationEditMajor" className="mt-3">
         <Form.Control type="text" placeholder="전공" value={major} onChange={e => setMajor(e.target.value)} />
       </Form.Group>
 
@@ -46,7 +44,7 @@ function EducationEditForm({ currentEducation, setEducations, setIsEditing }) {
             <Button variant="primary" type="submit">
               확인
             </Button>
-            <Button variant="secondary" type="submit" onClick={() => setIsEditing(false)}>
+            <Button variant="secondary" onClick={() => setIsEditing(false)}>
               취소
             </Button>
           </Col>

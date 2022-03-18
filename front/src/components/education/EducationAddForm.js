@@ -2,14 +2,16 @@ import React, { useState } from 'react';
 import { Button, Col, Form, Row } from 'react-bootstrap';
 import * as Api from '../../api';
 
-function EducationAddForm({ portfolioOwnerId, setEducation, setIsAdding }) {
+function EducationAddForm({ portfolioOwnerId, setEducations, setIsAdding }) {
   const [school, setSchool] = useState('');
   const [major, setMajor] = useState('');
-  const [position, setPosition] = useState('');
+  const [position, setPosition] = useState('재학중');
 
   const handleSubmit = async e => {
     e.preventDefault();
+
     const user_id = portfolioOwnerId;
+    console.log('portfolioOwnerId', portfolioOwnerId);
 
     await Api.post('education/create', {
       user_id,
@@ -19,7 +21,7 @@ function EducationAddForm({ portfolioOwnerId, setEducation, setIsAdding }) {
     });
 
     const res = await Api.get('educationlist', user_id);
-    setEducation(res.data);
+    setEducations(res.data);
     setIsAdding(false);
   };
 
