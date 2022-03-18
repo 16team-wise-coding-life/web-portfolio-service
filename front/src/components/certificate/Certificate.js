@@ -7,6 +7,14 @@ function Certificate({ certificate, setIsEditing, isEditable }) {
     setIsEditing(true);
   };
 
+  const convertDate = date => {
+    const seperatedDate = date.split(/T|-/);
+    const [year, month, day] = seperatedDate;
+    return `${year}-${month}-${day}`;
+  };
+
+  const convertedDate = convertDate(certificate.when_date);
+
   return (
     <>
       <Card.Text>
@@ -16,7 +24,7 @@ function Certificate({ certificate, setIsEditing, isEditable }) {
             <br />
             <span className='text-muted'>{certificate.description}</span>
             <br />
-            <span className='text-muted'>{certificate.when_date}</span>
+            <span className='text-muted'>{convertedDate}</span>
           </Col>
           <Col>
             {isEditable && (
