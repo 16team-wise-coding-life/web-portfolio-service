@@ -19,14 +19,14 @@ function Certificate({ certificate, setIsEditing, isEditable }) {
     <>
       <Card.Text>
         <Row className='align-items-center'>
-          <Col className='mr-4'>
+          <Col>
             <span>{certificate.title}</span>
             <br />
             <span className='text-muted'>{certificate.description}</span>
             <br />
             <span className='text-muted'>{convertedDate}</span>
           </Col>
-          <Col>
+          <Col xs lg='1'>
             {isEditable && (
               <Button variant='outline-info' onClick={handleClick}>
                 편집
