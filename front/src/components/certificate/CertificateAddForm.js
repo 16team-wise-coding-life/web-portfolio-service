@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState } from 'react';
 import { Button, Form, Card, Col, Row } from 'react-bootstrap';
 import DatePicker from 'react-datepicker';
 import * as Api from '../../api';
@@ -9,18 +9,6 @@ function CertificateAddForm({ certificates, setCertificates, portfolioOwnerId, s
   const [whenDate, setWhenDate] = useState('');
   const [startDate, setStartDate] = useState(new Date());
 
-  const convertDate = () => {
-    const seperatedDate = startDate.toISOString().split(/T|-/);
-    const [year, month, day] = seperatedDate;
-    const convertedDate = `${year}-${month}-${day}`;
-
-    setWhenDate(convertedDate);
-  };
-
-  useEffect(() => {
-    convertDate();
-  }, [convertDate, startDate]);
-
   const handleSubmit = e => {
     e.preventDefault();
 
@@ -28,7 +16,7 @@ function CertificateAddForm({ certificates, setCertificates, portfolioOwnerId, s
       user_id: portfolioOwnerId,
       title,
       description,
-      when_date: whenDate,
+      when_date: startDate,
     }).then(res => {
       setCertificates([...certificates, res.data]);
       setIsAdding(false);
