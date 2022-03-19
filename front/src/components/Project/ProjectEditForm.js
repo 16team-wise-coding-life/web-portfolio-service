@@ -49,7 +49,7 @@ function ProjectEditForm({ currentProject, setProjects, setIsEditing }) {
       <Form.Group as={Row} className='mt-3 text-center'>
         <Row>
           <Col sm='20'>
-            <Button variant='primary' type='submit' className='me-3'>
+            <Button variant='primary' type='submit' className='me-2'>
               확인
             </Button>
             <Button variant='secondary' type='submit' onClick={() => setIsEditing(false)}>
