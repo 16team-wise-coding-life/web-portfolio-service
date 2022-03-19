@@ -20,32 +20,26 @@ function AwardAddForm({ awards, setAwards, portfolioOwnerId, setIsAdding }) {
   };
 
   return (
-    <>
-      <Card className='mb-2'>
-        <Card.Body>
-          <Form onSubmit={handleSubmit}>
-            <Form.Group controlId='awardEditTitle'>
-              <Form.Control type='text' placeholder='수상내역' value={title} onChange={e => setTitle(e.target.value)} />
-            </Form.Group>
+    <Form onSubmit={handleSubmit} className='mt-3'>
+      <Form.Group controlId='awardAddTitle'>
+        <Form.Control type='text' placeholder='수상내역' value={title} onChange={e => setTitle(e.target.value)} />
+      </Form.Group>
 
-            <Form.Group controlId='awardEditDescription'>
-              <Form.Control type='text' placeholder='상세내역' value={description} onChange={e => setDescription(e.target.value)} />
-            </Form.Group>
+      <Form.Group controlId='awardAddDescription' className='mt-3'>
+        <Form.Control type='text' placeholder='상세내역' value={description} onChange={e => setDescription(e.target.value)} />
+      </Form.Group>
 
-            <Form.Group as={Row} className='mt-3 text-center'>
-              <Col>
-                <Button variant='primary' type='submit'>
-                  확인
-                </Button>
-                <Button variant='secondary' onClick={() => setIsAdding(false)}>
-                  취소
-                </Button>
-              </Col>
-            </Form.Group>
-          </Form>
-        </Card.Body>
-      </Card>
-    </>
+      <Form.Group as={Row} className='mt-3 text-center'>
+        <Col>
+          <Button variant='primary' type='submit' className='me-2'>
+            확인
+          </Button>
+          <Button variant='secondary' onClick={() => setIsAdding(false)}>
+            취소
+          </Button>
+        </Col>
+      </Form.Group>
+    </Form>
   );
 }
 
