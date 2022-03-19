@@ -1,16 +1,32 @@
-import React, { useState } from 'react';
+import React from 'react';
+import { Card, Col, Row, Button } from 'react-bootstrap';
 
-import Award from './Award';
-import AwardEditForm from './AwardEditForm';
+function AwardCard({ award, setIsEditing, isEditable }) {
+  const handleClick = e => {
+    e.preventDefault();
+    setIsEditing(true);
+  };
 
-function AwardCard({ awardCard, isEditable }) {
-  const [isEditing, setIsEditing] = useState(false);
-  const [award, setAward] = useState({ title: awardCard.title, description: awardCard.description, id: awardCard._id });
-  // const [title, setTitle] = useState(award.title);
-  // const [description, setDescription] = useState(award.description);
-  // const [id, setId] = useState(award._id);
-
-  return <>{isEditing ? <AwardEditForm award={award} setAward={setAward} setIsEditing={setIsEditing} /> : <Award award={award} setIsEditing={setIsEditing} isEditable={isEditable} />}</>;
+  return (
+    <>
+      <Card.Text>
+        <Row className='align-items-center'>
+          <Col className='mr-4'>
+            <span>{award.title}</span>
+            <br />
+            <span className='text-muted'>{award.description}</span>
+          </Col>
+          <Col xs lg='1'>
+            {isEditable && (
+              <Button variant='outline-info' onClick={handleClick}>
+                편집
+              </Button>
+            )}
+          </Col>
+        </Row>
+      </Card.Text>
+    </>
+  );
 }
 
 export default AwardCard;
