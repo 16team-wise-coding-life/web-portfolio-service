@@ -12,7 +12,7 @@ function EducationEditForm({ currentEducation, setEducations, setIsEditing }) {
 
     const user_id = currentEducation.user_id;
     console.log('user_id', user_id);
-    await Api.put(`educations/${currentEducation.id}`, {
+    await Api.put(`educations/${currentEducation._id}`, {
       school,
       major,
       position,
