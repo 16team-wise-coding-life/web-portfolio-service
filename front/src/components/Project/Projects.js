@@ -14,7 +14,7 @@ function Projects({ portfolioOwnerId, isEditable }) {
 
   return (
     <>
-      <Card className='mt-2'>
+      <Card>
         <Card.Body>
           <Card.Title>프로젝트</Card.Title>
           <Card.Text>
@@ -23,8 +23,8 @@ function Projects({ portfolioOwnerId, isEditable }) {
             ))}
           </Card.Text>
           {isEditable && (
-            <Row className='mt-3 text-center mb-4'>
-              <Col sm='20'>
+            <Row className="mt-3 text-center mb-4">
+              <Col sm={{ span: 20 }}>
                 <Button onClick={() => setIsAdding(true)}>+</Button>
               </Col>
             </Row>
