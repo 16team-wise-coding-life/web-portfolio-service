@@ -1,40 +1,21 @@
-import React from 'react';
-import { Card, Col, Row, Button } from 'react-bootstrap';
+import React, { useState } from 'react';
 
-function Certificate({ certificate, setIsEditing, isEditable }) {
-  const handleClick = e => {
-    e.preventDefault();
-    setIsEditing(true);
-  };
+import CertificateCard from './CertificateCard';
+import CertificateEditForm from './CertificateEditForm';
 
-  const convertDate = date => {
-    const seperatedDate = date.split(/T|-/);
-    const [year, month, day] = seperatedDate;
-    return `${year}-${month}-${day}`;
-  };
+function Certificate({ certificateCard, isEditable }) {
+  const { title, description, when_date, _id } = certificateCard;
 
-  const convertedDate = convertDate(certificate.when_date);
+  const [isEditing, setIsEditing] = useState(false);
+  const [certificate, setCertificate] = useState({ title, description, when_date, _id });
 
   return (
     <>
-      <Card.Text>
-        <Row className='align-items-center'>
-          <Col>
-            <span>{certificate.title}</span>
-            <br />
-            <span className='text-muted'>{certificate.description}</span>
-            <br />
-            <span className='text-muted'>{convertedDate}</span>
-          </Col>
-          <Col xs lg='1'>
-            {isEditable && (
-              <Button variant='outline-info' onClick={handleClick}>
-                편집
-              </Button>
-            )}
-          </Col>
-        </Row>
-      </Card.Text>
+      {isEditing ? (
+        <CertificateEditForm certificate={certificate} setCertificate={setCertificate} setIsEditing={setIsEditing} />
+      ) : (
+        <CertificateCard certificate={certificate} setIsEditing={setIsEditing} isEditable={isEditable} />
+      )}
     </>
   );
 }
