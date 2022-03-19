@@ -19,6 +19,7 @@ function ProjectEditForm({ currentProject, setProjects, setIsEditing }) {
     const to_date = toDate.toISOString().split('T')[0];
 
     await Api.put(`projects/${currentProject._id}`, {
+      user_id,
       title,
       description,
       from_date,
@@ -38,17 +39,17 @@ function ProjectEditForm({ currentProject, setProjects, setIsEditing }) {
         <Form.Control type='text' placeholder='상세내역' value={description} onChange={e => setDescription(e.target.value)} />
       </Form.Group>
       <Form.Group as={Row} className='mt-3'>
-        <Col>
+        <Col xs='auto'>
           <DatePicker selected={fromDate} dateFormat='yyyy-MM-dd' onChange={date => setFromDate(date)} />{' '}
         </Col>
-        <Col>
+        <Col xs='auto'>
           <DatePicker selected={toDate} dateFormat='yyyy-MM-dd' onChange={date => setToDate(date)} />
         </Col>
       </Form.Group>
-      <Form.Group as={Row} className='mt-3'>
+      <Form.Group as={Row} className='mt-3 text-center'>
         <Row>
-          <Col>
-            <Button variant='primary' type='submit' className='me-2'>
+          <Col sm='20'>
+            <Button variant='primary' type='submit' className='me-3'>
               확인
             </Button>
             <Button variant='secondary' type='submit' onClick={() => setIsEditing(false)}>
