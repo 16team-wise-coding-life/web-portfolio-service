@@ -17,7 +17,7 @@ class Education {
   }
 
   static async update({ education_id, fieldToUpdate, newValue }) {
-    const filter = { id: education_id };
+    const filter = { _id: education_id };
     const update = { [fieldToUpdate]: newValue };
     const option = { returnOriginal: false };
 
