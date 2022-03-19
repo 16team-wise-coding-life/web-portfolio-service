@@ -34,27 +34,27 @@ function ProjectAddForm({ portfolioOwnerId, setProjects, setIsAdding }) {
 
   return (
     <Form onSubmit={handleSubmit}>
-      <Form.Group controlId="ProjectAddTitle" className="mt-3">
-        <Form.Control type="text" placeholder="프로젝트 이름" value={title} onChange={e => setTitle(e.target.value)} />
+      <Form.Group controlId='ProjectAddTitle' className='mt-3'>
+        <Form.Control type='text' placeholder='프로젝트 이름' value={title} onChange={e => setTitle(e.target.value)} />
       </Form.Group>
-      <Form.Group controlId="ProjectAddMajor" className="mt-3">
-        <Form.Control type="text" placeholder="상세내역" value={description} onChange={e => setDescription(e.target.value)} />
+      <Form.Group controlId='ProjectAddMajor' className='mt-3'>
+        <Form.Control type='text' placeholder='상세내역' value={description} onChange={e => setDescription(e.target.value)} />
       </Form.Group>
-      <Form.Group as={Row} className="mt-3">
-        <Col>
-          <DatePicker selected={fromDate} dateFormat="yyyy-MM-dd" onChange={date => setFromDate(date)} />{' '}
+      <Form.Group as={Row} className='mt-3'>
+        <Col xs='auto'>
+          <DatePicker selected={fromDate} dateFormat='yyyy-MM-dd' onChange={date => setFromDate(date)} />{' '}
         </Col>
-        <Col>
-          <DatePicker selected={toDate} dateFormat="yyyy-MM-dd" onChange={date => setToDate(date)} />
+        <Col xs='auto'>
+          <DatePicker selected={toDate} dateFormat='yyyy-MM-dd' onChange={date => setToDate(date)} />
         </Col>
       </Form.Group>
-      <Form.Group as={Row} className="mt-3">
+      <Form.Group as={Row} className='mt-3 text-center'>
         <Row>
-          <Col>
-            <Button variant="primary" type="submit" className="me-2">
+          <Col sm='20'>
+            <Button variant='primary' type='submit' className='me-3'>
               확인
             </Button>
-            <Button variant="secondary" type="submit" onClick={() => setIsAdding(false)}>
+            <Button variant='secondary' type='submit' onClick={() => setIsAdding(false)}>
               취소
             </Button>
           </Col>
