@@ -18,7 +18,7 @@ function ProjectEditForm({ currentProject, setProjects, setIsEditing }) {
     const from_date = fromDate.toISOString().split('T')[0];
     const to_date = toDate.toISOString().split('T')[0];
 
-    await Api.put(`projects/${currentProject.user_id}`, {
+    await Api.put(`projects/${currentProject._id}`, {
       title,
       description,
       from_date,
@@ -31,27 +31,27 @@ function ProjectEditForm({ currentProject, setProjects, setIsEditing }) {
 
   return (
     <Form onSubmit={handleSubmit}>
-      <Form.Group controlId="ProjectEditTitle" className="mt-3">
-        <Form.Control type="text" placeholder="프로젝트 이름" value={title} onChange={e => setTitle(e.target.value)} />
+      <Form.Group controlId='ProjectEditTitle' className='mt-3'>
+        <Form.Control type='text' placeholder='프로젝트 이름' value={title} onChange={e => setTitle(e.target.value)} />
       </Form.Group>
-      <Form.Group controlId="ProjectEditMajor" className="mt-3">
-        <Form.Control type="text" placeholder="상세내역" value={description} onChange={e => setDescription(e.target.value)} />
+      <Form.Group controlId='ProjectEditMajor' className='mt-3'>
+        <Form.Control type='text' placeholder='상세내역' value={description} onChange={e => setDescription(e.target.value)} />
       </Form.Group>
-      <Form.Group as={Row} className="mt-3">
+      <Form.Group as={Row} className='mt-3'>
         <Col>
-          <DatePicker selected={fromDate} dateFormat="yyyy-MM-dd" onChange={date => setFromDate(date)} />{' '}
+          <DatePicker selected={fromDate} dateFormat='yyyy-MM-dd' onChange={date => setFromDate(date)} />{' '}
         </Col>
         <Col>
-          <DatePicker selected={toDate} dateFormat="yyyy-MM-dd" onChange={date => setToDate(date)} />
+          <DatePicker selected={toDate} dateFormat='yyyy-MM-dd' onChange={date => setToDate(date)} />
         </Col>
       </Form.Group>
-      <Form.Group as={Row} className="mt-3">
+      <Form.Group as={Row} className='mt-3'>
         <Row>
           <Col>
-            <Button variant="primary" type="submit" className="me-2">
+            <Button variant='primary' type='submit' className='me-2'>
               확인
             </Button>
-            <Button variant="secondary" type="submit" onClick={() => setIsEditing(false)}>
+            <Button variant='secondary' type='submit' onClick={() => setIsEditing(false)}>
               취소
             </Button>
           </Col>
