@@ -38,10 +38,10 @@ function EducationEditForm({ currentEducation, setEducations, setIsEditing }) {
         <Form.Check inline label='박사졸업' id='radio-edit4' type='radio' name='position' value='박사졸업' checked={position === '박사졸업'} onChange={e => setPosition(e.target.value)} />
       </div>
 
-      <Form.Group as={Row} className='mt-3'>
+      <Form.Group as={Row} className='mt-3 text-center'>
         <Row>
-          <Col>
-            <Button variant='primary' type='submit'>
+          <Col sm='20'>
+            <Button variant='primary' type='submit' className='me-2'>
               확인
             </Button>
             <Button variant='secondary' onClick={() => setIsEditing(false)}>
