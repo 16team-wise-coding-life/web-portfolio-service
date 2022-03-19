@@ -24,17 +24,17 @@ function AwardEditForm({ award, setAward, setIsEditing }) {
   return (
     <>
       <Form onSubmit={handleSubmit}>
-        <Form.Group controlId='awardEditTitle'>
+        <Form.Group controlId='awardEditTitle' className='mt-3'>
           <Form.Control type='text' placeholder='수상내역' value={award.title} onChange={e => setAward({ ...award, title: e.target.value })} />
         </Form.Group>
 
-        <Form.Group controlId='awardEditDescription'>
+        <Form.Group controlId='awardEditDescription' className='mt-3'>
           <Form.Control type='text' placeholder='상세내역' value={award.description} onChange={e => setAward({ ...award, description: e.target.value })} />
         </Form.Group>
 
         <Form.Group as={Row} className='mt-3 text-center'>
           <Col>
-            <Button variant='primary' type='submit'>
+            <Button variant='primary' type='submit' className='me-2'>
               확인
             </Button>
             <Button variant='secondary' onClick={() => setIsEditing(false)}>

@@ -11,18 +11,18 @@ function AwardCard({ award, setIsEditing, isEditable }) {
     <>
       <Card.Text>
         <Row className='align-items-center'>
-          <Col className='mr-4'>
+          <Col>
             <span>{award.title}</span>
             <br />
             <span className='text-muted'>{award.description}</span>
           </Col>
-          <Col xs lg='1'>
-            {isEditable && (
-              <Button variant='outline-info' onClick={handleClick}>
+          {isEditable && (
+            <Col xs lg='1'>
+              <Button variant='outline-info' size='sm' onClick={handleClick}>
                 편집
               </Button>
-            )}
-          </Col>
+            </Col>
+          )}
         </Row>
       </Card.Text>
     </>
