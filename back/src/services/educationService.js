@@ -1,11 +1,8 @@
 import { Education } from '../db';
-import { v4 as uuidv4 } from 'uuid';
 
 class EducationService {
   static async addEducation({ user_id, school, major, position }) {
-    const education_id = uuidv4();
     const newEducation = {
-      id: education_id,
       user_id,
       school,
       major,
@@ -22,7 +19,7 @@ class EducationService {
     const education = await Education.findById({ education_id });
 
     if (!education) {
-      const errorMessage = '해당 이메일은 학력이 없습니다.';
+      const errorMessage = '학력이 존재하지 않습니다.';
       return { errorMessage };
     }
 
@@ -35,7 +32,7 @@ class EducationService {
   }
 
   static async setEducation({ education_id, toUpdate }) {
-    let education = await Education.findAllById({ education_id });
+    let education = await Education.findById({ education_id });
 
     if (!education) {
       const errorMessage = '학력이 존재하지 않습니다.';

@@ -24,11 +24,11 @@ function AwardAddForm({ awards, setAwards, portfolioOwnerId, setIsAdding }) {
       <Card className='mb-2'>
         <Card.Body>
           <Form onSubmit={handleSubmit}>
-            <Form.Group controlId='useEditTitle'>
+            <Form.Group controlId='awardEditTitle'>
               <Form.Control type='text' placeholder='수상내역' value={title} onChange={e => setTitle(e.target.value)} />
             </Form.Group>
 
-            <Form.Group controlId='userEditDescription'>
+            <Form.Group controlId='awardEditDescription'>
               <Form.Control type='text' placeholder='상세내역' value={description} onChange={e => setDescription(e.target.value)} />
             </Form.Group>
 

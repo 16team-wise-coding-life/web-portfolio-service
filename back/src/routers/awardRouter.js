@@ -6,15 +6,13 @@ import { awardService } from '../services/awardService';
 const awardRouter = Router();
 awardRouter.use(login_required);
 
-awardRouter.post('/award/create', async function (req, res, next) {
+awardRouter.post('/award/create', async (req, res, next) => {
   try {
     if (is.emptyObject(req.body)) {
       throw new Error('headers의 Content-Type을 application/json으로 설정해주세요');
     }
 
-    const user_id = req.body.user_id;
-    const title = req.body.title;
-    const description = req.body.description;
+    const { user_id, title, description } = req.body;
 
     // Add db
     const newAward = await awardService.addAward({
@@ -28,12 +26,12 @@ awardRouter.post('/award/create', async function (req, res, next) {
     }
 
     res.status(201).json(newAward);
-  } catch (e) {
-    next(e);
+  } catch (error) {
+    next(error);
   }
 });
 
-awardRouter.get('/awards/:id', async function (req, res, next) {
+awardRouter.get('/awards/:id', async (req, res, next) => {
   try {
     const award_id = req.params.id;
     const currentAwardInfo = await awardService.getAwardInfo({ award_id });
@@ -43,12 +41,12 @@ awardRouter.get('/awards/:id', async function (req, res, next) {
     }
 
     res.status(200).send(currentAwardInfo);
-  } catch (e) {
-    next(e);
+  } catch (error) {
+    next(error);
   }
 });
 
-awardRouter.put('/awards/:id', async function (req, res, next) {
+awardRouter.put('/awards/:id', async (req, res, next) => {
   try {
     const award_id = req.params.id;
     const title = req.body.title ?? null;
@@ -63,18 +61,18 @@ awardRouter.put('/awards/:id', async function (req, res, next) {
     }
 
     res.status(200).json(updatedAward);
-  } catch (e) {
-    next(e);
+  } catch (error) {
+    next(error);
   }
 });
 
-awardRouter.get('/awardlist/:user_id', async function (req, res, next) {
+awardRouter.get('/awardlist/:user_id', async (req, res, next) => {
   try {
     const user_id = req.params.user_id;
     const awards = await awardService.getAwards({ user_id });
     res.status(200).send(awards);
-  } catch (e) {
-    next(e);
+  } catch (error) {
+    next(error);
   }
 });
 

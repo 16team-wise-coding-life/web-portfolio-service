@@ -6,7 +6,7 @@ import { projectService } from '../services/projectService';
 const projectRouter = Router();
 projectRouter.use(login_required);
 
-projectRouter.post('/project/create', async function (req, res, next) {
+projectRouter.post('/project/create', async (req, res, next) => {
   try {
     if (is.emptyObject(req.body)) {
       throw new Error('headers의 Content-Type을 application/json으로 설정해주세요');
@@ -31,12 +31,12 @@ projectRouter.post('/project/create', async function (req, res, next) {
     }
 
     res.status(201).json(newProject);
-  } catch (e) {
-    next(e);
+  } catch (error) {
+    next(error);
   }
 });
 
-projectRouter.get('/projects/:id', async function (req, res, next) {
+projectRouter.get('/projects/:id', async (req, res, next) => {
   try {
     const project_id = req.params.id;
     const currentProjectInfo = await projectService.getProjectInfo({ project_id });
@@ -45,12 +45,12 @@ projectRouter.get('/projects/:id', async function (req, res, next) {
       throw new Error(currentProjectInfo.errorMessage);
     }
     res.status(200).send(currentProjectInfo);
-  } catch (e) {
-    next(e);
+  } catch (error) {
+    next(error);
   }
 });
 
-projectRouter.put('/projects/:id', async function (req, res, next) {
+projectRouter.put('/projects/:id', async (req, res, next) => {
   try {
     const project_id = req.params.id;
     const title = req.body.title ?? null;
@@ -67,18 +67,18 @@ projectRouter.put('/projects/:id', async function (req, res, next) {
     }
 
     res.status(200).json(updatedProject);
-  } catch (e) {
-    next(e);
+  } catch (error) {
+    next(error);
   }
 });
 
-projectRouter.get('/projectlist/:user_id', async function (req, res, next) {
+projectRouter.get('/projectlist/:user_id', async (req, res, next) => {
   try {
     const user_id = req.params.user_id;
     const projects = await projectService.getProjects({ user_id });
     res.status(200).send(projects);
-  } catch (e) {
-    next(e);
+  } catch (error) {
+    next(error);
   }
 });
 

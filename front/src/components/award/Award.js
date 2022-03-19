@@ -1,33 +1,16 @@
-import React, { useState, useEffect } from 'react';
-import { Card, Col, Row, Button } from 'react-bootstrap';
-import * as Api from '../../api';
+import React, { useState } from 'react';
 
-function Award({ award, setIsEditing, isEditable }) {
-  const handleClick = e => {
-    e.preventDefault();
-    setIsEditing(true);
-  };
+import AwardCard from './AwardCard';
+import AwardEditForm from './AwardEditForm';
 
-  return (
-    <>
-      <Card.Text>
-        <Row className='align-items-center'>
-          <Col className='mr-4'>
-            <span>{award.title}</span>
-            <br />
-            <span className='text-muted'>{award.description}</span>
-          </Col>
-          <Col>
-            {isEditable && (
-              <Button variant='outline-info' onClick={handleClick}>
-                편집
-              </Button>
-            )}
-          </Col>
-        </Row>
-      </Card.Text>
-    </>
-  );
+function Award({ awardCard, isEditable }) {
+  const [isEditing, setIsEditing] = useState(false);
+  const [award, setAward] = useState({ title: awardCard.title, description: awardCard.description, id: awardCard._id });
+  // const [title, setTitle] = useState(award.title);
+  // const [description, setDescription] = useState(award.description);
+  // const [id, setId] = useState(award._id);
+
+  return <>{isEditing ? <AwardEditForm award={award} setAward={setAward} setIsEditing={setIsEditing} /> : <AwardCard award={award} setIsEditing={setIsEditing} isEditable={isEditable} />}</>;
 }
 
 export default Award;

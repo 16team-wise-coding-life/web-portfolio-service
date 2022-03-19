@@ -10,11 +10,7 @@ educationRouter.post('/education/create', login_required, async (req, res, next)
     if (is.emptyObject(req.body)) {
       throw new Error('headers의 Content-Type을 application/json으로 설정해주세요');
     }
-
-    const user_id = req.body.user_id;
-    const school = req.body.school;
-    const major = req.body.major;
-    const position = req.body.position;
+    const { user_id, school, major, position } = req.body;
 
     const newEducation = await EducationService.addEducation({
       user_id,
