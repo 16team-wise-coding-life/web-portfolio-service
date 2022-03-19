@@ -1,5 +1,5 @@
-import React, { useState, useEffect } from 'react';
-import { Button, Form, Card, Col, Row } from 'react-bootstrap';
+import React, { useState } from 'react';
+import { Button, Form, Col, Row } from 'react-bootstrap';
 import DatePicker from 'react-datepicker';
 import * as Api from '../../api';
 
@@ -19,32 +19,30 @@ function CertificateEditForm({ certificate, setCertificate, setIsEditing }) {
   };
 
   return (
-    <>
-      <Form onSubmit={handleSubmit}>
-        <Form.Group controlId='certificateEditTitle'>
-          <Form.Control type='text' placeholder='자격증 제목' value={title} onChange={e => setCertificate({ ...certificate, title: e.target.value })} />
-        </Form.Group>
+    <Form onSubmit={handleSubmit}>
+      <Form.Group controlId='certificateEditTitle' className='mt-3'>
+        <Form.Control type='text' placeholder='자격증 제목' value={title} onChange={e => setCertificate({ ...certificate, title: e.target.value })} />
+      </Form.Group>
 
-        <Form.Group controlId='certificateEditDescription'>
-          <Form.Control type='text' placeholder='상세내역' value={description} onChange={e => setCertificate({ ...certificate, description: e.target.value })} />
-        </Form.Group>
+      <Form.Group controlId='certificateEditDescription' className='mt-3'>
+        <Form.Control type='text' placeholder='상세내역' value={description} onChange={e => setCertificate({ ...certificate, description: e.target.value })} />
+      </Form.Group>
 
-        <Form.Group controlId='certificateEditDate'>
-          <DatePicker selected={selectedDate} dateFormat='yyyy/MM/dd' onChange={date => setSelectedDate(date)} />
-        </Form.Group>
+      <Form.Group controlId='certificateEditDate' className='mb-3 mt-3'>
+        <DatePicker selected={selectedDate} dateFormat='yyyy/MM/dd' onChange={date => setSelectedDate(date)} />
+      </Form.Group>
 
-        <Form.Group as={Row} className='mt-3 text-center'>
-          <Col>
-            <Button variant='primary' type='submit'>
-              확인
-            </Button>
-            <Button variant='secondary' onClick={() => setIsEditing(false)}>
-              취소
-            </Button>
-          </Col>
-        </Form.Group>
-      </Form>
-    </>
+      <Form.Group as={Row} className='mt-3 text-center'>
+        <Col>
+          <Button variant='primary' type='submit' className='me-2'>
+            확인
+          </Button>
+          <Button variant='secondary' onClick={() => setIsEditing(false)}>
+            취소
+          </Button>
+        </Col>
+      </Form.Group>
+    </Form>
   );
 }
 
