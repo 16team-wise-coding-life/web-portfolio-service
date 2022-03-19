@@ -13,6 +13,7 @@ function EducationEditForm({ currentEducation, setEducations, setIsEditing }) {
     const user_id = currentEducation.user_id;
     console.log('user_id', user_id);
     await Api.put(`educations/${currentEducation.user_id}`, {
+      user_id,
       school,
       major,
       position,
@@ -38,13 +39,13 @@ function EducationEditForm({ currentEducation, setEducations, setIsEditing }) {
         <Form.Check inline label="박사졸업" id="radio-edit4" type="radio" name="position" value="박사졸업" checked={position === '박사졸업'} onChange={e => setPosition(e.target.value)} />
       </div>
 
-      <Form.Group as={Row} className="mt-3">
+      <Form.Group as={Row} className="mt-3 text-center">
         <Row>
           <Col>
-            <Button variant="primary" type="submit">
+            <Button variant="primary" type="submit" className="me-2">
               확인
             </Button>
-            <Button variant="secondary" onClick={() => setIsEditing(false)}>
+            <Button variant="secondary" type="submit" onClick={() => setIsEditing(false)}>
               취소
             </Button>
           </Col>

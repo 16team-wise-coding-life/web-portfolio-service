@@ -41,7 +41,7 @@ function EducationAddForm({ portfolioOwnerId, setEducations, setIsAdding }) {
         <Form.Check inline label="박사졸업" id="radio-add4" type="radio" name="position" value="박사졸업" checked={position === '박사졸업'} onChange={e => setPosition(e.target.value)} />
       </div>
 
-      <Form.Group as={Row} className="mt-3">
+      <Form.Group as={Row} className="mt-3 text-center">
         <Row>
           <Col>
             <Button variant="primary" type="submit" className="me-2">
