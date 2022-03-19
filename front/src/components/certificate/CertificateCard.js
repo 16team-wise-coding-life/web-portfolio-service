@@ -16,26 +16,24 @@ function CertificateCard({ certificate, setIsEditing, isEditable }) {
   const convertedDate = convertDate(certificate.when_date);
 
   return (
-    <>
-      <Card.Text>
-        <Row className='align-items-center'>
-          <Col>
-            <span>{certificate.title}</span>
-            <br />
-            <span className='text-muted'>{certificate.description}</span>
-            <br />
-            <span className='text-muted'>{convertedDate}</span>
-          </Col>
+    <Card.Text>
+      <Row className='align-items-center'>
+        <Col>
+          <span>{certificate.title}</span>
+          <br />
+          <span className='text-muted'>{certificate.description}</span>
+          <br />
+          <span className='text-muted'>{convertedDate}</span>
+        </Col>
+        {isEditable && (
           <Col xs lg='1'>
-            {isEditable && (
-              <Button variant='outline-info' onClick={handleClick}>
-                편집
-              </Button>
-            )}
+            <Button variant='outline-info' size='sm' onClick={handleClick}>
+              편집
+            </Button>
           </Col>
-        </Row>
-      </Card.Text>
-    </>
+        )}
+      </Row>
+    </Card.Text>
   );
 }
 
