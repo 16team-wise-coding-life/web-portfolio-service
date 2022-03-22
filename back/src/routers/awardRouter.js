@@ -76,4 +76,19 @@ awardRouter.get('/awardlist/:user_id', async (req, res, next) => {
   }
 });
 
+awardRouter.delete('/awards/:id', async (req, res, next) => {
+  try {
+    const award_id = req.params.id;
+    const deletedAward = await awardService.deleteAward({ award_id });
+
+    if (deletedAward.errorMessage) {
+      throw new Error(deletedAward.errorMessage);
+    }
+
+    res.status(200).send(deletedAward);
+  } catch (error) {
+    next(error);
+  }
+});
+
 export { awardRouter };
