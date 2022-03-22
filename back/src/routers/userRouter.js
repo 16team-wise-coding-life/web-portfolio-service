@@ -124,7 +124,7 @@ userAuthRouter.get('/afterlogin', login_required, (req, res, next) => {
   res.status(200).send(`안녕하세요 ${req.currentUserId}님, jwt 웹 토큰 기능 정상 작동 중입니다.`);
 });
 
-userAuthRouter.post('/image/upload', login_required, async (req, res, next) => {
+userAuthRouter.put('/image/upload/:id', login_required, async (req, res, next) => {
   try {
     const user_id = req.params.id;
     const uploadSingle = upload('elice-portfolio-upload').single('image');
