@@ -36,23 +36,25 @@ class certificateAuthService {
       return { errorMessage };
     }
 
-    if (toUpdate.title) {
-      const fieldToUpdate = 'title';
-      const newValue = toUpdate.title;
-      certificate = await Certificate.update({ certificate_id, fieldToUpdate, newValue });
+    if (!toUpdate.title) {
+      toUpdate.title = certificate.title;
     }
 
-    if (toUpdate.description) {
-      const fieldToUpdate = 'description';
-      const newValue = toUpdate.description;
-      certificate = await Certificate.update({ certificate_id, fieldToUpdate, newValue });
+    if (!toUpdate.description) {
+      toUpdate.description = certificate.description;
     }
 
-    if (toUpdate.when_date) {
-      const fieldToUpdate = 'when_date';
-      const newValue = toUpdate.when_date;
-      certificate = await Certificate.update({ certificate_id, fieldToUpdate, newValue });
+    if (!toUpdate.when_date) {
+      toUpdate.when_date = certificate.when_date;
     }
+
+    const newValues = {
+      title: toUpdate.title,
+      description: toUpdate.description,
+      when_data: toUpdate.when_date,
+    };
+
+    certificate = await Certificate.update({ certificate_id, newValues });
 
     return certificate;
   }
