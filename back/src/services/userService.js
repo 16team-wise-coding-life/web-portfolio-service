@@ -119,7 +119,7 @@ class userAuthService {
   }
 
   static async setImage({ user_id, image_url }) {
-    const user = await User.findById({ user_id });
+    var user = await User.findById({ user_id });
 
     if (!user) {
       const errorMessage = '가입 내역이 없습니다. 다시 한 번 확인해 주세요.';
