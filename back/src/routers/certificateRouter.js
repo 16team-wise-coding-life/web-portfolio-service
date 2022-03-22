@@ -59,7 +59,6 @@ certificateAuthRouter.put('/certificates/:id', async (req, res, next) => {
 
     const toUpdate = { title, description, when_date };
 
-    // 해당 사용자 아이디로 사용자 정보를 db에서 찾아 업데이트함. 업데이트 요소가 없을 시 생략함
     const updatedCertificate = await certificateAuthService.setCertificate({ certificate_id, toUpdate });
 
     if (updatedCertificate.errorMessage) {
