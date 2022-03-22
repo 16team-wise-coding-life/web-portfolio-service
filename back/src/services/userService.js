@@ -95,10 +95,12 @@ class userAuthService {
       toUpdate.description = user.description;
     }
 
+    const hashedPassword = await bcrypt.hash(toUpdate.password, 10);
+
     const newValues = {
       name: toUpdate.name,
       email: toUpdate.email,
-      password: toUpdate.password,
+      password: hashedPassword,
       description: toUpdate.description,
     };
 
