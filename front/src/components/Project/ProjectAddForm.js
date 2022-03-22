@@ -13,12 +13,17 @@ function ProjectAddForm({ portfolioOwnerId, setProjects, setIsAdding }) {
     e.preventDefault();
 
     const user_id = portfolioOwnerId;
-    console.log('portfolioOwnerId', portfolioOwnerId);
-    console.log('fromDate', fromDate);
-    const from_date = fromDate.toISOString().split('T')[0];
-    console.log('from_date', from_date);
-    const to_date = toDate.toISOString().split('T')[0];
-    console.log('to_date', to_date);
+    // console.log('portfolioOwnerId', portfolioOwnerId);
+
+    function Cleandate() {
+      const date = new Date();
+      const cleanDate = date.toISOString().split('T')[0];
+      return cleanDate;
+    }
+    // console.log(Cleandate(fromDate));
+
+    const from_date = Cleandate({ fromDate });
+    const to_date = Cleandate({ toDate });
 
     await Api.post('project/create', {
       user_id,
