@@ -78,30 +78,31 @@ class userAuthService {
       return { errorMessage };
     }
 
-    // 업데이트 대상에 name이 있다면, 즉 name 값이 null 이 아니라면 업데이트 진행
-    if (toUpdate.name) {
-      const fieldToUpdate = 'name';
-      const newValue = toUpdate.name;
-      user = await User.update({ user_id, fieldToUpdate, newValue });
+    // 업데이트 대상에 name이 없다면, 기존 name 데이터로 업데이트 진행
+    if (!toUpdate.name) {
+      toUpdate.name = user.name;
     }
 
-    if (toUpdate.email) {
-      const fieldToUpdate = 'email';
-      const newValue = toUpdate.email;
-      user = await User.update({ user_id, fieldToUpdate, newValue });
+    if (!toUpdate.email) {
+      toUpdate.email = user.email;
     }
 
-    if (toUpdate.password) {
-      const fieldToUpdate = 'password';
-      const newValue = toUpdate.password;
-      user = await User.update({ user_id, fieldToUpdate, newValue });
+    if (!toUpdate.password) {
+      toUpdate.password = user.password;
     }
 
-    if (toUpdate.description) {
-      const fieldToUpdate = 'description';
-      const newValue = toUpdate.description;
-      user = await User.update({ user_id, fieldToUpdate, newValue });
+    if (!toUpdate.description) {
+      toUpdate.description = user.description;
     }
+
+    const newValues = {
+      name: toUpdate.name,
+      email: toUpdate.email,
+      password: toUpdate.password,
+      description: toUpdate.description,
+    };
+
+    user = await User.update({ user_id, newValues });
 
     return user;
   }
