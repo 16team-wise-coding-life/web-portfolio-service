@@ -1,32 +1,21 @@
-import React from 'react';
-import { Card, Col, Row, Button } from 'react-bootstrap';
+import React, { useState } from 'react';
 
-function Certificate({ certificate, setIsEditing, isEditable }) {
-  const handleClick = e => {
-    e.preventDefault();
-    setIsEditing(true);
-  };
+import CertificateCard from './CertificateCard';
+import CertificateEditForm from './CertificateEditForm';
+
+function Certificate({ certificateCard, isEditable }) {
+  const { title, description, when_date, _id } = certificateCard;
+
+  const [isEditing, setIsEditing] = useState(false);
+  const [certificate, setCertificate] = useState({ title, description, when_date, _id });
 
   return (
     <>
-      <Card.Text>
-        <Row className='align-items-center'>
-          <Col className='mr-4'>
-            <span>{certificate.title}</span>
-            <br />
-            <span className='text-muted'>{certificate.description}</span>
-            <br />
-            <span className='text-muted'>{certificate.when_date}</span>
-          </Col>
-          <Col>
-            {isEditable && (
-              <Button variant='outline-info' onClick={handleClick}>
-                편집
-              </Button>
-            )}
-          </Col>
-        </Row>
-      </Card.Text>
+      {isEditing ? (
+        <CertificateEditForm certificate={certificate} setCertificate={setCertificate} setIsEditing={setIsEditing} />
+      ) : (
+        <CertificateCard certificate={certificate} setIsEditing={setIsEditing} isEditable={isEditable} />
+      )}
     </>
   );
 }

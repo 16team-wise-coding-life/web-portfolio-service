@@ -24,6 +24,12 @@ class Project {
     const updatedProject = await ProjectModel.findOneAndUpdate(filter, update, option);
     return updatedProject;
   }
+
+  static async delete({ project_id }) {
+    await ProjectModel.deleteOne({ _id: project_id });
+
+    return '삭제가 완료 되었습니다.';
+  }
 }
 
 export { Project };

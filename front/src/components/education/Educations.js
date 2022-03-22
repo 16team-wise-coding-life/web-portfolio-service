@@ -14,7 +14,7 @@ function Educations({ portfolioOwnerId, isEditable }) {
 
   return (
     <>
-      <Card>
+      <Card className='mb-3'>
         <Card.Body>
           <Card.Title>학력</Card.Title>
           <Card.Text>
@@ -23,8 +23,8 @@ function Educations({ portfolioOwnerId, isEditable }) {
             ))}
           </Card.Text>
           {isEditable && (
-            <Row className="mt-3 text-center mb-4">
-              <Col sm={{ span: 20 }}>
+            <Row className='mt-3 text-center mb-4'>
+              <Col sm='20'>
                 <Button onClick={() => setIsAdding(true)}>+</Button>
               </Col>
             </Row>

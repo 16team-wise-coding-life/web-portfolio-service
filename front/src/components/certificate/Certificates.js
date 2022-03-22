@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import { Card, Button, Row, Col } from 'react-bootstrap';
 
-import CertificateCard from './CertificateCard';
+import Certificate from './Certificate';
 import CertificateAddForm from './CertificateAddForm';
 
 import * as Api from '../../api';
@@ -16,15 +16,21 @@ function Certificates({ portfolioOwnerId, isEditable }) {
 
   return (
     <>
-      <Card>
+      <Card className='mt-2'>
         <Card.Body>
-          <Card.Title>수상이력</Card.Title>
-          {certificates.map(certificate => {
-            return <CertificateCard key={certificate._id} certificateCard={certificate} isEditable={isEditable} />;
-          })}
-          <Row className='mt-3 text-center mb-4'>
-            <Col>{isEditable && <Button onClick={() => setIsAdding(true)}>+</Button>}</Col>
-          </Row>
+          <Card.Title>자격증</Card.Title>
+          <Card.Text>
+            {certificates.map(certificate => {
+              return <Certificate key={certificate._id} certificateCard={certificate} isEditable={isEditable} />;
+            })}
+          </Card.Text>
+          {isEditable && (
+            <Row className='mt-3 text-center mb-4'>
+              <Col sm={{ span: 20 }}>
+                <Button onClick={() => setIsAdding(true)}>+</Button>
+              </Col>
+            </Row>
+          )}
           {isAdding && <CertificateAddForm certificates={certificates} setCertificates={setCertificates} portfolioOwnerId={portfolioOwnerId} setIsAdding={setIsAdding} />}
         </Card.Body>
       </Card>
