@@ -4,24 +4,33 @@ import * as Api from '../../api';
 import DatePicker from 'react-datepicker';
 
 function ProjectAddForm({ portfolioOwnerId, setProjects, setIsAdding }) {
-  const [form, setForm] = useState({ title: '', description: '', from_date: new Date(), to_date: new Date() });
+  const [title, setTitle] = useState('');
+  const [description, setDescription] = useState('');
+  const [fromDate, setFromDate] = useState(new Date());
+  const [toDate, setToDate] = useState(new Date());
 
   const handleSubmit = async e => {
     e.preventDefault();
 
     const user_id = portfolioOwnerId;
+    // console.log('portfolioOwnerId', portfolioOwnerId);
 
     const Cleandate = cleanDate => {
       return cleanDate.toISOString().split('T')[0];
     };
 
-    const fromdate = Cleandate(form.from_date);
-    const todate = Cleandate(form.to_date);
+    // console.log(Cleandate(fromDate));
+    // console.log(Cleandate(toDate));
+
+    const from_date = Cleandate(fromDate);
+    const to_date = Cleandate(toDate);
 
     await Api.post('project/create', {
-      ...form,
-      fromdate,
-      todate,
+      user_id,
+      title,
+      description,
+      from_date,
+      to_date,
     });
 
     await Api.get('Projectlist', user_id).then(res => setProjects(res.data));
@@ -31,17 +40,17 @@ function ProjectAddForm({ portfolioOwnerId, setProjects, setIsAdding }) {
   return (
     <Form onSubmit={handleSubmit}>
       <Form.Group controlId='ProjectAddTitle' className='mt-3'>
-        <Form.Control type='text' placeholder='프로젝트 이름' value={form.title} onChange={e => setForm(e.target.value)} />
+        <Form.Control type='text' placeholder='프로젝트 이름' value={title} onChange={e => setTitle(e.target.value)} />
       </Form.Group>
       <Form.Group controlId='ProjectAddMajor' className='mt-3'>
-        <Form.Control type='text' placeholder='상세내역' value={form.description} onChange={e => setForm(e.target.value)} />
+        <Form.Control type='text' placeholder='상세내역' value={description} onChange={e => setDescription(e.target.value)} />
       </Form.Group>
       <Form.Group as={Row} className='mt-3'>
         <Col xs='auto'>
-          <DatePicker selected={form.from_date} dateFormat='yyyy-MM-dd' onChange={date => setForm(date)} />{' '}
+          <DatePicker selected={fromDate} dateFormat='yyyy-MM-dd' onChange={date => setFromDate(date)} />{' '}
         </Col>
         <Col xs='auto'>
-          <DatePicker selected={form.to_date} dateFormat='yyyy-MM-dd' onChange={date => setForm(date)} />
+          <DatePicker selected={toDate} dateFormat='yyyy-MM-dd' onChange={date => setToDate(date)} />
         </Col>
       </Form.Group>
       <Form.Group as={Row} className='mt-3 text-center'>
