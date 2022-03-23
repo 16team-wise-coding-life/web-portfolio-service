@@ -8,10 +8,11 @@ freeboardRouter.use(login_required);
 
 freeboardRouter.post('/freeboard/create', async (req, res, next) => {
   try {
-    const { user_id, title, content } = req.body;
+    const { user_id, name, title, content } = req.body;
 
     const newPost = await freeboardService.addPost({
       user_id,
+      name,
       title,
       content,
     });

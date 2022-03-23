@@ -27,6 +27,7 @@ function PostAddForm({ portfolioOwnerId }) {
 
     Api.post('freeboard/create', {
       user_id: userState.user.id,
+      name: userState.user.name,
       ...tempPost,
     }).then(navigate(`/freeboard`));
   };
