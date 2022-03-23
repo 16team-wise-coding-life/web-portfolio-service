@@ -39,23 +39,25 @@ class EducationService {
       return { errorMessage };
     }
 
-    if (toUpdate.school) {
-      const fieldToUpdate = 'school';
-      const newValue = toUpdate.school;
-      education = await Education.update({ education_id, fieldToUpdate, newValue });
+    if (!toUpdate.school) {
+      toUpdate.school = education.school;
     }
 
-    if (toUpdate.major) {
-      const fieldToUpdate = 'major';
-      const newValue = toUpdate.major;
-      education = await Education.update({ education_id, fieldToUpdate, newValue });
+    if (!toUpdate.major) {
+      toUpdate.major = education.major;
     }
 
-    if (toUpdate.position) {
-      const fieldToUpdate = 'position';
-      const newValue = toUpdate.position;
-      education = await Education.update({ education_id, fieldToUpdate, newValue });
+    if (!toUpdate.position) {
+      toUpdate.position = education.position;
     }
+
+    const newValues = {
+      school: toUpdate.school,
+      major: toUpdate.major,
+      position: toUpdate.position,
+    };
+
+    education = await Education.update({ education_id, newValues });
 
     return education;
   }
