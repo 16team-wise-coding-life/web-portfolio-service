@@ -4,46 +4,63 @@ import * as Api from '../../api';
 import DatePicker from 'react-datepicker';
 
 function ProjectEditForm({ currentProject, setProjects, setIsEditing }) {
-  const [title, setTitle] = useState(currentProject.title);
-  const [description, setDescription] = useState(currentProject.description);
-  const [fromDate, setFromDate] = useState(new Date(currentProject.from_date));
-  const [toDate, setToDate] = useState(new Date(currentProject.to_date));
+  const [form, setForm] = useState({
+    title: currentProject.title,
+    description: currentProject.description,
+    from_date: new Date(currentProject.from_date),
+    to_date: new Date(currentProject.to_date),
+  });
+
+  console.log('currentProject.from_date', currentProject.from_date);
+  console.log('form.from_date', form.from_date);
 
   const handleSubmit = async e => {
     e.preventDefault();
 
-    const user_id = currentProject.user_id;
-    console.log('user_id', user_id);
+    const { _id, user_id } = currentProject;
 
-    const from_date = fromDate.toISOString().split('T')[0];
-    const to_date = toDate.toISOString().split('T')[0];
+    // 날짜 정리 함수
+    // const Cleandate = cleanDate => {
+    //   return cleanDate.toISOString().split('T')[0];
+    // };
+    // const cleanFromDate = Cleandate(currentProject.from_date);
+    // console.log('cleanFromDate', cleanFromDate);
 
-    await Api.put(`projects/${currentProject._id}`, {
-      user_id,
-      title,
-      description,
-      from_date,
-      to_date,
-    });
+    // const todate = Cleandate(currentProject.to_date);
 
-    await Api.get('projectlist', user_id).then(res => setProjects(res.data));
-    setIsEditing(false);
+    try {
+      const res = await Api.put(`projects/${currentProject._id}`, {
+        ...form,
+      });
+      console.log(res.data);
+      setProjects({
+        ...form,
+        title: res.data.title,
+        description: res.data.description,
+        from_date: res.data.from_date,
+        to_date: res.data.to_date,
+      });
+
+      setIsEditing(false);
+    } catch (error) {
+      console.log(error);
+    }
   };
 
   return (
     <Form onSubmit={handleSubmit}>
       <Form.Group controlId='ProjectEditTitle' className='mt-3'>
-        <Form.Control type='text' placeholder='프로젝트 이름' value={title} onChange={e => setTitle(e.target.value)} />
+        <Form.Control type='text' placeholder='프로젝트 이름' value={form.title} onChange={e => setForm(e.target.value)} />
       </Form.Group>
       <Form.Group controlId='ProjectEditMajor' className='mt-3'>
-        <Form.Control type='text' placeholder='상세내역' value={description} onChange={e => setDescription(e.target.value)} />
+        <Form.Control type='text' placeholder='상세내역' value={form.description} onChange={e => setForm(e.target.value)} />
       </Form.Group>
       <Form.Group as={Row} className='mt-3'>
         <Col xs='auto'>
-          <DatePicker selected={fromDate} dateFormat='yyyy-MM-dd' onChange={date => setFromDate(date)} />{' '}
+          <DatePicker selected={form.from_date} dateFormat='yyyy-MM-dd' onChange={date => setForm(date)} />{' '}
         </Col>
         <Col xs='auto'>
-          <DatePicker selected={toDate} dateFormat='yyyy-MM-dd' onChange={date => setToDate(date)} />
+          <DatePicker selected={form.to_date} dateFormat='yyyy-MM-dd' onChange={date => setForm(date)} />
         </Col>
       </Form.Group>
       <Form.Group as={Row} className='mt-3 text-center'>
