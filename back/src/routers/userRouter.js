@@ -81,24 +81,29 @@ userAuthRouter.get('/user/current', login_required, async (req, res, next) => {
 
 userAuthRouter.put('/users/:id', login_required, async (req, res, next) => {
   try {
-    // URI로부터 사용자 id를 추출함.
-    const user_id = req.params.id;
-    // body data 로부터 업데이트할 사용자 정보를 추출함.
-    const name = req.body.name ?? null;
-    const email = req.body.email ?? null;
-    const password = req.body.password ?? null;
-    const description = req.body.description ?? null;
+    const uploadSingle = upload('elice-portfolio-upload').single('image');
+    uploadSingle(req, res, async error => {
+      if (error) {
+        return res.status(400).json({ success: false, message: error.message });
+      }
 
-    const toUpdate = { name, email, password, description };
+      // URI로부터 사용자 id를 추출함.
+      const user_id = req.params.id;
+      // body data 로부터 업데이트할 사용자 정보를 추출함.
+      const name = req.body.name ?? null;
+      const email = req.body.email ?? null;
+      const password = req.body.password ?? null;
+      const description = req.body.description ?? null;
+      const image_url = req.file.location ?? null;
 
-    // 해당 사용자 아이디로 사용자 정보를 db에서 찾아 업데이트함. 업데이트 요소가 없을 시 생략함
-    const updatedUser = await userAuthService.setUser({ user_id, toUpdate });
-
-    if (updatedUser.errorMessage) {
-      throw new Error(updatedUser.errorMessage);
-    }
-
-    res.status(200).json(updatedUser);
+      const toUpdate = { name, email, password, description, image_url };
+      // 해당 사용자 아이디로 사용자 정보를 db에서 찾아 업데이트함. 업데이트 요소가 없을 시 생략함
+      const updatedUser = await userAuthService.setUser({ user_id, toUpdate });
+      if (updatedUser.errorMessage) {
+        throw new Error(updatedUser.errorMessage);
+      }
+      res.status(200).json(updatedUser);
+    });
   } catch (error) {
     next(error);
   }
