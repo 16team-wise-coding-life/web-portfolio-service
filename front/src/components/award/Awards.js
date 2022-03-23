@@ -8,10 +8,18 @@ import * as Api from '../../api';
 function Awards({ portfolioOwnerId, isEditable }) {
   const [isAdding, setIsAdding] = useState(false);
   const [awards, setAwards] = useState([]);
+  const [isDeleted, setIsDeleted] = useState(false);
 
   useEffect(() => {
     Api.get(`awardlist/${portfolioOwnerId}`).then(res => setAwards(res.data));
   }, []);
+
+  useEffect(() => {
+    if (isDeleted) {
+      Api.get(`awardlist/${portfolioOwnerId}`).then(res => setAwards(res.data));
+      setIsDeleted(false);
+    }
+  }, [isDeleted]);
 
   return (
     <>
@@ -20,7 +28,7 @@ function Awards({ portfolioOwnerId, isEditable }) {
           <Card.Title>수상이력</Card.Title>
           <Card.Text>
             {awards.map(award => {
-              return <Award key={award._id} awardCard={award} isEditable={isEditable} />;
+              return <Award key={award._id} awardCard={award} isEditable={isEditable} setIsDeleted={setIsDeleted} />;
             })}
           </Card.Text>
           {isEditable && (
