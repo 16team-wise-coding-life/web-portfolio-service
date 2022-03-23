@@ -9,10 +9,18 @@ import * as Api from '../../api';
 function Certificates({ portfolioOwnerId, isEditable }) {
   const [isAdding, setIsAdding] = useState(false);
   const [certificates, setCertificates] = useState([]);
+  const [isDeleted, setIsDeleted] = useState(false);
 
   useEffect(() => {
     Api.get(`certificatelist/${portfolioOwnerId}`).then(res => setCertificates(res.data));
   }, []);
+
+  useEffect(() => {
+    if (isDeleted) {
+      Api.get(`certificatelist/${portfolioOwnerId}`).then(res => setCertificates(res.data));
+      setIsDeleted(false);
+    }
+  }, [portfolioOwnerId, isDeleted]);
 
   return (
     <>
@@ -21,7 +29,7 @@ function Certificates({ portfolioOwnerId, isEditable }) {
           <Card.Title>자격증</Card.Title>
           <Card.Text>
             {certificates.map(certificate => {
-              return <Certificate key={certificate._id} certificateCard={certificate} isEditable={isEditable} />;
+              return <Certificate key={certificate._id} certificateCard={certificate} isEditable={isEditable} setIsDeleted={setIsDeleted} />;
             })}
           </Card.Text>
           {isEditable && (
