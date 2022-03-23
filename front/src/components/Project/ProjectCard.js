@@ -2,6 +2,13 @@ import React from 'react';
 import { Button, Card, Col, Row } from 'react-bootstrap';
 
 function ProjectCard({ project, setIsEditing, isEditable }) {
+  const Cleandate = cleanDate => {
+    return cleanDate.split('T')[0];
+  };
+
+  const CleanFromDate = Cleandate(project.from_date);
+  const CleanToDate = Cleandate(project.to_date);
+
   return (
     <Card.Text className='mb-2 mt-3'>
       <Row className='align-items-center'>
@@ -11,7 +18,7 @@ function ProjectCard({ project, setIsEditing, isEditable }) {
           <span className='text-muted'>
             {`${project.description}`}
             <br />
-            {`${project.from_date.split('T')[0]} ~ ${project.to_date.split('T')[0]}`}
+            {`${CleanFromDate} ~ ${CleanToDate}`}
           </span>
         </Col>
         {isEditable && (

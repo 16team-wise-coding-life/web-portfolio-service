@@ -16,9 +16,9 @@ class Project {
     return projects;
   }
 
-  static async update({ project_id, fieldToUpdate, newValue }) {
+  static async update({ project_id, newValues }) {
     const filter = { _id: project_id };
-    const update = { [fieldToUpdate]: newValue };
+    const update = { $set: newValues };
     const option = { returnOriginal: false };
 
     const updatedProject = await ProjectModel.findOneAndUpdate(filter, update, option);
