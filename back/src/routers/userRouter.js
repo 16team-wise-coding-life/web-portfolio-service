@@ -4,7 +4,6 @@ import { login_required } from '../middlewares/login_required';
 import { userAuthService } from '../services/userService';
 
 const userAuthRouter = Router();
-const upload = require('../module/multer');
 
 userAuthRouter.post('/user/register', async (req, res, next) => {
   try {
@@ -122,23 +121,6 @@ userAuthRouter.get('/users/:id', login_required, async (req, res, next) => {
 // jwt 토큰 기능 확인용, 삭제해도 되는 라우터임.
 userAuthRouter.get('/afterlogin', login_required, (req, res, next) => {
   res.status(200).send(`안녕하세요 ${req.currentUserId}님, jwt 웹 토큰 기능 정상 작동 중입니다.`);
-});
-
-userAuthRouter.put('/image/upload/:id', login_required, async (req, res, next) => {
-  try {
-    const user_id = req.params.id;
-    const uploadSingle = upload('elice-portfolio-upload').single('image');
-    uploadSingle(req, res, async error => {
-      if (error) {
-        return res.status(400).json({ success: false, message: error.message });
-      }
-      const image_url = req.file.location;
-      const updated = await userAuthService.setImage({ user_id, image_url });
-      res.status(200).json({ data: req.file, updated });
-    });
-  } catch (error) {
-    next(error);
-  }
 });
 
 export { userAuthRouter };
