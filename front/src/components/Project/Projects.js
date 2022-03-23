@@ -19,7 +19,7 @@ function Projects({ portfolioOwnerId, isEditable }) {
           <Card.Title>프로젝트</Card.Title>
           <Card.Text>
             {projects.map(project => (
-              <Project key={project.id} project={project} setProjects={setProjects} isEditable={isEditable} />
+              <Project key={project._id} project={project} setProjects={setProjects} isEditable={isEditable} />
             ))}
           </Card.Text>
           {isEditable && (
