@@ -21,18 +21,19 @@ class awardService {
       return { errorMessage };
     }
 
-    if (toUpdate.title) {
-      const fieldToUpdate = 'title';
-      const newValue = toUpdate.title;
-      award = await Award.update({ award_id, fieldToUpdate, newValue });
+    if (!toUpdate.title) {
+      toUpdate.title = award.title;
+    }
+    if (!toUpdate.description) {
+      toUpdate.description = award.description;
     }
 
-    if (toUpdate.description) {
-      const fieldToUpdate = 'description';
-      const newValue = toUpdate.description;
-      award = await Award.update({ award_id, fieldToUpdate, newValue });
-    }
+    const newValues = {
+      title: toUpdate.title,
+      description: toUpdate.description,
+    };
 
+    award = await Award.update({ award_id, newValues });
     return award;
   }
 
