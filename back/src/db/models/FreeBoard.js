@@ -7,31 +7,31 @@ class FreeBoard {
   }
 
   static async findById({ post_id }) {
-    const post = await FreeBoard.findOne({ _id: post_id });
+    const post = await FreeBoardModel.findOne({ _id: post_id });
     return post;
   }
 
   static async findAll() {
-    const posts = await FreeBoard.findAll({});
+    const posts = await FreeBoardModel.find({});
     return posts;
   }
 
   static async findAllByUserId({ user_id }) {
-    const posts = await FreeBoard.findAllByUserId({ user_id: user_id });
+    const posts = await FreeBoardModel.find({ user_id: user_id });
     return posts;
   }
 
   static async update({ post_id, newValues }) {
-    const filter = { _id: project_id };
+    const filter = { _id: post_id };
     const update = { $set: newValues };
     const option = { returnOriginal: false };
 
-    const updatedPost = await FreeBoard.findOneAndUpdate(filter, update, option);
+    const updatedPost = await FreeBoardModel.findOneAndUpdate(filter, update, option);
     return updatedPost;
   }
 
   static async delete({ post_id }) {
-    await FreeBoard.deleteOne({ _id: post_id });
+    await FreeBoardModel.deleteOne({ _id: post_id });
     return '삭제가 완료되었습니다.';
   }
 }
