@@ -120,22 +120,6 @@ class userAuthService {
 
     return user;
   }
-
-  static async setImage({ user_id, image_url }) {
-    var user = await User.findById({ user_id });
-
-    if (!user) {
-      const errorMessage = '가입 내역이 없습니다. 다시 한 번 확인해 주세요.';
-      return { errorMessage };
-    }
-
-    if (image_url) {
-      const fieldToUpdate = 'image';
-      const newValue = image_url;
-      user = await User.update({ user_id, fieldToUpdate, newValue });
-    }
-    return user;
-  }
 }
 
 export { userAuthService };

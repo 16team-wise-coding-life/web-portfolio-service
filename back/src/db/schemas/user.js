@@ -23,11 +23,6 @@ const UserSchema = new Schema(
       required: false,
       default: '설명이 아직 없습니다. 추가해 주세요.',
     },
-    image: {
-      type: String,
-      required: true,
-      default: 'https://i.ibb.co/jTXFzFT/2021-10-07-10-48-59.png',
-    },
   },
   {
     timestamps: true,
