@@ -1,8 +1,8 @@
 import { FreeBoard } from '../db';
 
 class freeboardService {
-  static async addPost({ user_id, title, content }) {
-    const newPost = { user_id, title, content };
+  static async addPost({ user_id, name, title, content }) {
+    const newPost = { user_id, name, title, content };
     const createdNewPost = await FreeBoard.create({ newPost });
     createdNewPost.errorMessage = null;
     return createdNewPost;
