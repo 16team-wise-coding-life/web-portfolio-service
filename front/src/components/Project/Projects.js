@@ -8,9 +8,25 @@ function Projects({ portfolioOwnerId, isEditable }) {
   const [projects, setProjects] = useState([]);
   const [isAdding, setIsAdding] = useState(false);
 
+  const handleDeleteClick = async id => {
+    try {
+      if (window.confirm('프로젝트 항목을 삭제하시겠습니까?')) {
+        await Api.delete(`projects/${id}`);
+        const res = await Api.get(`projectlist/${portfolioOwnerId}`);
+        setProjects({ ...res.data });
+      }
+    } catch (error) {
+      alert('프로젝트 항목을 삭제하지 못했습니다.', error);
+    }
+  };
+
   useEffect(() => {
-    Api.get('Projectlist', portfolioOwnerId).then(res => setProjects(res.data));
-  }, [portfolioOwnerId]);
+    async function loadProjectList() {
+      const res = await Api.get(`projectlist/${portfolioOwnerId}`);
+      setProjects(res.data);
+    }
+    loadProjectList();
+  }, []);
 
   return (
     <>
@@ -19,12 +35,12 @@ function Projects({ portfolioOwnerId, isEditable }) {
           <Card.Title>프로젝트</Card.Title>
           <Card.Text>
             {projects.map(project => (
-              <Project key={project._id} project={project} setProjects={setProjects} isEditable={isEditable} />
+              <Project key={project._id} project={project} setProjects={setProjects} isEditable={isEditable} handleDeleteClick={handleDeleteClick} />
             ))}
           </Card.Text>
           {isEditable && (
             <Row className='mt-3 text-center mb-4'>
-              <Col sm='20'>
+              <Col sm={{ span: 20 }}>
                 <Button onClick={() => setIsAdding(true)}>+</Button>
               </Col>
             </Row>
