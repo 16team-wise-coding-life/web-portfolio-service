@@ -17,6 +17,15 @@ class followingService {
     }
     return following;
   }
+
+  static async deleteFollowing({ user_id, following_id }) {
+    const unfollow = { user_id, following_id };
+
+    const deletedFollowing = await Following.deleteFollowing({ unfollow });
+    deletedFollowing.errorMessage = null;
+
+    return deletedFollowing;
+  }
 }
 
 export { followingService };

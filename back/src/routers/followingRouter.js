@@ -41,4 +41,22 @@ followingRouter.get('/followinglist/:user_id', async (req, res, next) => {
   }
 });
 
+followingRouter.delete('/following/delete', async (req, res, next) => {
+  try {
+    const { user_id, following_id } = req.body;
+
+    const deleteFollowing = await followingService.deleteFollowing({
+      user_id,
+      following_id,
+    });
+
+    if (deleteFollowing.errorMessage) {
+      throw new Error(deleteFollowing.errorMessage);
+    }
+    res.status(200).send(deleteFollowing);
+  } catch (error) {
+    next(error);
+  }
+});
+
 export { followingRouter };
