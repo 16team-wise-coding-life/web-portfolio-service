@@ -3,7 +3,7 @@ import { Button, Col, Form, Row } from 'react-bootstrap';
 import * as Api from '../../api';
 import DatePicker from 'react-datepicker';
 
-function ProjectAddForm({ projects, setProjects, portfolioOwnerId, setIsAdding }) {
+function ProjectAddForm({ portfolioOwnerId, setProjects, setIsAdding }) {
   const [tempProject, setTempProject] = useState({
     title: '',
     description: '',
