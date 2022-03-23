@@ -11,7 +11,6 @@ function Project({ project, setProjects, isEditable, handleDeleteClick }) {
       ) : (
         <ProjectCard project={project} isEditable={isEditable} setIsEditing={setIsEditing} handleDeleteClick={handleDeleteClick} />
       )}
-      <button onClick={() => console.log(project._id)}>dddd</button>
     </>
   );
 }

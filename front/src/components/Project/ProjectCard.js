@@ -28,7 +28,7 @@ function ProjectCard({ project, setIsEditing, isEditable, handleDeleteClick }) {
               </Button>
             </Col>
             <Col xs='auto' lg='1'>
-              <Button className='mr-3' variant='outline-danger' size='sm' onClick={handleDeleteClick}>
+              <Button className='mr-3' variant='outline-danger' size='sm' onClick={() => handleDeleteClick(project._id)}>
                 삭제
               </Button>
             </Col>
