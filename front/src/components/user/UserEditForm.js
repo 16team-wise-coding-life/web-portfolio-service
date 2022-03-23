@@ -1,6 +1,6 @@
-import React, { useState } from "react";
-import { Button, Form, Card, Col, Row } from "react-bootstrap";
-import * as Api from "../../api";
+import React, { useState } from 'react';
+import { Button, Form, Card, Col, Row } from 'react-bootstrap';
+import * as Api from '../../api';
 
 function UserEditForm({ user, setIsEditing, setUser }) {
   //useState로 name 상태를 생성함.
@@ -10,15 +10,23 @@ function UserEditForm({ user, setIsEditing, setUser }) {
   //useState로 description 상태를 생성함.
   const [description, setDescription] = useState(user.description);
 
-  const handleSubmit = async (e) => {
+  const [userImage, setUserImage] = useState('');
+
+  const handleSubmit = async e => {
     e.preventDefault();
 
     // "users/유저id" 엔드포인트로 PUT 요청함.
-    const res = await Api.put(`users/${user.id}`, {
+    let res = await Api.put(`users/${user.id}`, {
       name,
       email,
       description,
     });
+
+    const formData = new FormData();
+    formData.append('File', userImage);
+
+    res = await Api.file_put(`image/upload/${user.id}`, formData);
+
     // 유저 정보는 response의 data임.
     const updatedUser = res.data;
     // 해당 유저 정보로 user을 세팅함.
@@ -33,30 +41,20 @@ function UserEditForm({ user, setIsEditing, setUser }) {
       <Card.Body>
         <Form onSubmit={handleSubmit}>
           <Form.Group controlId="useEditName" className="mb-3">
-            <Form.Control
-              type="text"
-              placeholder="이름"
-              value={name}
-              onChange={(e) => setName(e.target.value)}
-            />
+            <Form.Control type="text" placeholder="이름" value={name} onChange={e => setName(e.target.value)} />
           </Form.Group>
 
           <Form.Group controlId="userEditEmail" className="mb-3">
-            <Form.Control
-              type="email"
-              placeholder="이메일"
-              value={email}
-              onChange={(e) => setEmail(e.target.value)}
-            />
+            <Form.Control type="email" placeholder="이메일" value={email} onChange={e => setEmail(e.target.value)} />
           </Form.Group>
 
           <Form.Group controlId="userEditDescription">
-            <Form.Control
-              type="text"
-              placeholder="정보, 인사말"
-              value={description}
-              onChange={(e) => setDescription(e.target.value)}
-            />
+            <Form.Control type="text" placeholder="정보, 인사말" value={description} onChange={e => setDescription(e.target.value)} />
+          </Form.Group>
+
+          <Form.Group controlId="userEditImage" className="mb-3">
+            <Form.Label>이미지 바꾸기</Form.Label>
+            <Form.Control type="file" size="sm" onChange={e => setUserImage(e.target.files[0])} />
           </Form.Group>
 
           <Form.Group as={Row} className="mt-3 text-center">
