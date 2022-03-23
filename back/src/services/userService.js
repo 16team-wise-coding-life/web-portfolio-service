@@ -89,6 +89,8 @@ class userAuthService {
 
     if (!toUpdate.password) {
       toUpdate.password = user.password;
+    } else {
+      toUpdate.password = bcrypt.hash(toUpdate.password, 10);
     }
 
     if (!toUpdate.description) {
@@ -99,12 +101,10 @@ class userAuthService {
       toUpdate.image_url = user.image;
     }
 
-    const hashedPassword = await bcrypt.hash(toUpdate.password, 10);
-
     const newValues = {
       name: toUpdate.name,
       email: toUpdate.email,
-      password: hashedPassword,
+      password: toUpdate.password,
       description: toUpdate.description,
       image: toUpdate.image_url,
     };
