@@ -1,9 +1,10 @@
 import React, { useEffect, useContext, useState } from 'react';
 import { useNavigate } from 'react-router';
-import { Container, Button, Form, ListGroup, Row, Col } from 'react-bootstrap';
+import { Container, Button, Form, ListGroup, Row, Col, Card } from 'react-bootstrap';
 
 import * as Api from '../../api';
 import { UserStateContext } from '../../App';
+import CardHeader from 'react-bootstrap/esm/CardHeader';
 
 function Freeboard() {
   const navigate = useNavigate();
@@ -21,17 +22,16 @@ function Freeboard() {
 
   return (
     <Container fluid>
-      {posts.map(post => (
-        <Row>
-          <Col xs={8} sm={8}>
-            {post.title}
-          </Col>
-          <Col sx={4} sm={4}>
-            {post.created_at}
-          </Col>
-        </Row>
-      ))}
-
+      <Card>
+        <Card.Header>자유게시판 </Card.Header>
+        <ListGroup variant="flush">
+          {posts.map(post => (
+            <ListGroup.Item onClick={() => navigate(`/freeboard/${post._id}`)}>
+              {post.title} {post.created_at}
+            </ListGroup.Item>
+          ))}
+        </ListGroup>
+      </Card>
       <Form.Group as={Row} className="mt-3 text-center">
         <Col>
           <Button variant="primary" type="submit" className="me-2" onClick={() => navigate(`/freeboard/create`)}>
