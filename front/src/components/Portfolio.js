@@ -7,8 +7,8 @@ import * as Api from '../api';
 import User from './user/User';
 import Educations from './education/Educations';
 import Awards from './award/Awards';
-import Certificates from './certificate/Certificates';
 import Projects from './Project/Projects';
+import Certificates from './certificate/Certificates';
 
 function Portfolio() {
   const navigate = useNavigate();

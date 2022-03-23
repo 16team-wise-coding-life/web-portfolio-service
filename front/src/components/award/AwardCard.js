@@ -1,15 +1,18 @@
-import React, { useState } from 'react';
+import React from 'react';
 import { Card, Col, Row, Button } from 'react-bootstrap';
 import * as Api from '../../api';
 
 function AwardCard({ award, setIsEditing, isEditable, setIsDeleted }) {
   const handleDeleteClick = e => {
     //delete '/awards/:id'
-    console.log(award);
-    Api.delete(`awards/${award.id}`).then(res => {
-      console.log(res.data);
-      setIsDeleted(true);
-    });
+    Api.delete(`awards/${award.id}`)
+      .then(res => {
+        console.log(res.data);
+        setIsDeleted(true);
+      })
+      .catch(error => {
+        console.log(error);
+      });
   };
 
   return (
