@@ -15,17 +15,13 @@ function UserEditForm({ user, setIsEditing, setUser }) {
   const handleSubmit = async e => {
     e.preventDefault();
 
-    // "users/유저id" 엔드포인트로 PUT 요청함.
-    let res = await Api.put(`users/${user.id}`, {
-      name,
-      email,
-      description,
-    });
-
     const formData = new FormData();
-    formData.append('File', userImage);
+    formData.append('name', name);
+    formData.append('email', email);
+    formData.append('description', description);
+    formData.append('image', userImage);
 
-    res = await Api.file_put(`image/upload/${user.id}`, formData);
+    const res = await Api.form_put(`users/${user.id}`, formData);
 
     // 유저 정보는 response의 data임.
     const updatedUser = res.data;

@@ -55,10 +55,7 @@ async function del(endpoint, params = '') {
   });
 }
 
-async function file_put(endpoint, formData) {
-  console.log(`%cPUT 요청: ${serverUrl + endpoint}`, 'color: #059c4b;');
-  console.log(`%cPUT 요청 데이터: ${formData}`, 'color: #059c4b;');
-
+async function form_put(endpoint, formData) {
   return axios.put(serverUrl + endpoint, formData, {
     headers: {
       'Content-Type': 'multipart/form-data',
@@ -69,4 +66,4 @@ async function file_put(endpoint, formData) {
 
 // 아래처럼 export한 후, import * as A 방식으로 가져오면,
 // A.get, A.post 로 쓸 수 있음.
-export { get, post, put, del as delete, file_put };
+export { get, post, put, del as delete, form_put };
