@@ -1,6 +1,13 @@
 import { Following } from '../db';
 
 class followingService {
+  static async addFollowing({ user_id, following_id }) {
+    const newFollowing = { user_id, following_id };
+    const createdNewFollowing = await Following.create({ newFollowing });
+    createdNewFollowing.errorMessage = null;
+    return createdNewFollowing;
+  }
+
   static async getFollowing({ user_id }) {
     const following = await Following.findAllByUserId({ user_id });
 

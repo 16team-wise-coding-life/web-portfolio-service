@@ -6,6 +6,29 @@ import { followingService } from '../services/followingService';
 const followingRouter = Router();
 followingRouter.use(login_required);
 
+followingRouter.post('/following/create', async (req, res, next) => {
+  try {
+    if (is.emptyObject(req.body)) {
+      throw new Error('headers의 Content-Type을 application/json으로 설정해주세요');
+    }
+
+    const { user_id, following_id } = req.body;
+
+    const newFollowing = await followingService.addFollowing({
+      user_id,
+      following_id,
+    });
+
+    if (newFollowing.errorMessage) {
+      throw new Error(newFollowing.errorMessage);
+    }
+
+    res.status(201).json(newFollowing);
+  } catch (error) {
+    next(error);
+  }
+});
+
 // 모든팔로우 조회 API
 followingRouter.get('/followinglist/:user_id', async (req, res, next) => {
   try {
