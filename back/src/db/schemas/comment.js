@@ -5,9 +5,9 @@ const CommentSchema = new Schema({
     type: Mongoose.Schema.Types.ObjectId,
     ref: 'FreeBoard',
   },
-  user: {
-    type: Mongoose.Schema.Types.ObjectId,
-    ref: 'User',
+  user_id: {
+    type: String,
+    required: true,
   },
   content: {
     type: String,

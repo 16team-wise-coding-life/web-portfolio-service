@@ -8,11 +8,11 @@ commentRouter.use(login_required);
 
 commentRouter.post('/comment/:board_id', async (req, res, next) => {
   try {
-    const { user, content } = req.body;
+    const { user_id, content } = req.body;
     const board_id = req.params.board_id;
 
     const newComment = await commentService.addComment({
-      user,
+      user_id,
       content,
       board_id,
     });
@@ -22,6 +22,21 @@ commentRouter.post('/comment/:board_id', async (req, res, next) => {
     }
 
     res.status(201).json(newComment);
+  } catch (error) {
+    next(error);
+  }
+});
+
+commentRouter.delete('/comment/:id', async (req, res, next) => {
+  try {
+    const comment_id = req.params.id;
+    const deletedComment = await commentService.deleteComment({
+      comment_id,
+    });
+    if (deletedComment.errorMessage) {
+      throw new Error(deletedComment.errorMessage);
+    }
+    res.status(200).send(deletedComment);
   } catch (error) {
     next(error);
   }
