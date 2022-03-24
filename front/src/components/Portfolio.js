@@ -1,7 +1,6 @@
 import React, { useContext, useState, useEffect, useMemo } from 'react';
 import { useNavigate, useParams } from 'react-router-dom';
-import { Container, Col, Row } from 'react-bootstrap';
-import Skeleton from 'react-loading-skeleton';
+import { Container, Col, Row, Placeholder } from 'react-bootstrap';
 
 import { UserStateContext } from '../App';
 import * as Api from '../api';
@@ -10,6 +9,7 @@ import Educations from './education/Educations';
 import Awards from './award/Awards';
 import Projects from './Project/Projects';
 import Certificates from './certificate/Certificates';
+import { PortfolioSkeleton } from './Skeletons';
 
 function Portfolio() {
   const navigate = useNavigate();
@@ -59,12 +59,7 @@ function Portfolio() {
   }, [params, userState, navigate]);
 
   if (!isFetchCompleted) {
-    return (
-      <div style={{ height: '90vh', width: '90vw', display: 'flex', flexDirection: 'column', alignItems: 'center', justifyContent: 'center' }}>
-        <h2>Loading..</h2>
-        <Skeleton height={100} width={100} style={{ clipPath: 'polygon(0 40%, 60% 40%, 60% 10%, 100% 50%, 60% 90%, 60% 60%, 0 60%)' }} />
-      </div>
-    );
+    return <>{PortfolioSkeleton()}</>;
   }
 
   return (
