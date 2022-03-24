@@ -1,6 +1,6 @@
 import React, { useEffect, useContext, useState } from 'react';
 import { useNavigate } from 'react-router';
-import { Container, Button, Form, ListGroup, Row, Col, Card, ButtonGroup } from 'react-bootstrap';
+import { Container, Button, ListGroup, Card } from 'react-bootstrap';
 
 import * as Api from '../../api';
 import { UserStateContext } from '../../App';
@@ -39,7 +39,7 @@ function Freeboard() {
           ))}
         </ListGroup>
       </Card>
-      <Button variant="primary" className="me-2" className="mt-3 text-center" onClick={() => navigate(`/freeboard/create`)}>
+      <Button variant="primary" className="mt-3" onClick={() => navigate(`/freeboard/create`)}>
         게시글 작성
       </Button>
     </Container>

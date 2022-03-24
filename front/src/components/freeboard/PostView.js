@@ -1,4 +1,4 @@
-import React, { useContext, useState, useEffect, useMemo } from 'react';
+import React, { useContext, useState, useEffect } from 'react';
 import { useNavigate, useParams } from 'react-router-dom';
 import { Container, Button, Card } from 'react-bootstrap';
 
@@ -14,13 +14,18 @@ function PostView() {
   const [isEditable, setIsEditable] = useState(false);
 
   const fetchPostInfo = async postId => {
-    const res = await Api.get('freeboard', postId);
-    const postData = res.data;
-    if (postData?.user_id === userState.user?.id) {
-      setIsEditable(true);
+    try {
+      const { data: postData } = await Api.get('freeboard', postId);
+      if (postData?.user_id === userState.user?.id) {
+        setIsEditable(true);
+      } else {
+        setIsEditable(false);
+      }
+      setPostInfo(postData);
+      setIsFetchCompleted(true);
+    } catch (error) {
+      console.log(error);
     }
-    setPostInfo(postData);
-    setIsFetchCompleted(true);
   };
 
   useEffect(() => {
@@ -30,13 +35,23 @@ function PostView() {
       return;
     }
 
-    const postId = params.postId;
-    fetchPostInfo(postId);
+    fetchPostInfo(params.postId);
   }, [params, userState, navigate]);
 
   if (!isFetchCompleted) {
     return 'loading...';
   }
+
+  const deleteNavigate = async () => {
+    try {
+      if (window.confirm('게시글을 삭제하시겠습니까?')) {
+        await Api.delete('freeboard', params.postId);
+        navigate(`/freeboard`);
+      }
+    } catch (error) {
+      console.log(error);
+    }
+  };
 
   return (
     <Container fluid>
@@ -46,34 +61,24 @@ function PostView() {
           작성자 : {postInfo.name} 작성 시간 : {postInfo.created_at}
         </Card.Header>
         <Card.Body>
-          {postInfo.content?.split('\n')?.map(line => (
-            <Card.Text>
+          {postInfo.content?.split('\n')?.map((line, index) => (
+            <Card.Text key={index}>
               {line}
               <br />
             </Card.Text>
           ))}
         </Card.Body>
         <Card.Footer className="text-center">
-          <Button variant="primary" type="submit" className="me-2" onClick={() => navigate(`/freeboard`)}>
+          <Button variant="primary" className="me-2" onClick={() => navigate(`/freeboard`)}>
             목록
           </Button>
           {isEditable && (
-            <Button variant="primary" type="submit" className="me-2" onClick={() => navigate(`/freeboard/edit/${params.postId}`)}>
+            <Button variant="primary" className="me-2" onClick={() => navigate(`/freeboard/edit/${params.postId}`)}>
               수정
             </Button>
           )}
           {isEditable && (
-            <Button
-              variant="primary"
-              type="submit"
-              className="me-2"
-              onClick={() => {
-                if (window.confirm('게시글을 삭제하시겠습니까?')) {
-                  Api.delete('freeboard', params.postId);
-                  navigate(`/freeboard`);
-                }
-              }}
-            >
+            <Button variant="primary" className="me-2" onClick={() => deleteNavigate()}>
               삭제
             </Button>
           )}
