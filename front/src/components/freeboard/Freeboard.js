@@ -4,7 +4,6 @@ import { Container, Button, Form, ListGroup, Row, Col, Card } from 'react-bootst
 
 import * as Api from '../../api';
 import { UserStateContext } from '../../App';
-import CardHeader from 'react-bootstrap/esm/CardHeader';
 
 function Freeboard() {
   const navigate = useNavigate();
@@ -27,7 +26,7 @@ function Freeboard() {
         <ListGroup variant="flush">
           {posts.map(post => (
             <ListGroup.Item onClick={() => navigate(`/freeboard/${post._id}`)}>
-              {post.title} {post.created_at}
+              {post.title} {post.name}
             </ListGroup.Item>
           ))}
         </ListGroup>
