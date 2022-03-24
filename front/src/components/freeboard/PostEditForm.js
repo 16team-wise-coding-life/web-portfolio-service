@@ -1,6 +1,6 @@
 import React, { useContext, useState, useEffect, useMemo } from 'react';
 import { useNavigate, useParams } from 'react-router-dom';
-import { Form, Row, Col, Button } from 'react-bootstrap';
+import { Container, Form, Row, Col, Button } from 'react-bootstrap';
 
 import { UserStateContext } from '../../App';
 import * as Api from '../../api';
@@ -49,24 +49,32 @@ function PostEditForm() {
   }
 
   return (
-    <Form onSubmit={handleSubmit} className="mt-3">
-      <Form.Group controlId="postAddTitle">
-        <Form.Control type="text" name="title" value={postInfo.title} onChange={e => handlePostValue('title', e.target.value)} />
-      </Form.Group>
-      <Form.Group controlId="postAddContext">
-        <Form.Control type="textarea" style={{ height: '500px' }} name="content" value={postInfo.content} onChange={e => handlePostValue('content', e.target.value)} />
-      </Form.Group>
-      <Form.Group as={Row} className="mt-3 text-center">
-        <Col>
-          <Button variant="primary" type="submit" className="me-2">
-            등록
-          </Button>
-          <Button variant="secondary" onClick={() => navigate(`/freeboard/${postInfo._id}`)}>
-            취소
-          </Button>
+    <Container>
+      <Row className="justify-content-md-center">
+        <Col lg={8}>
+          <Form onSubmit={handleSubmit} className="mt-3">
+            <Form.Group controlId="postAddTitle">
+              <Form.Label>제목</Form.Label>
+              <Form.Control type="text" name="title" value={postInfo.title} onChange={e => handlePostValue('title', e.target.value)} />
+            </Form.Group>
+            <Form.Group controlId="postAddContext">
+              <Form.Label>내용</Form.Label>
+              <Form.Control type="textarea" style={{ height: '300px' }} name="content" value={postInfo.content} onChange={e => handlePostValue('content', e.target.value)} />
+            </Form.Group>
+            <Form.Group as={Row} className="mt-3 text-center">
+              <Col>
+                <Button variant="primary" type="submit" className="me-2">
+                  등록
+                </Button>
+                <Button variant="secondary" onClick={() => navigate(`/freeboard/${postInfo._id}`)}>
+                  취소
+                </Button>
+              </Col>
+            </Form.Group>
+          </Form>
         </Col>
-      </Form.Group>
-    </Form>
+      </Row>
+    </Container>
   );
 }
 
