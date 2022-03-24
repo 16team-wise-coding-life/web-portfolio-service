@@ -9,7 +9,6 @@ import * as Api from '../../api';
 function Certificates({ portfolioOwnerId, isEditable }) {
   const [isAdding, setIsAdding] = useState(false);
   const [certificates, setCertificates] = useState([]);
-  const [isDeleted, setIsDeleted] = useState(false);
 
   useEffect(() => {
     try {
@@ -21,7 +20,7 @@ function Certificates({ portfolioOwnerId, isEditable }) {
     } catch (error) {
       console.log(error);
     }
-  }, []);
+  }, [portfolioOwnerId]);
 
   const handleDeleteClick = async _id => {
     try {
@@ -52,7 +51,7 @@ function Certificates({ portfolioOwnerId, isEditable }) {
               </Col>
             </Row>
           )}
-          {isAdding && <CertificateAddForm certificates={certificates} setCertificates={setCertificates} portfolioOwnerId={portfolioOwnerId} setIsAdding={setIsAdding} />}
+          {isAdding && <CertificateAddForm setCertificates={setCertificates} portfolioOwnerId={portfolioOwnerId} setIsAdding={setIsAdding} />}
         </Card.Body>
       </Card>
     </>

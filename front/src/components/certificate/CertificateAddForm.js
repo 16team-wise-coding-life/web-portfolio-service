@@ -10,16 +10,18 @@ function CertificateAddForm({ setCertificates, portfolioOwnerId, setIsAdding }) 
     setTempCertificate(prev => ({ ...prev, [name]: value }));
   };
 
-  const handleSubmit = e => {
+  const handleSubmit = async e => {
     e.preventDefault();
-
-    Api.post('certificate/create', {
-      user_id: portfolioOwnerId,
-      ...tempCertificate,
-    }).then(res => {
+    try {
+      const res = await Api.post('certificate/create', {
+        user_id: portfolioOwnerId,
+        ...tempCertificate,
+      });
       setCertificates(prev => [...prev, res.data]);
       setIsAdding(false);
-    });
+    } catch (error) {
+      console.log(error);
+    }
   };
 
   return (
