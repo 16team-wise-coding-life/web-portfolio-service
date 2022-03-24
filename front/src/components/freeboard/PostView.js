@@ -43,7 +43,7 @@ function PostView() {
       <Card>
         <Card.Header>
           <Card.Title>{postInfo.title}</Card.Title>
-          작성자 : {postInfo.user_id} 작성 시간 : {postInfo.created_at}
+          작성자 : {postInfo.name} 작성 시간 : {postInfo.created_at}
         </Card.Header>
         <Card.Body>
           <Card.Text>{postInfo.content}</Card.Text>
