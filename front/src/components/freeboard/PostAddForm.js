@@ -22,11 +22,11 @@ function PostAddForm({ portfolioOwnerId }) {
     setTempPost({ ...tempPost, [name]: value });
   };
 
-  const handleSubmit = e => {
+  const handleSubmit = async e => {
     e.preventDefault();
     try {
       if (window.confirm('게시글을 등록 하겠습니까?')) {
-        Api.post('freeboard/create', {
+        await Api.post('freeboard/create', {
           user_id: userState.user.id,
           name: userState.user.name,
           ...tempPost,

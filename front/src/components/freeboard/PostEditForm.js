@@ -33,10 +33,10 @@ function PostEditForm() {
     setPostInfo({ ...postInfo, [name]: value });
   };
 
-  const handleSubmit = e => {
+  const handleSubmit = async e => {
     e.preventDefault();
     try {
-      Api.put(`freeboard/${postInfo._id}`, {
+      await Api.put(`freeboard/${postInfo._id}`, {
         ...postInfo,
       }).then(navigate(`/freeboard/${postInfo._id}`));
     } catch (error) {
