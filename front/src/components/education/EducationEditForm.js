@@ -25,7 +25,7 @@ function EducationEditForm({ currentEducation, setEducations, setIsEditing }) {
         });
         console.log(res.data);
         await Api.get('educationlist', currentEducation._id);
-        setEducations(prev => [{ ...prev, ...res.data }]);
+        setEducations(prev => [...prev, { ...res.data }]);
         setIsEditing(false);
       }
     } catch (error) {
