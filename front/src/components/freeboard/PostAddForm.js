@@ -49,14 +49,7 @@ function PostAddForm({ portfolioOwnerId }) {
 
             <Form.Group controlId="postAddContext">
               <Form.Label>내용</Form.Label>
-              <Form.Control
-                type="textarea"
-                style={{ height: '300px' }}
-                placeholder="내용을 입력하세요"
-                name="content"
-                value={tempPost.content}
-                onChange={e => handlePostValue(e.target.name, e.target.value)}
-              />
+              <Form.Control as="textarea" rows={20} placeholder="내용을 입력하세요" name="content" value={tempPost.content} onChange={e => handlePostValue(e.target.name, e.target.value)} />
             </Form.Group>
 
             <Form.Group as={Row} className="mt-3 text-center">

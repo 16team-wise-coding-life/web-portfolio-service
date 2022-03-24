@@ -15,7 +15,6 @@ function Freeboard() {
       navigate('/login');
       return;
     }
-    // TODO : freeboard내용 받아와야함
     Api.get('freeboardlist').then(res => setPosts(res.data));
   }, [userState, navigate]);
 
