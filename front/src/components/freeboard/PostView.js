@@ -63,8 +63,10 @@ function PostView() {
               type="submit"
               className="me-2"
               onClick={() => {
-                Api.delete('freeboard', params.postId);
-                navigate(`/freeboard`);
+                if (window.confirm('게시글을 삭제하시겠습니까?')) {
+                  Api.delete('freeboard', params.postId);
+                  navigate(`/freeboard`);
+                }
               }}
             >
               삭제
