@@ -46,7 +46,12 @@ function PostView() {
           작성자 : {postInfo.name} 작성 시간 : {postInfo.created_at}
         </Card.Header>
         <Card.Body>
-          <Card.Text>{postInfo.content}</Card.Text>
+          {postInfo.content?.split('\n')?.map(line => (
+            <Card.Text>
+              {line}
+              <br />
+            </Card.Text>
+          ))}
         </Card.Body>
         <Card.Footer className="text-center">
           <Button variant="primary" type="submit" className="me-2" onClick={() => navigate(`/freeboard`)}>

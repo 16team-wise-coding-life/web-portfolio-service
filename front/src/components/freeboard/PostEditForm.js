@@ -33,10 +33,10 @@ function PostEditForm() {
     setPostInfo({ ...postInfo, [name]: value });
   };
 
-  const handleSubmit = e => {
+  const handleSubmit = async e => {
     e.preventDefault();
     try {
-      Api.put(`freeboard/${postInfo._id}`, {
+      await Api.put(`freeboard/${postInfo._id}`, {
         ...postInfo,
       }).then(navigate(`/freeboard/${postInfo._id}`));
     } catch (error) {
@@ -59,7 +59,7 @@ function PostEditForm() {
             </Form.Group>
             <Form.Group controlId="postAddContext">
               <Form.Label>내용</Form.Label>
-              <Form.Control type="textarea" style={{ height: '300px' }} name="content" value={postInfo.content} onChange={e => handlePostValue('content', e.target.value)} />
+              <Form.Control as="textarea" rows={20} name="content" value={postInfo.content} onChange={e => handlePostValue('content', e.target.value)} />
             </Form.Group>
             <Form.Group as={Row} className="mt-3 text-center">
               <Col>
