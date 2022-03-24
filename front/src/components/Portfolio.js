@@ -59,7 +59,7 @@ function Portfolio() {
   }, [params, userState, navigate]);
 
   if (!isFetchCompleted) {
-    return <>{PortfolioSkeleton()}</>;
+    return <PortfolioSkeleton />;
   }
 
   return (

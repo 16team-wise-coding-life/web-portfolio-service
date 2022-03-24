@@ -50,7 +50,7 @@ function App() {
   }, []);
 
   if (!isFetchCompleted) {
-    return <>{HeaderSkeleton()}</>;
+    return <HeaderSkeleton />;
   }
 
   return (

@@ -197,13 +197,13 @@ export const PortfolioSkeleton = () => {
     <Container fluid>
       <Row>
         <Col md='3' lg='3'>
-          {UserSkeleton()}
+          <UserSkeleton />
         </Col>
         <Col>
-          {EducationSkeleton()}
-          {AwardSkeleton()}
-          {ProjectSkeleton()}
-          {CertificateSkeleton()}
+          <EducationSkeleton />
+          <AwardSkeleton />
+          <ProjectSkeleton />
+          <CertificateSkeleton />
         </Col>
       </Row>
     </Container>
