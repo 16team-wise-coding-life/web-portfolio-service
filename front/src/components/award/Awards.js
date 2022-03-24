@@ -22,7 +22,15 @@ function Awards({ portfolioOwnerId, isEditable }) {
   };
 
   useEffect(() => {
-    Api.get(`awardlist/${portfolioOwnerId}`).then(res => setAwards(res.data));
+    const loadAwards = async () => {
+      try {
+        const res = await Api.get(`awardlist/${portfolioOwnerId}`);
+        setAwards(res.data);
+      } catch (error) {
+        console.log(error);
+      }
+    };
+    loadAwards();
   }, [portfolioOwnerId]);
 
   return (

@@ -16,8 +16,7 @@ function AwardEditForm({ award, setAward, setIsEditing }) {
       const { data } = await Api.put(`awards/${_id}`, tempAward);
       setAward(prev => ({
         ...prev,
-        title: data.title,
-        description: data.description,
+        ...data,
       }));
       setIsEditing(false);
     } catch (error) {
