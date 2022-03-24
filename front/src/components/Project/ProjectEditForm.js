@@ -15,23 +15,16 @@ function ProjectEditForm({ currentProject, setProjects, setIsEditing }) {
     setForm(prev => ({ ...prev, [name]: value }));
   };
 
-  const handleCleandate = cleanDate => {
-    return cleanDate.toISOString().split('T')[0];
-  };
-
-  const from_date = handleCleandate(form.from_date);
-  const to_date = handleCleandate(form.to_date);
-
   const handleSubmit = async e => {
     e.preventDefault();
     try {
       const res = await Api.put(`projects/${currentProject._id}`, {
-        user_id: currentProject,
-        from_date,
-        to_date,
+        _id: currentProject._id,
         ...form,
       });
-      setProjects(prev => ({ ...prev, ...res.data }));
+      // res.data랑 ...prev data를 두개가 합쳐져야 하는데 합쳐지지를 않음 => 구조 분해 할당으로 합쳐야 한다!
+      console.log(res.data);
+      setProjects(prev => [...prev, res.data]);
       setIsEditing(false);
     } catch (error) {
       console.log(error);
@@ -47,7 +40,7 @@ function ProjectEditForm({ currentProject, setProjects, setIsEditing }) {
       </Form.Group>
       <Form.Group as={Row} className='mt-3'>
         <Col xs='auto'>
-          <DatePicker selected={form.from_date} name='from_date' dateFormat='yyyy-MM-dd' onChange={date => handleProjectEdit('from_date', date)} />{' '}
+          <DatePicker selected={form.from_date} name='from_date' dateFormat='yyyy-MM-dd' onChange={date => handleProjectEdit('from_date', date)} />
         </Col>
         <Col xs='auto'>
           <DatePicker selected={form.to_date} name='to_date' dateFormat='yyyy-MM-dd' onChange={date => handleProjectEdit('to_date', date)} />
