@@ -8,18 +8,22 @@ import * as Api from '../../api';
 function Awards({ portfolioOwnerId, isEditable }) {
   const [isAdding, setIsAdding] = useState(false);
   const [awards, setAwards] = useState([]);
-  const [isDeleted, setIsDeleted] = useState(false);
+
+  const handleDeleteClick = async _id => {
+    try {
+      if (window.confirm('수상이력 항목을 삭제하시겠습니까?')) {
+        await Api.delete(`awards/${_id}`);
+        const res = await Api.get(`awardlist/${portfolioOwnerId}`);
+        setAwards(res.data);
+      }
+    } catch (error) {
+      alert('수상이력 항목을 삭제하지 못했습니다.', error);
+    }
+  };
 
   useEffect(() => {
     Api.get(`awardlist/${portfolioOwnerId}`).then(res => setAwards(res.data));
   }, [portfolioOwnerId]);
-
-  useEffect(() => {
-    if (isDeleted) {
-      Api.get(`awardlist/${portfolioOwnerId}`).then(res => setAwards(res.data));
-      setIsDeleted(false);
-    }
-  }, [portfolioOwnerId, isDeleted]);
 
   return (
     <>
@@ -28,7 +32,7 @@ function Awards({ portfolioOwnerId, isEditable }) {
           <Card.Title>수상이력</Card.Title>
           <Card.Text>
             {awards.map(award => {
-              return <Award key={award._id} awardCard={award} isEditable={isEditable} setIsDeleted={setIsDeleted} />;
+              return <Award key={award._id} awardCard={award} isEditable={isEditable} handleDeleteClick={handleDeleteClick} />;
             })}
           </Card.Text>
           {isEditable && (

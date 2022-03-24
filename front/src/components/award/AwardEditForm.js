@@ -3,7 +3,7 @@ import { Button, Form, Col, Row } from 'react-bootstrap';
 import * as Api from '../../api';
 
 function AwardEditForm({ award, setAward, setIsEditing }) {
-  const { title, description, id } = award;
+  const { title, description, _id } = award;
   const [tempAward, setTempAward] = useState({ title, description });
 
   const handleAwardValue = (name, value) => {
@@ -13,7 +13,7 @@ function AwardEditForm({ award, setAward, setIsEditing }) {
   const handleSubmit = async e => {
     e.preventDefault();
     try {
-      const { data } = await Api.put(`awards/${id}`, tempAward);
+      const { data } = await Api.put(`awards/${_id}`, tempAward);
       setAward(prev => ({
         ...prev,
         title: data.title,
