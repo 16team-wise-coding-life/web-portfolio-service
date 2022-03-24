@@ -10,12 +10,13 @@ function CertificateEditForm({ certificate, setCertificate, setIsEditing }) {
   const handleSubmit = async e => {
     e.preventDefault();
 
-    Api.put(`certificates/${_id}`, { title, description, when_date: selectedDate })
-      .then(res => {
-        setCertificate(res.data);
-        setIsEditing(false);
-      })
-      .catch(error => console.log(error));
+    try {
+      const res = await Api.put(`certificates/${_id}`, { title, description, when_date: selectedDate });
+      setCertificate(res.data);
+      setIsEditing(false);
+    } catch (error) {
+      console.log(error);
+    }
   };
 
   return (

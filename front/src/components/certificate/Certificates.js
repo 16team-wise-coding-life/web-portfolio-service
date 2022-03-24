@@ -12,15 +12,28 @@ function Certificates({ portfolioOwnerId, isEditable }) {
   const [isDeleted, setIsDeleted] = useState(false);
 
   useEffect(() => {
-    Api.get(`certificatelist/${portfolioOwnerId}`).then(res => setCertificates(res.data));
+    try {
+      const loadCertificates = async () => {
+        const res = await Api.get(`certificatelist/${portfolioOwnerId}`);
+        setCertificates(res.data);
+      };
+      loadCertificates();
+    } catch (error) {
+      console.log(error);
+    }
   }, []);
 
-  useEffect(() => {
-    if (isDeleted) {
-      Api.get(`certificatelist/${portfolioOwnerId}`).then(res => setCertificates(res.data));
-      setIsDeleted(false);
+  const handleDeleteClick = async _id => {
+    try {
+      if (window.confirm('자격증 항목을 삭제하시겠습니까?')) {
+        await Api.delete(`certificates/${_id}`);
+        const res = await Api.get(`certificatelist/${portfolioOwnerId}`);
+        setCertificates(res.data);
+      }
+    } catch (error) {
+      alert('자격증 항목을 삭제하지 못했습니다.', error);
     }
-  }, [portfolioOwnerId, isDeleted]);
+  };
 
   return (
     <>
@@ -29,7 +42,7 @@ function Certificates({ portfolioOwnerId, isEditable }) {
           <Card.Title>자격증</Card.Title>
           <Card.Text>
             {certificates.map(certificate => {
-              return <Certificate key={certificate._id} certificateCard={certificate} isEditable={isEditable} setIsDeleted={setIsDeleted} />;
+              return <Certificate key={certificate._id} certificateCard={certificate} isEditable={isEditable} handleDeleteClick={handleDeleteClick} />;
             })}
           </Card.Text>
           {isEditable && (
