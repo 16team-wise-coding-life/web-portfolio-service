@@ -40,6 +40,8 @@ class projectService {
     const newValues = {
       title: toUpdate.title,
       description: toUpdate.description,
+      from_date: toUpdate.from_date,
+      to_date: toUpdate.to_date,
     };
 
     project = await Project.update({ project_id, newValues });
