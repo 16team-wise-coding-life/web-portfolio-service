@@ -39,11 +39,9 @@ function Freeboard() {
           ))}
         </ListGroup>
       </Card>
-      <Container classsname="text-center">
-        <Button variant="primary" className="me-2" className="mt-3 text-center" onClick={() => navigate(`/freeboard/create`)}>
-          게시글 작성
-        </Button>
-      </Container>
+      <Button variant="primary" className="me-2" className="mt-3 text-center" onClick={() => navigate(`/freeboard/create`)}>
+        게시글 작성
+      </Button>
     </Container>
   );
 }
