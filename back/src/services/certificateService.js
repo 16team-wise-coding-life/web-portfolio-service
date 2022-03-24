@@ -51,7 +51,7 @@ class certificateAuthService {
     const newValues = {
       title: toUpdate.title,
       description: toUpdate.description,
-      when_data: toUpdate.when_date,
+      when_date: toUpdate.when_date,
     };
 
     certificate = await Certificate.update({ certificate_id, newValues });
