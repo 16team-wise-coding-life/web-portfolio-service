@@ -12,14 +12,14 @@ function Awards({ portfolioOwnerId, isEditable }) {
 
   useEffect(() => {
     Api.get(`awardlist/${portfolioOwnerId}`).then(res => setAwards(res.data));
-  }, []);
+  }, [portfolioOwnerId]);
 
   useEffect(() => {
     if (isDeleted) {
       Api.get(`awardlist/${portfolioOwnerId}`).then(res => setAwards(res.data));
       setIsDeleted(false);
     }
-  }, [isDeleted]);
+  }, [portfolioOwnerId, isDeleted]);
 
   return (
     <>
@@ -38,7 +38,7 @@ function Awards({ portfolioOwnerId, isEditable }) {
               </Col>
             </Row>
           )}
-          {isAdding && <AwardAddForm awards={awards} setAwards={setAwards} portfolioOwnerId={portfolioOwnerId} setIsAdding={setIsAdding} />}
+          {isAdding && <AwardAddForm setAwards={setAwards} portfolioOwnerId={portfolioOwnerId} setIsAdding={setIsAdding} />}
         </Card.Body>
       </Card>
     </>
