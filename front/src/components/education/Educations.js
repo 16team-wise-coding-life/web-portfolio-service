@@ -8,9 +8,25 @@ function Educations({ portfolioOwnerId, isEditable }) {
   const [educations, setEducations] = useState([]);
   const [isAdding, setIsAdding] = useState(false);
 
+  const handleDeleteClick = async id => {
+    try {
+      if (window.confirm('프로젝트 항목을 삭제하시겠습니까?')) {
+        await Api.delete(`educations/${id}`);
+        const res = await Api.get(`educationlist/${portfolioOwnerId}`);
+        setEducations(res.data);
+      }
+    } catch (error) {
+      alert('프로젝트 항목을 삭제하지 못했습니다.', error);
+    }
+  };
+
   useEffect(() => {
-    Api.get('educationlist', portfolioOwnerId).then(res => setEducations(res.data));
-  }, [portfolioOwnerId]);
+    async function loadEducationList() {
+      const res = await Api.get(`educationlist/${portfolioOwnerId}`);
+      setEducations(res.data);
+    }
+    loadEducationList();
+  }, []);
 
   return (
     <>
@@ -19,7 +35,7 @@ function Educations({ portfolioOwnerId, isEditable }) {
           <Card.Title>학력</Card.Title>
           <Card.Text>
             {educations.map(education => (
-              <Education key={education.id} education={education} setEducations={setEducations} isEditable={isEditable} />
+              <Education key={education.id} education={education} setEducations={setEducations} isEditable={isEditable} handleDeleteClick={handleDeleteClick} />
             ))}
           </Card.Text>
           {isEditable && (
