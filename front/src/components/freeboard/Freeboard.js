@@ -30,18 +30,22 @@ function Freeboard() {
   return (
     <Container>
       <Card>
-        <Card.Header>자유게시판 </Card.Header>
+        <Card.Header className="text-center">자유게시판</Card.Header>
         <ListGroup variant="flush">
           {posts.map(post => (
             <ListGroup.Item key={post._id} onClick={() => navigate(`/freeboard/${post._id}`)}>
-              {post.title} {post.name}
+              <Row>
+                <Col md={4}>{post.title}</Col> <Col md={{ span: 4, offset: 4 }}>{post.name}</Col>
+              </Row>
             </ListGroup.Item>
           ))}
         </ListGroup>
       </Card>
-      <Button variant="primary" className="me-2" className="mt-3 text-center" onClick={() => navigate(`/freeboard/create`)}>
-        게시글 작성
-      </Button>
+      <Container className="mt-3 text-center">
+        <Button variant="primary" className="me-2 float-right" onClick={() => navigate(`/freeboard/create`)}>
+          게시글 작성
+        </Button>
+      </Container>
     </Container>
   );
 }
