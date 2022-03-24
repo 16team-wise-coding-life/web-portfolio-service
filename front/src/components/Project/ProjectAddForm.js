@@ -31,7 +31,7 @@ function ProjectAddForm({ portfolioOwnerId, setProjects, setIsAdding }) {
         to_date,
         ...tempProject,
       });
-      setProjects(prev => ({ ...prev, ...res.data }));
+      setProjects(prev => [...prev, res.data]);
       setIsAdding(false);
     } catch (error) {
       console.log(error);
