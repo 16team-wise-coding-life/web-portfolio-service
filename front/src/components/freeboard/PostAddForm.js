@@ -5,7 +5,7 @@ import { Container, Button, Form, Col, Row } from 'react-bootstrap';
 import * as Api from '../../api';
 import { UserStateContext } from '../../App';
 
-function PostAddForm({ portfolioOwnerId }) {
+function PostAddForm() {
   const navigate = useNavigate();
   const [tempPost, setTempPost] = useState({ title: '', content: '' });
   const userState = useContext(UserStateContext);
@@ -19,7 +19,7 @@ function PostAddForm({ portfolioOwnerId }) {
   }, [userState, navigate]);
 
   const handlePostValue = (name, value) => {
-    setTempPost({ ...tempPost, [name]: value });
+    setTempPost(prev => ({ ...prev, [name]: value }));
   };
 
   const handleSubmit = async e => {
@@ -27,10 +27,11 @@ function PostAddForm({ portfolioOwnerId }) {
     try {
       if (window.confirm('게시글을 등록 하겠습니까?')) {
         await Api.post('freeboard/create', {
+          ...tempPost,
           user_id: userState.user.id,
           name: userState.user.name,
-          ...tempPost,
-        }).then(navigate(`/freeboard`));
+        });
+        navigate(`/freeboard`);
       }
     } catch (error) {
       alert('게시글 등록에 실패하였습니다.', error);
@@ -44,12 +45,12 @@ function PostAddForm({ portfolioOwnerId }) {
           <Form onSubmit={handleSubmit} className="mt-3">
             <Form.Group controlId="postAddTitle">
               <Form.Label>제목</Form.Label>
-              <Form.Control type="text" placeholder="제목을 입력하세요" name="title" value={tempPost.title} onChange={e => handlePostValue(e.target.name, e.target.value)} />
+              <Form.Control type="text" placeholder="제목을 입력하세요" value={tempPost.title} onChange={e => handlePostValue('title', e.target.value)} />
             </Form.Group>
 
             <Form.Group controlId="postAddContext">
               <Form.Label>내용</Form.Label>
-              <Form.Control as="textarea" rows={20} placeholder="내용을 입력하세요" name="content" value={tempPost.content} onChange={e => handlePostValue(e.target.name, e.target.value)} />
+              <Form.Control as="textarea" rows={20} placeholder="내용을 입력하세요" value={tempPost.content} onChange={e => handlePostValue('content', e.target.value)} />
             </Form.Group>
 
             <Form.Group as={Row} className="mt-3 text-center">
