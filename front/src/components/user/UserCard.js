@@ -3,7 +3,7 @@ import { Card, Row, Button, Col } from 'react-bootstrap';
 
 import FollowingButton from './FollowingButton';
 
-function UserCard({ user, setIsEditing, isEditable, isNetwork }) {
+function UserCard({ user, setIsEditing, isEditable, isNetwork, isFollowing, handleFollowChange }) {
   const navigate = useNavigate();
   return (
     <Card className='mb-2 ms-3 mr-5' style={{ width: '18rem' }}>
@@ -14,7 +14,7 @@ function UserCard({ user, setIsEditing, isEditable, isNetwork }) {
         <Card.Title>{user?.name}</Card.Title>
         <Card.Subtitle className='mb-2 text-muted'>{user?.email}</Card.Subtitle>
         <Card.Text>{user?.description}</Card.Text>
-
+        {console.log(user, '나야')}
         {isEditable && (
           <Col>
             <Row className='mt-3 text-center text-info'>
@@ -27,12 +27,13 @@ function UserCard({ user, setIsEditing, isEditable, isNetwork }) {
           </Col>
         )}
 
+        {!isNetwork && !isEditable && <FollowingButton isFollowing={isFollowing} handleFollowChange={handleFollowChange} />}
+
         {isNetwork && (
           <>
             <Card.Link className='mt-3' href='#' onClick={() => navigate(`/users/${user.id}`)}>
               포트폴리오
             </Card.Link>
-            <FollowingButton />
           </>
         )}
       </Card.Body>
