@@ -18,13 +18,7 @@ function EducationEditForm({ currentEducation, setEducations, setIsEditing }) {
   const handleSubmit = async e => {
     e.preventDefault();
     try {
-      if (
-        window.confirm(`
-        "학교 이름 : ${form.school}"
-        "전공 : ${form.major}"
-        "${form.position}"
-        상태로 학력을 수정하시겠습니까?`)
-      ) {
+      if (window.confirm(`"${form.school}, ${form.major}, ${form.position}" 상태로 학력을 수정하시겠습니까?`)) {
         await Api.put(`educations/${currentEducation._id}`, {
           _id: currentEducation._id,
           ...form,
