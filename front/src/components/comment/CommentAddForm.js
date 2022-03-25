@@ -24,6 +24,7 @@ function CommentAddForm({ setComments, cur_user_id, cur_user_name, cur_board_id 
         name: cur_user_name,
       });
       setComments(prev => [...prev, createdComment]);
+      handleCommentValue('content', '');
     } catch (error) {
       console.log(error);
     }

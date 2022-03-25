@@ -3,12 +3,11 @@ import React, { useState } from 'react';
 import CommentCard from './CommentCard';
 import CommentEditForm from './CommentEditForm';
 
-function Comment({ commentCard, isEditable, setIsDeleted }) {
+function Comment({ commentCard, isEditable, handleDeleteClick }) {
   //board_id 안쓰는디..?
   const { user_id, name, content, created_at, _id: id } = commentCard;
-
+  console.log(commentCard);
   const [isEditing, setIsEditing] = useState(false);
-  // comment useState가 필요한가?
   const [comment, setComment] = useState({ user_id, name, content, created_at, id });
 
   return (
@@ -16,7 +15,7 @@ function Comment({ commentCard, isEditable, setIsDeleted }) {
       {isEditing ? (
         <CommentEditForm comment={comment} setComment={setComment} setIsEditing={setIsEditing} />
       ) : (
-        <CommentCard comment={comment} setIsEditing={setIsEditing} isEditable={isEditable} setIsDeleted={setIsDeleted} />
+        <CommentCard comment={comment} setIsEditing={setIsEditing} isEditable={isEditable} handleDeleteClick={handleDeleteClick} />
       )}
     </>
   );

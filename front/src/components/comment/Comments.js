@@ -5,19 +5,19 @@ import Comment from './Comment';
 import CommentAddForm from './CommentAddForm';
 import * as Api from '../../api';
 
-// 모든 사람의 comment를 불러오는곳?
-
 function Comments({ cur_user_id, cur_user_name, board_id }) {
   const [comments, setComments] = useState([]);
 
   const handleDeleteClick = async _id => {
-    // try {
-    //   if (window.confirm('댓글을 삭제하시겠습니까?')) {
-    //       await Api.delete(`freeboard/comments/${}`)
-    //   }
-    // } catch (error) {
-    //   alert('댓글을 삭제하지 못했습니다.', error);
-    // }
+    try {
+      if (window.confirm('댓글을 삭제하시겠습니까?')) {
+        await Api.delete(`freeboard/comments/${_id}`);
+        const { data: newComments } = await Api.get(`freeboard/boardcommentlist/${board_id}`);
+        setComments(newComments);
+      }
+    } catch (error) {
+      alert('댓글을 삭제하지 못했습니다.', error);
+    }
   };
 
   const loadComments = async () => {
@@ -41,21 +41,19 @@ function Comments({ cur_user_id, cur_user_name, board_id }) {
   }, [cur_user_id, cur_user_name]);
 
   return (
-    <>
-      <Card className="mb-3">
-        <Card.Body>
-          <Card.Title>댓글</Card.Title>
-          <Card.Text>
-            <CommentAddForm setComments={setComments} cur_user_id={cur_user_id} cur_user_name={cur_user_name} cur_board_id={board_id} />
-          </Card.Text>
-          <Card.Text>
-            {comments.map(comment => {
-              return <Comment key={comment._id} commentCard={comment} isEditable={checkIsEditable(comment.user_id)} handleDeleteClick={handleDeleteClick} />;
-            })}
-          </Card.Text>
-        </Card.Body>
-      </Card>
-    </>
+    <Card className="mb-3">
+      <Card.Body>
+        <Card.Title>댓글</Card.Title>
+        <Card.Text>
+          <CommentAddForm setComments={setComments} cur_user_id={cur_user_id} cur_user_name={cur_user_name} cur_board_id={board_id} />
+        </Card.Text>
+        <Card.Text>
+          {comments.map(comment => {
+            return <Comment key={comment._id} commentCard={comment} isEditable={checkIsEditable(comment.user_id)} handleDeleteClick={handleDeleteClick} />;
+          })}
+        </Card.Text>
+      </Card.Body>
+    </Card>
   );
 }
 
