@@ -13,12 +13,14 @@ function AwardEditForm({ award, setAward, setIsEditing }) {
   const handleSubmit = async e => {
     e.preventDefault();
     try {
-      const { data } = await Api.put(`awards/${_id}`, tempAward);
-      setAward(prev => ({
-        ...prev,
-        ...data,
-      }));
-      setIsEditing(false);
+      if (window.confirm(`"${tempAward.title}" 수상이력을 수정하시겠습니까?`)) {
+        const { data } = await Api.put(`awards/${_id}`, tempAward);
+        setAward(prev => ({
+          ...prev,
+          ...data,
+        }));
+        setIsEditing(false);
+      }
     } catch (error) {
       console.log(error);
     }
@@ -36,14 +38,16 @@ function AwardEditForm({ award, setAward, setIsEditing }) {
         </Form.Group>
 
         <Form.Group as={Row} className='mt-3 text-center'>
-          <Col>
-            <Button variant='primary' type='submit' className='me-2'>
-              확인
-            </Button>
-            <Button variant='secondary' onClick={() => setIsEditing(false)}>
-              취소
-            </Button>
-          </Col>
+          <Row>
+            <Col sm='20'>
+              <Button variant='primary' type='submit' className='me-2'>
+                확인
+              </Button>
+              <Button variant='secondary' onClick={() => setIsEditing(false)}>
+                취소
+              </Button>
+            </Col>
+          </Row>
         </Form.Group>
       </Form>
     </>
