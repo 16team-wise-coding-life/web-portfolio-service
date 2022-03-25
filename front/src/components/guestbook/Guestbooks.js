@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from 'react';
-import { Card } from 'react-bootstrap';
+import { Card, CardGroup } from 'react-bootstrap';
 
 import Guestbook from './Guestbook';
 import GuestbookAddFrom from './GuestbookAddForm';
@@ -41,21 +41,19 @@ function Guestbooks({ cur_user_id, cur_user_name, cur_owner_id }) {
   }, [cur_user_id, cur_user_name, cur_owner_id]);
 
   return (
-    <Card className="mb-3">
+    <Card className='mt-3 mb-3'>
       <Card.Body>
         <Card.Title>방명록</Card.Title>
-        <Card.Text>
-          <GuestbookAddFrom setGuestbooks={setGuestbooks} cur_user_id={cur_user_id} cur_user_name={cur_user_name} cur_owner_id={cur_owner_id} />
-        </Card.Text>
-        <Card.Text>
-          {guestbooks.map(guestbook => {
-            return (
-              <Card key={guestbook._id}>
+        {guestbooks.map(guestbook => {
+          return (
+            <CardGroup className='pt-1 pb-4' key={guestbook._id}>
+              <Card border='light' style={{ width: '18rem' }}>
                 <Guestbook guestbookCard={guestbook} isEditable={checkIsEditable(guestbook.user_id)} handleDeleteClick={handleDeleteClick} />
               </Card>
-            );
-          })}
-        </Card.Text>
+            </CardGroup>
+          );
+        })}
+        <GuestbookAddFrom setGuestbooks={setGuestbooks} cur_user_id={cur_user_id} cur_user_name={cur_user_name} cur_owner_id={cur_owner_id} />
       </Card.Body>
     </Card>
   );

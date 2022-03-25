@@ -27,13 +27,13 @@ function GuestbookAddForm({ setGuestbooks, cur_user_id, cur_user_name, cur_owner
   };
 
   return (
-    <Form onSubmit={handleSubmit} className="mt-3">
-      <Form.Group className="mb-3" controlId="commentAdd">
+    <Form onSubmit={handleSubmit} className='mt-5'>
+      <Form.Group className='mb-3' controlId='commentAdd'>
         <Form.Label>{cur_user_name}</Form.Label>
-        <Form.Control as="textarea" rows={3} placeholder="바르고 고운 방명록을 달아주세요 *^~^*" value={tempGuestbook.content} onChange={e => handleGuestbookValue('content', e.target.value)} />
+        <Form.Control as='textarea' rows={3} placeholder='바르고 고운 말을 남겨주세요 *^~^*' value={tempGuestbook.content} onChange={e => handleGuestbookValue('content', e.target.value)} />
       </Form.Group>
-      <Form.Group className="mt-3 text-center">
-        <Button variant="primary" type="submit" className="me-2">
+      <Form.Group className='mt-3 text-center'>
+        <Button variant='primary' type='submit' className='me-2'>
           등록
         </Button>
       </Form.Group>
