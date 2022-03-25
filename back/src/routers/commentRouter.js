@@ -6,15 +6,15 @@ import { commentService } from '../services/commentService';
 const commentRouter = Router();
 commentRouter.use(login_required);
 
-commentRouter.post('/comment/:board_id', async (req, res, next) => {
+commentRouter.post('/freeboard/comment/create', async (req, res, next) => {
   try {
-    const { user_id, content } = req.body;
-    const board_id = req.params.board_id;
+    const { board_id, user_id, name, content } = req.body;
 
     const newComment = await commentService.addComment({
-      user_id,
-      content,
       board_id,
+      user_id,
+      name,
+      content,
     });
 
     if (newComment.errorMessage) {
@@ -27,7 +27,7 @@ commentRouter.post('/comment/:board_id', async (req, res, next) => {
   }
 });
 
-commentRouter.delete('/comment/:id', async (req, res, next) => {
+commentRouter.delete('/freeboard/comment/:id', async (req, res, next) => {
   try {
     const comment_id = req.params.id;
     const deletedComment = await commentService.deleteComment({

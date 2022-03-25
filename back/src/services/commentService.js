@@ -1,9 +1,9 @@
 import { Comment } from '../db';
 
 class commentService {
-  static async addComment({ user_id, comment, board_id }) {
-    const newComment = { user_id, comment, board_id };
-    const createdNewComment = await Comment.create({ newComment });
+  static async addComment({ board_id, user_id, name, content }) {
+    const newComment = { board_id, user_id, name, content };
+    const createdNewComment = await Comment.createComment({ newComment });
     createdNewComment.errorMessage = null;
     return createdNewComment;
   }

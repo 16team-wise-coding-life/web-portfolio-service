@@ -1,7 +1,7 @@
 import { CommentModel } from '../schemas/comment';
 
 class Comment {
-  static async create({ newComment }) {
+  static async createComment({ newComment }) {
     const createdNewComment = await CommentModel.create(newComment);
     return createdNewComment;
   }
