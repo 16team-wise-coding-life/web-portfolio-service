@@ -67,7 +67,7 @@ commentRouter.put('/freeboard/comments/:id', async (req, res, next) => {
   }
 });
 
-commentRouter.delete('/freeboard/comment/:id', async (req, res, next) => {
+commentRouter.delete('/freeboard/comments/:id', async (req, res, next) => {
   try {
     const comment_id = req.params.id;
     const deletedComment = await commentService.deleteComment({
@@ -82,4 +82,25 @@ commentRouter.delete('/freeboard/comment/:id', async (req, res, next) => {
   }
 });
 
+commentRouter.get('/freeboard/usercommentlist/:user_id', async (req, res, next) => {
+  try {
+    const user_id = req.params.user_id;
+    const comments = await commentService.getCommentsById({ user_id });
+
+    res.status(200).send(comments);
+  } catch (error) {
+    next(error);
+  }
+});
+
+commentRouter.get('/freeboard/boardcommentlist/:board_id', async (req, res, next) => {
+  try {
+    const board_id = req.params.board_id;
+    const comments = await commentService.getCommentsByBoardId({ board_id });
+
+    res.status(200).send(comments);
+  } catch (error) {
+    next(error);
+  }
+});
 export { commentRouter };

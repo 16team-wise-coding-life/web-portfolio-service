@@ -18,6 +18,18 @@ class commentService {
     return comment;
   }
 
+  // 유저가 생성한 모든 댓글
+  static async getCommentsById({ user_id }) {
+    const comments = await Comment.findByUserId({ user_id });
+    return comments;
+  }
+
+  // 게시글의 모든 댓글
+  static async getCommentsByBoardId({ board_id }) {
+    const comments = await Comment.findByBoardId({ board_id });
+    return comments;
+  }
+
   // 수정
   static async setComment({ comment_id, toUpdate }) {
     let comment = await Comment.findById({ comment_id });
