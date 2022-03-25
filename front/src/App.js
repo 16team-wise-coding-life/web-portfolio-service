@@ -9,6 +9,10 @@ import LoginForm from './components/user/LoginForm';
 import Network from './components/user/Network';
 import RegisterForm from './components/user/RegisterForm';
 import Portfolio from './components/Portfolio';
+import Freeboard from './components/freeboard/Freeboard';
+import PostAddForm from './components/freeboard/PostAddForm';
+import PostView from './components/freeboard/PostView';
+import PostEditForm from './components/freeboard/PostEditForm';
 import { HeaderSkeleton } from './components/Skeletons';
 
 export const UserStateContext = createContext(null);
@@ -59,12 +63,16 @@ function App() {
         <Router>
           <Header />
           <Routes>
-            <Route path='/' exact element={<Portfolio />} />
-            <Route path='/login' element={<LoginForm />} />
-            <Route path='/register' element={<RegisterForm />} />
-            <Route path='/users/:userId' element={<Portfolio />} />
-            <Route path='/network' element={<Network />} />
-            <Route path='*' element={<Portfolio />} />
+            <Route path="/" exact element={<Portfolio />} />
+            <Route path="/login" element={<LoginForm />} />
+            <Route path="/register" element={<RegisterForm />} />
+            <Route path="/users/:userId" element={<Portfolio />} />
+            <Route path="/network" element={<Network />} />
+            <Route path="/freeboard" element={<Freeboard />} />
+            <Route path="/freeboard/create" element={<PostAddForm />} />
+            <Route path="/freeboard/:postId" element={<PostView />} />
+            <Route path="/freeboard/edit/:postId" element={<PostEditForm />} />
+            <Route path="*" element={<Portfolio />} />
           </Routes>
         </Router>
       </UserStateContext.Provider>
