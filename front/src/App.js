@@ -1,6 +1,8 @@
 import React, { useState, useEffect, useReducer, createContext } from 'react';
 import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
 
+import './styles/styles.css';
+
 import * as Api from './api';
 import { loginReducer } from './reducer';
 
@@ -63,16 +65,16 @@ function App() {
         <Router>
           <Header />
           <Routes>
-            <Route path="/" exact element={<Portfolio />} />
-            <Route path="/login" element={<LoginForm />} />
-            <Route path="/register" element={<RegisterForm />} />
-            <Route path="/users/:userId" element={<Portfolio />} />
-            <Route path="/network" element={<Network />} />
-            <Route path="/freeboard" element={<Freeboard />} />
-            <Route path="/freeboard/create" element={<PostAddForm />} />
-            <Route path="/freeboard/:postId" element={<PostView />} />
-            <Route path="/freeboard/edit/:postId" element={<PostEditForm />} />
-            <Route path="*" element={<Portfolio />} />
+            <Route path='/' exact element={<Portfolio />} />
+            <Route path='/login' element={<LoginForm />} />
+            <Route path='/register' element={<RegisterForm />} />
+            <Route path='/users/:userId' element={<Portfolio />} />
+            <Route path='/network' element={<Network />} />
+            <Route path='/freeboard' element={<Freeboard />} />
+            <Route path='/freeboard/create' element={<PostAddForm />} />
+            <Route path='/freeboard/:postId' element={<PostView />} />
+            <Route path='/freeboard/edit/:postId' element={<PostEditForm />} />
+            <Route path='*' element={<Portfolio />} />
           </Routes>
         </Router>
       </UserStateContext.Provider>
