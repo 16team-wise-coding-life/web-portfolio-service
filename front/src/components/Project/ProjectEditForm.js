@@ -18,16 +18,17 @@ function ProjectEditForm({ currentProject, setProjects, setIsEditing }) {
   const handleSubmit = async e => {
     e.preventDefault();
     try {
-      const res = await Api.put(`projects/${currentProject._id}`, {
-        _id: currentProject._id,
-        ...form,
-      });
-      // res.data랑 ...prev data를 두개가 합쳐져야 하는데 합쳐지지를 않음 => 구조 분해 할당으로 합쳐야 한다!
-      console.log(res.data);
-      setProjects(prev => [...prev, res.data]);
-      setIsEditing(false);
+      if (window.confirm(`"${form.title}" 프로젝트를 수정하시겠습니까?`)) {
+        await Api.put(`projects/${currentProject._id}`, {
+          _id: currentProject._id,
+          ...form,
+        });
+        const { data } = await Api.get('projectlist', currentProject.user_id);
+        setProjects(data);
+        setIsEditing(false);
+      }
     } catch (error) {
-      console.log(error);
+      alert(`"${form.title}" 프로젝트를 수정하지 못했습니다.`, error);
     }
   };
   return (
