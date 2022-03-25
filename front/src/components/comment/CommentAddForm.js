@@ -1,14 +1,10 @@
 import React, { useState } from 'react';
 import { Button, Form } from 'react-bootstrap';
 
-//import { UserStateContext } from '../../App';
 import * as Api from '../../api';
 
 function CommentAddForm({ setComments, cur_user_id, cur_user_name, cur_board_id }) {
   const [tempComment, setTempComment] = useState({ content: '' });
-  // ??? 궁금한점 : freeboard에서 userStateContext를 사용할건데
-  // parameter를 전달받아오는 방식이 아닌 UserStateContext를 여기서 다시또 불러도 괜찮은가?
-  //  const userState = useContext(UserStateContext);
 
   const handleCommentValue = (name, value) => {
     setTempComment(prev => ({ ...prev, [name]: value }));
@@ -31,7 +27,6 @@ function CommentAddForm({ setComments, cur_user_id, cur_user_name, cur_board_id 
   };
 
   return (
-    //테두리 넣고싶다...
     <Form onSubmit={handleSubmit} className="mt-3">
       <Form.Group className="mb-3" controlId="commentAdd">
         <Form.Label>{cur_user_name}</Form.Label>
