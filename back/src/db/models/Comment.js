@@ -11,6 +11,16 @@ class Comment {
     return comment;
   }
 
+  static async findByUserId({ user_id }) {
+    const comments = await CommentModel.find({ user_id });
+    return comments;
+  }
+
+  static async findByBoardId({ board_id }) {
+    const comments = await CommentModel.find({ board_id });
+    return comments;
+  }
+
   static async update({ comment_id, newValues }) {
     const filter = { _id: comment_id };
     const update = { $set: newValues };
