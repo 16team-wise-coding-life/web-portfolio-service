@@ -16,9 +16,11 @@ function CertificateEditForm({ certificate, setCertificate, setIsEditing }) {
     e.preventDefault();
 
     try {
-      const res = await Api.put(`certificates/${_id}`, tempCertificate);
-      setCertificate(res.data);
-      setIsEditing(false);
+      if (window.confirm(`"${tempCertificate.title}" 자격증 항목을 수정하시겠습니까?`)) {
+        const res = await Api.put(`certificates/${_id}`, tempCertificate);
+        setCertificate(res.data);
+        setIsEditing(false);
+      }
     } catch (error) {
       console.log(error);
     }
@@ -39,14 +41,16 @@ function CertificateEditForm({ certificate, setCertificate, setIsEditing }) {
       </Form.Group>
 
       <Form.Group as={Row} className='mt-3 text-center'>
-        <Col>
-          <Button variant='primary' type='submit' className='me-2'>
-            확인
-          </Button>
-          <Button variant='secondary' onClick={() => setIsEditing(false)}>
-            취소
-          </Button>
-        </Col>
+        <Row>
+          <Col sm='20'>
+            <Button variant='primary' type='submit' className='me-2'>
+              확인
+            </Button>
+            <Button variant='secondary' onClick={() => setIsEditing(false)}>
+              취소
+            </Button>
+          </Col>
+        </Row>
       </Form.Group>
     </Form>
   );

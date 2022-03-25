@@ -12,7 +12,7 @@ class FreeBoard {
   }
 
   static async findAll() {
-    const posts = await FreeBoardModel.find({});
+    const posts = await FreeBoardModel.find({}).sort({ created_at: -1 });
     return posts;
   }
 

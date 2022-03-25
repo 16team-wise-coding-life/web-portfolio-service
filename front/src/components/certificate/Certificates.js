@@ -36,14 +36,12 @@ function Certificates({ portfolioOwnerId, isEditable }) {
 
   return (
     <>
-      <Card className='mt-2'>
+      <Card className='mt-3 mb-3'>
         <Card.Body>
           <Card.Title>자격증</Card.Title>
-          <Card.Text>
-            {certificates.map(certificate => {
-              return <Certificate key={certificate._id} certificateCard={certificate} isEditable={isEditable} handleDeleteClick={handleDeleteClick} />;
-            })}
-          </Card.Text>
+          {certificates.map(certificate => {
+            return <Certificate key={certificate._id} certificateCard={certificate} isEditable={isEditable} handleDeleteClick={handleDeleteClick} />;
+          })}
           {isEditable && (
             <Row className='mt-3 text-center mb-4'>
               <Col sm={{ span: 20 }}>

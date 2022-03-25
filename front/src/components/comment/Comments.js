@@ -49,7 +49,11 @@ function Comments({ cur_user_id, cur_user_name, board_id }) {
         </Card.Text>
         <Card.Text>
           {comments.map(comment => {
-            return <Comment key={comment._id} commentCard={comment} isEditable={checkIsEditable(comment.user_id)} handleDeleteClick={handleDeleteClick} />;
+            return (
+              <Card>
+                <Comment key={comment._id} commentCard={comment} isEditable={checkIsEditable(comment.user_id)} handleDeleteClick={handleDeleteClick} />
+              </Card>
+            );
           })}
         </Card.Text>
       </Card.Body>

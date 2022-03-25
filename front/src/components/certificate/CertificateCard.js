@@ -9,31 +9,30 @@ function CertificateCard({ certificate, setIsEditing, isEditable, handleDeleteCl
   };
 
   return (
-    <Card.Text>
-      <Row className='align-items-center'>
-        <Col>
-          <span>{certificate.title}</span>
+    <Row className='align-items-center'>
+      <Col>
+        <Card.Text className='mb-2 mt-3'>{certificate.title}</Card.Text>
+        <Card.Subtitle className='text-muted'>
+          {certificate.description}
           <br />
-          <span className='text-muted'>{certificate.description}</span>
-          <br />
-          <span className='text-muted'>{convertDate(certificate.when_date)}</span>
-        </Col>
-        {isEditable && (
-          <>
-            <Col xs='auto' lg='1'>
-              <Button variant='outline-info' size='sm' onClick={() => setIsEditing(true)}>
-                편집
-              </Button>
-            </Col>
-            <Col xs='auto' lg='1'>
-              <Button variant='outline-danger' size='sm' onClick={() => handleDeleteClick(certificate._id)}>
-                삭제
-              </Button>
-            </Col>
-          </>
-        )}
-      </Row>
-    </Card.Text>
+          {convertDate(certificate.when_date)}
+        </Card.Subtitle>
+      </Col>
+      {isEditable && (
+        <>
+          <Col xs='auto' lg='1'>
+            <Button className='mr-3' variant='outline-info' size='sm' onClick={() => setIsEditing(true)}>
+              편집
+            </Button>
+          </Col>
+          <Col xs='auto' lg='1'>
+            <Button className='mr-3' variant='outline-danger' size='sm' onClick={() => handleDeleteClick(certificate._id)}>
+              삭제
+            </Button>
+          </Col>
+        </>
+      )}
+    </Row>
   );
 }
 
