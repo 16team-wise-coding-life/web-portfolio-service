@@ -9,20 +9,18 @@ function AwardAddForm({ setAwards, portfolioOwnerId, setIsAdding }) {
     setTempAward(prev => ({ ...prev, [name]: value }));
   };
 
-  const handleSubmit = e => {
+  const handleSubmit = async e => {
     e.preventDefault();
-
-    Api.post('award/create', {
-      user_id: portfolioOwnerId,
-      ...tempAward,
-    })
-      .then(res => {
-        setAwards(prev => [...prev, res.data]);
-        setIsAdding(false);
-      })
-      .catch(error => {
-        console.log(error);
+    try {
+      const res = await Api.post('award/create', {
+        user_id: portfolioOwnerId,
+        ...tempAward,
       });
+      setAwards(prev => [...prev, res.data]);
+      setIsAdding(false);
+    } catch (error) {
+      console.log(error);
+    }
   };
 
   return (

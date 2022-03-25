@@ -1,20 +1,7 @@
 import React from 'react';
 import { Card, Col, Row, Button } from 'react-bootstrap';
-import * as Api from '../../api';
 
-function AwardCard({ award, setIsEditing, isEditable, setIsDeleted }) {
-  const handleDeleteClick = e => {
-    //delete '/awards/:id'
-    Api.delete(`awards/${award.id}`)
-      .then(res => {
-        console.log(res.data);
-        setIsDeleted(true);
-      })
-      .catch(error => {
-        console.log(error);
-      });
-  };
-
+function AwardCard({ award, setIsEditing, isEditable, handleDeleteClick }) {
   return (
     <>
       <Card.Text>
@@ -32,7 +19,7 @@ function AwardCard({ award, setIsEditing, isEditable, setIsDeleted }) {
                 </Button>
               </Col>
               <Col xs lg='1'>
-                <Button variant='outline-danger' size='sm' onClick={handleDeleteClick}>
+                <Button variant='outline-danger' size='sm' onClick={() => handleDeleteClick(award._id)}>
                   삭제
                 </Button>
               </Col>
