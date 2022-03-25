@@ -1,6 +1,6 @@
 import React, { useEffect, useContext, useState } from 'react';
 import { useNavigate } from 'react-router';
-import { Container, Button, Form, ListGroup, Row, Col, Card } from 'react-bootstrap';
+import { Container, Button, ListGroup, Row, Col, Card, ToggleButton } from 'react-bootstrap';
 
 import * as Api from '../../api';
 import { UserStateContext } from '../../App';
@@ -8,35 +8,57 @@ import { UserStateContext } from '../../App';
 function Freeboard() {
   const navigate = useNavigate();
   const userState = useContext(UserStateContext);
-  const [posts, setPosts] = useState([]);
+  const [allPosts, setAllPosts] = useState([]);
+  const [myPosts, setMyPosts] = useState([]);
+  const [checked, setChecked] = useState(false);
+
+  const fetchPostsInfo = async () => {
+    try {
+      const { data: tempAllPosts } = await Api.get('freeboardlist');
+      setAllPosts(tempAllPosts);
+      const { data: tempMyPosts } = await Api.get('freeboardlist', userState.user?.id);
+      setMyPosts(tempMyPosts);
+    } catch (error) {
+      console.log(error);
+    }
+  };
 
   useEffect(() => {
     if (!userState.user) {
       navigate('/login');
       return;
     }
-    Api.get('freeboardlist').then(res => setPosts(res.data));
+    fetchPostsInfo();
   }, [userState, navigate]);
 
+  const toggleCheck = () => {
+    setChecked(!checked);
+  };
+
   return (
-    <Container fluid>
+    <Container>
+      <Container className="mt-3">
+        <ToggleButton className="mb-2" id="toggle-check" type="checkbox" variant="outline-primary" checked={checked} onChange={toggleCheck}>
+          {checked ? '모든 게시글 보기' : '내가 쓴 게시글 보기'}
+        </ToggleButton>
+      </Container>
       <Card>
-        <Card.Header>자유게시판 </Card.Header>
+        <Card.Header className="text-center">자유게시판</Card.Header>
         <ListGroup variant="flush">
-          {posts.map(post => (
-            <ListGroup.Item onClick={() => navigate(`/freeboard/${post._id}`)}>
-              {post.title} {post.name}
+          {(checked ? myPosts : allPosts).map(post => (
+            <ListGroup.Item key={post._id} onClick={() => navigate(`/freeboard/${post._id}`)}>
+              <Row>
+                <Col md={4}>{post.title}</Col> <Col md={{ span: 4, offset: 4 }}>{post.name}</Col>
+              </Row>
             </ListGroup.Item>
           ))}
         </ListGroup>
       </Card>
-      <Form.Group as={Row} className="mt-3 text-center">
-        <Col>
-          <Button variant="primary" type="submit" className="me-2" onClick={() => navigate(`/freeboard/create`)}>
-            게시글 작성
-          </Button>
-        </Col>
-      </Form.Group>
+      <Container className="mt-3 text-center">
+        <Button variant="primary" className="me-2 float-right" onClick={() => navigate(`/freeboard/create`)}>
+          게시글 작성
+        </Button>
+      </Container>
     </Container>
   );
 }

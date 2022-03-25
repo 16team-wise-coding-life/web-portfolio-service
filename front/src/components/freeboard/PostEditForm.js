@@ -1,4 +1,4 @@
-import React, { useContext, useState, useEffect, useMemo } from 'react';
+import React, { useContext, useState, useEffect } from 'react';
 import { useNavigate, useParams } from 'react-router-dom';
 import { Container, Form, Row, Col, Button } from 'react-bootstrap';
 
@@ -13,10 +13,13 @@ function PostEditForm() {
   const [isFetchCompleted, setIsFetchCompleted] = useState(false);
 
   const fetchPostInfo = async postId => {
-    const res = await Api.get('freeboard', postId);
-    const postData = res.data;
-    setPostInfo(postData);
-    setIsFetchCompleted(true);
+    try {
+      const { data: postData } = await Api.get('freeboard', postId);
+      setPostInfo(postData);
+      setIsFetchCompleted(true);
+    } catch (error) {
+      console.log(error);
+    }
   };
 
   useEffect(() => {
@@ -24,13 +27,12 @@ function PostEditForm() {
       navigate('/login');
       return;
     }
-    const postId = params.postId;
-    console.log(postId);
-    fetchPostInfo(postId);
+
+    fetchPostInfo(params.postId);
   }, [params, userState, navigate]);
 
   const handlePostValue = (name, value) => {
-    setPostInfo({ ...postInfo, [name]: value });
+    setPostInfo(prev => ({ ...prev, [name]: value }));
   };
 
   const handleSubmit = async e => {
@@ -38,7 +40,8 @@ function PostEditForm() {
     try {
       await Api.put(`freeboard/${postInfo._id}`, {
         ...postInfo,
-      }).then(navigate(`/freeboard/${postInfo._id}`));
+      });
+      navigate(`/freeboard/${postInfo._id}`);
     } catch (error) {
       console.log(error);
     }
@@ -55,11 +58,11 @@ function PostEditForm() {
           <Form onSubmit={handleSubmit} className="mt-3">
             <Form.Group controlId="postAddTitle">
               <Form.Label>제목</Form.Label>
-              <Form.Control type="text" name="title" value={postInfo.title} onChange={e => handlePostValue('title', e.target.value)} />
+              <Form.Control type="text" value={postInfo.title} onChange={e => handlePostValue('title', e.target.value)} />
             </Form.Group>
             <Form.Group controlId="postAddContext">
               <Form.Label>내용</Form.Label>
-              <Form.Control as="textarea" rows={20} name="content" value={postInfo.content} onChange={e => handlePostValue('content', e.target.value)} />
+              <Form.Control as="textarea" rows={20} value={postInfo.content} onChange={e => handlePostValue('content', e.target.value)} />
             </Form.Group>
             <Form.Group as={Row} className="mt-3 text-center">
               <Col>
