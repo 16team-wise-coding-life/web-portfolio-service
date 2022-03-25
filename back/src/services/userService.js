@@ -90,7 +90,7 @@ class userAuthService {
     if (!toUpdate.password) {
       toUpdate.password = user.password;
     } else {
-      toUpdate.password = bcrypt.hash(toUpdate.password, 10);
+      toUpdate.password = await bcrypt.hash(toUpdate.password, 10);
     }
 
     if (!toUpdate.description) {
