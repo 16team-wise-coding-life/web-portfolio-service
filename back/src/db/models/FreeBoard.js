@@ -7,7 +7,7 @@ class FreeBoard {
   }
 
   static async findById({ post_id }) {
-    const post = await FreeBoardModel.findOne({ _id: post_id });
+    const post = await FreeBoardModel.findOne({ _id: post_id }).populate('comment', 'content');
     return post;
   }
 
