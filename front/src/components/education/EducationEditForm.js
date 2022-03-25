@@ -19,12 +19,11 @@ function EducationEditForm({ currentEducation, setEducations, setIsEditing }) {
     e.preventDefault();
     try {
       if (window.confirm('학력을 수정하시겠습니까?')) {
-        const res = await Api.put(`educations/${currentEducation._id}`, {
+        await Api.put(`educations/${currentEducation._id}`, {
           _id: currentEducation._id,
           ...form,
         });
-        console.log(res.data);
-        const { data } = await Api.get('educationlist', currentEducation._id);
+        const { data } = await Api.get('educationlist', currentEducation.user_id);
         setEducations(data);
         setIsEditing(false);
       }

@@ -33,11 +33,9 @@ function Educations({ portfolioOwnerId, isEditable }) {
       <Card className='mb-3'>
         <Card.Body>
           <Card.Title>학력</Card.Title>
-          <Card.Text>
-            {educations.map(education => (
-              <Education key={education._id} education={education} setEducations={setEducations} isEditable={isEditable} handleDeleteClick={handleDeleteClick} />
-            ))}
-          </Card.Text>
+          {educations.map(education => (
+            <Education key={education._id} education={education} setEducations={setEducations} isEditable={isEditable} handleDeleteClick={handleDeleteClick} />
+          ))}
           {isEditable && (
             <Row className='mt-3 text-center mb-4'>
               <Col sm='20'>
