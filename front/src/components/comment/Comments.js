@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from 'react';
-import { Card, Button, Row, Col } from 'react-bootstrap';
+import { Card } from 'react-bootstrap';
 
 import Comment from './Comment';
 import CommentAddForm from './CommentAddForm';
@@ -8,7 +8,6 @@ import * as Api from '../../api';
 // 모든 사람의 comment를 불러오는곳?
 
 function Comments({ cur_user_id, cur_user_name, board_id }) {
-  const [isAdding, setIsAdding] = useState(false);
   const [comments, setComments] = useState([]);
 
   const handleDeleteClick = async _id => {

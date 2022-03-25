@@ -5,11 +5,11 @@ import CommentEditForm from './CommentEditForm';
 
 function Comment({ commentCard, isEditable, setIsDeleted }) {
   //board_id 안쓰는디..?
-  const { board_id, user_id, name, content, created_at, _id } = commentCard;
+  const { user_id, name, content, created_at, _id: id } = commentCard;
 
   const [isEditing, setIsEditing] = useState(false);
   // comment useState가 필요한가?
-  const [comment, setComment] = useState({ user_id, name, content, created_at, id: _id });
+  const [comment, setComment] = useState({ user_id, name, content, created_at, id });
 
   return (
     <>
