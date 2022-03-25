@@ -35,7 +35,7 @@ function Awards({ portfolioOwnerId, isEditable }) {
 
   return (
     <>
-      <Card className='mb-3'>
+      <Card className='mt-3 mb-3'>
         <Card.Body>
           <Card.Title>수상이력</Card.Title>
           {awards.map(award => {

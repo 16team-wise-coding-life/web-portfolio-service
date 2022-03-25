@@ -30,7 +30,7 @@ function Projects({ portfolioOwnerId, isEditable }) {
 
   return (
     <>
-      <Card className='mt-2'>
+      <Card className='mt-3 mb-3'>
         <Card.Body>
           <Card.Title>프로젝트</Card.Title>
           {projects.map(project => (
