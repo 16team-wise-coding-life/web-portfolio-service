@@ -2,7 +2,7 @@ import { Schema, model, Mongoose } from 'mongoose';
 
 const CommentSchema = new Schema({
   board_id: {
-    type: Mongoose.Schema.Types.ObjectId,
+    type: Schema.Types.ObjectId,
     ref: 'FreeBoard',
   },
   user_id: {

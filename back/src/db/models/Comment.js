@@ -11,6 +11,15 @@ class Comment {
     return comment;
   }
 
+  static async update({ comment_id, newValues }) {
+    const filter = { _id: comment_id };
+    const update = { $set: newValues };
+    const option = { returnOriginal: false };
+
+    const comment = await CommentModel.findOneAndUpdate(filter, update, option);
+    return comment;
+  }
+
   static async delete({ comment_id }) {
     const deletedComment = await CommentModel.deleteOne({ _id: comment_id });
     return deletedComment;
