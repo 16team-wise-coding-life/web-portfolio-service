@@ -9,6 +9,7 @@ import Educations from './education/Educations';
 import Awards from './award/Awards';
 import Projects from './Project/Projects';
 import Certificates from './certificate/Certificates';
+import Guestbooks from './guestbook/Guestbooks';
 import { PortfolioSkeleton } from './Skeletons';
 
 function Portfolio() {
@@ -73,6 +74,7 @@ function Portfolio() {
           <Awards portfolioOwnerId={portfolioOwner.id} isEditable={isEditable} />
           <Projects portfolioOwnerId={portfolioOwner.id} isEditable={isEditable} />
           <Certificates portfolioOwnerId={portfolioOwner.id} isEditable={isEditable} />
+          <Guestbooks cur_user_id={userState.user.id} cur_user_name={userState.user.name} cur_owner_id={portfolioOwner.id} />
         </Col>
       </Row>
     </Container>
