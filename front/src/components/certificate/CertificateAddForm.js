@@ -39,14 +39,16 @@ function CertificateAddForm({ setCertificates, portfolioOwnerId, setIsAdding }) 
       </Form.Group>
 
       <Form.Group as={Row} className='mt-3 text-center'>
-        <Col>
-          <Button variant='primary' type='submit' className='me-2'>
-            확인
-          </Button>
-          <Button variant='secondary' onClick={() => setIsAdding(false)}>
-            취소
-          </Button>
-        </Col>
+        <Row>
+          <Col sm='20'>
+            <Button variant='primary' type='submit' className='me-2'>
+              확인
+            </Button>
+            <Button variant='secondary' onClick={() => setIsAdding(false)}>
+              취소
+            </Button>
+          </Col>
+        </Row>
       </Form.Group>
     </Form>
   );
