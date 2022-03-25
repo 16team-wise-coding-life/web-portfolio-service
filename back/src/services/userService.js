@@ -141,6 +141,13 @@ class userAuthService {
     }
     return user;
   }
+
+  // 삭제
+  static async deleteUser({ user_id }) {
+    const res = await User.delete({ user_id });
+
+    return res;
+  }
 }
 
 export { userAuthService };
