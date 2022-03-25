@@ -9,33 +9,30 @@ function ProjectCard({ project, setIsEditing, isEditable, handleDeleteClick }) {
   const CleanToDate = Cleandate(project.to_date);
 
   return (
-    <Card.Text className='mb-2 mt-3'>
-      <Row className='align-items-center'>
-        <Col>
-          {project.title}
+    <Row className='align-items-center'>
+      <Col>
+        <Card.Text className='mb-2 mt-3'>{project.title}</Card.Text>
+        <Card.Subtitle className='text-muted'>
+          {`${project.description}`}
           <br />
-          <span className='text-muted'>
-            {`${project.description}`}
-            <br />
-            {`${CleanFromDate} ~ ${CleanToDate}`}
-          </span>
-        </Col>
-        {isEditable && (
-          <>
-            <Col xs='auto' lg='1'>
-              <Button className='mr-3' variant='outline-info' size='sm' onClick={() => setIsEditing(edit => !edit)}>
-                편집
-              </Button>
-            </Col>
-            <Col xs='auto' lg='1'>
-              <Button className='mr-3' variant='outline-danger' size='sm' onClick={() => handleDeleteClick(project._id)}>
-                삭제
-              </Button>
-            </Col>
-          </>
-        )}
-      </Row>
-    </Card.Text>
+          {`${CleanFromDate} ~ ${CleanToDate}`}
+        </Card.Subtitle>
+      </Col>
+      {isEditable && (
+        <>
+          <Col xs='auto' lg='1'>
+            <Button className='mr-3' variant='outline-info' size='sm' onClick={() => setIsEditing(edit => !edit)}>
+              편집
+            </Button>
+          </Col>
+          <Col xs='auto' lg='1'>
+            <Button className='mr-3' variant='outline-danger' size='sm' onClick={() => handleDeleteClick(project._id)}>
+              삭제
+            </Button>
+          </Col>
+        </>
+      )}
+    </Row>
   );
 }
 export default ProjectCard;

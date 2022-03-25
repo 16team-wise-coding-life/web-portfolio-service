@@ -15,23 +15,14 @@ function ProjectAddForm({ portfolioOwnerId, setProjects, setIsAdding }) {
     setTempProject(prev => ({ ...prev, [name]: value }));
   };
 
-  const handleCleandate = cleanDate => {
-    return cleanDate.toISOString().split('T')[0];
-  };
-
-  const from_date = handleCleandate(tempProject.from_date);
-  const to_date = handleCleandate(tempProject.to_date);
-
   const handleSubmit = async e => {
     e.preventDefault();
     try {
       const res = await Api.post('project/create', {
         user_id: portfolioOwnerId,
-        from_date,
-        to_date,
         ...tempProject,
       });
-      setProjects(prev => ({ ...prev, ...res.data }));
+      setProjects(prev => [...prev, res.data]);
       setIsAdding(false);
     } catch (error) {
       console.log(error);

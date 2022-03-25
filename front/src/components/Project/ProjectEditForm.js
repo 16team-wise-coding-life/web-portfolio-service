@@ -15,26 +15,20 @@ function ProjectEditForm({ currentProject, setProjects, setIsEditing }) {
     setForm(prev => ({ ...prev, [name]: value }));
   };
 
-  const handleCleandate = cleanDate => {
-    return cleanDate.toISOString().split('T')[0];
-  };
-
-  const from_date = handleCleandate(form.from_date);
-  const to_date = handleCleandate(form.to_date);
-
   const handleSubmit = async e => {
     e.preventDefault();
     try {
-      const res = await Api.put(`projects/${currentProject._id}`, {
-        user_id: currentProject,
-        from_date,
-        to_date,
-        ...form,
-      });
-      setProjects(prev => ({ ...prev, ...res.data }));
-      setIsEditing(false);
+      if (window.confirm(`"${form.title}" 프로젝트를 수정하시겠습니까?`)) {
+        await Api.put(`projects/${currentProject._id}`, {
+          _id: currentProject._id,
+          ...form,
+        });
+        const { data } = await Api.get('projectlist', currentProject.user_id);
+        setProjects(data);
+        setIsEditing(false);
+      }
     } catch (error) {
-      console.log(error);
+      alert(`"${form.title}" 프로젝트를 수정하지 못했습니다.`, error);
     }
   };
   return (
@@ -47,7 +41,7 @@ function ProjectEditForm({ currentProject, setProjects, setIsEditing }) {
       </Form.Group>
       <Form.Group as={Row} className='mt-3'>
         <Col xs='auto'>
-          <DatePicker selected={form.from_date} name='from_date' dateFormat='yyyy-MM-dd' onChange={date => handleProjectEdit('from_date', date)} />{' '}
+          <DatePicker selected={form.from_date} name='from_date' dateFormat='yyyy-MM-dd' onChange={date => handleProjectEdit('from_date', date)} />
         </Col>
         <Col xs='auto'>
           <DatePicker selected={form.to_date} name='to_date' dateFormat='yyyy-MM-dd' onChange={date => handleProjectEdit('to_date', date)} />
