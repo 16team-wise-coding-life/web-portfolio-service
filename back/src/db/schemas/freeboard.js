@@ -17,6 +17,14 @@ const FreeBoardSchema = new Schema({
     type: String,
     required: true,
   },
+
+  comment: [
+    {
+      type: Schema.Types.ObjectId,
+      ref: 'Comment',
+    },
+  ],
+
   created_at: {
     type: Date,
     required: true,

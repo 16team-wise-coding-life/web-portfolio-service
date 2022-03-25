@@ -1,9 +1,12 @@
 import React, { useContext, useState, useEffect } from 'react';
 import { useNavigate, useParams } from 'react-router-dom';
-import { Container, Button, Card } from 'react-bootstrap';
+import { Container, Button, Card, Col, Row } from 'react-bootstrap';
+import moment from 'moment';
 
 import { UserStateContext } from '../../App';
 import * as Api from '../../api';
+
+import Comments from '../comment/Comments';
 
 function PostView() {
   const navigate = useNavigate();
@@ -52,13 +55,13 @@ function PostView() {
       console.log(error);
     }
   };
-
+  //
   return (
-    <Container fluid>
-      <Card>
+    <Container>
+      <Card className="mb-3 justify-content-md-center">
         <Card.Header>
           <Card.Title>{postInfo.title}</Card.Title>
-          작성자 : {postInfo.name} 작성 시간 : {postInfo.created_at}
+          작성자 : {postInfo.name} <dev style={{ color: 'grey' }}> / {moment(postInfo.created_at).format('YYYY-MM-DD HH:mm:ss')}</dev>
         </Card.Header>
         <Card.Body>
           {postInfo.content?.split('\n')?.map((line, index) => (
@@ -73,7 +76,7 @@ function PostView() {
             목록
           </Button>
           {isEditable && (
-            <Button variant="primary" className="me-2" onClick={() => navigate(`/freeboard/edit/${params.postId}`)}>
+            <Button variant="primary" className="me-2" onClick={() => navigate(`/freeboard/edit/${postInfo._id}`)}>
               수정
             </Button>
           )}
@@ -84,6 +87,7 @@ function PostView() {
           )}
         </Card.Footer>
       </Card>
+      <Comments cur_user_id={userState.user.id} cur_user_name={userState.user.name} board_id={postInfo._id} />
     </Container>
   );
 }

@@ -13,6 +13,7 @@ import Freeboard from './components/freeboard/Freeboard';
 import PostAddForm from './components/freeboard/PostAddForm';
 import PostView from './components/freeboard/PostView';
 import PostEditForm from './components/freeboard/PostEditForm';
+import { HeaderSkeleton } from './components/Skeletons';
 
 export const UserStateContext = createContext(null);
 export const DispatchContext = createContext(null);
@@ -53,7 +54,7 @@ function App() {
   }, []);
 
   if (!isFetchCompleted) {
-    return 'loading...';
+    return <HeaderSkeleton />;
   }
 
   return (
