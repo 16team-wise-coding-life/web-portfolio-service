@@ -1,9 +1,11 @@
 import React, { useContext, useState, useEffect } from 'react';
 import { useNavigate, useParams } from 'react-router-dom';
-import { Container, Button, Card } from 'react-bootstrap';
+import { Container, Button, Card, Col } from 'react-bootstrap';
 
 import { UserStateContext } from '../../App';
 import * as Api from '../../api';
+
+import Comments from '../comment/Comments';
 
 function PostView() {
   const navigate = useNavigate();
@@ -73,7 +75,7 @@ function PostView() {
             목록
           </Button>
           {isEditable && (
-            <Button variant="primary" className="me-2" onClick={() => navigate(`/freeboard/edit/${params.postId}`)}>
+            <Button variant="primary" className="me-2" onClick={() => navigate(`/freeboard/edit/${postInfo._id}`)}>
               수정
             </Button>
           )}
@@ -84,6 +86,9 @@ function PostView() {
           )}
         </Card.Footer>
       </Card>
+      <Col>
+        <Comments cur_user_id={userState.user.id} cur_user_name={userState.user.name} board_id={postInfo._id} />
+      </Col>
     </Container>
   );
 }
