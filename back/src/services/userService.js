@@ -90,7 +90,7 @@ class userAuthService {
     if (!toUpdate.password) {
       toUpdate.password = user.password;
     } else {
-      toUpdate.password = bcrypt.hash(toUpdate.password, 10);
+      toUpdate.password = await bcrypt.hash(toUpdate.password, 10);
     }
 
     if (!toUpdate.description) {
@@ -140,6 +140,13 @@ class userAuthService {
       user = await User.update({ user_id, fieldToUpdate, newValue });
     }
     return user;
+  }
+
+  // 삭제
+  static async deleteUser({ user_id }) {
+    const res = await User.delete({ user_id });
+
+    return res;
   }
 }
 
