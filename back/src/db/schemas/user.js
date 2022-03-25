@@ -26,7 +26,7 @@ const UserSchema = new Schema(
     image: {
       type: String,
       required: true,
-      default: 'https://i.ibb.co/jTXFzFT/2021-10-07-10-48-59.png',
+      default: 'https://i.ibb.co/HrtY6fw/default-img.png',
     },
   },
   {
