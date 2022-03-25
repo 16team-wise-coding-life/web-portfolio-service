@@ -1,6 +1,6 @@
 import React, { useContext, useState, useEffect } from 'react';
 import { useNavigate, useParams } from 'react-router-dom';
-import { Container, Button, Card, Col } from 'react-bootstrap';
+import { Container, Button, Card, Col, Row } from 'react-bootstrap';
 
 import { UserStateContext } from '../../App';
 import * as Api from '../../api';
@@ -56,39 +56,39 @@ function PostView() {
   };
 
   return (
-    <Container fluid>
-      <Card>
-        <Card.Header>
-          <Card.Title>{postInfo.title}</Card.Title>
-          작성자 : {postInfo.name} 작성 시간 : {postInfo.created_at}
-        </Card.Header>
-        <Card.Body>
-          {postInfo.content?.split('\n')?.map((line, index) => (
-            <Card.Text key={index}>
-              {line}
-              <br />
-            </Card.Text>
-          ))}
-        </Card.Body>
-        <Card.Footer className="text-center">
-          <Button variant="primary" className="me-2" onClick={() => navigate(`/freeboard`)}>
-            목록
-          </Button>
-          {isEditable && (
-            <Button variant="primary" className="me-2" onClick={() => navigate(`/freeboard/edit/${postInfo._id}`)}>
-              수정
+    <Container>
+      <Row className="justify-content-md-center">
+        <Card>
+          <Card.Header>
+            <Card.Title>{postInfo.title}</Card.Title>
+            작성자 : {postInfo.name} 작성 시간 : {postInfo.created_at}
+          </Card.Header>
+          <Card.Body>
+            {postInfo.content?.split('\n')?.map((line, index) => (
+              <Card.Text key={index}>
+                {line}
+                <br />
+              </Card.Text>
+            ))}
+          </Card.Body>
+          <Card.Footer className="text-center">
+            <Button variant="primary" className="me-2" onClick={() => navigate(`/freeboard`)}>
+              목록
             </Button>
-          )}
-          {isEditable && (
-            <Button variant="primary" className="me-2" onClick={() => deleteNavigate()}>
-              삭제
-            </Button>
-          )}
-        </Card.Footer>
-      </Card>
-      <Col>
+            {isEditable && (
+              <Button variant="primary" className="me-2" onClick={() => navigate(`/freeboard/edit/${postInfo._id}`)}>
+                수정
+              </Button>
+            )}
+            {isEditable && (
+              <Button variant="primary" className="me-2" onClick={() => deleteNavigate()}>
+                삭제
+              </Button>
+            )}
+          </Card.Footer>
+        </Card>
         <Comments cur_user_id={userState.user.id} cur_user_name={userState.user.name} board_id={postInfo._id} />
-      </Col>
+      </Row>
     </Container>
   );
 }
