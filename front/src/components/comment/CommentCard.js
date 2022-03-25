@@ -21,7 +21,7 @@ function CommentCard({ comment, setIsEditing, isEditable, handleDeleteClick }) {
                   </Button>
                 </Col>
                 <Col xs lg="1">
-                  <Button variant="outline-danger" size="sm" onClick={() => handleDeleteClick(comment._id)}>
+                  <Button variant="outline-danger" size="sm" onClick={() => handleDeleteClick(comment.id)}>
                     삭제
                   </Button>
                 </Col>
