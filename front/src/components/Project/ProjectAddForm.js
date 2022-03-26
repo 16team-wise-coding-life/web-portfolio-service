@@ -32,17 +32,17 @@ function ProjectAddForm({ portfolioOwnerId, setProjects, setIsAdding }) {
   return (
     <Form onSubmit={handleSubmit}>
       <Form.Group controlId='ProjectAddTitle' className='mt-3'>
-        <Form.Control type='text' placeholder='프로젝트 이름' name='title' value={tempProject.title} onChange={e => handleProjectValue(e.target.name, e.target.value)} />
+        <Form.Control type='text' placeholder='프로젝트 이름' value={tempProject.title} onChange={e => handleProjectValue('title', e.target.value)} />
       </Form.Group>
       <Form.Group controlId='ProjectAddMajor' className='mt-3'>
-        <Form.Control type='text' placeholder='상세내역' name='description' value={tempProject.description} onChange={e => handleProjectValue(e.target.name, e.target.value)} />
+        <Form.Control type='text' placeholder='상세내역' value={tempProject.description} onChange={e => handleProjectValue('description', e.target.value)} />
       </Form.Group>
       <Form.Group as={Row} className='mt-3'>
         <Col xs='auto'>
-          <DatePicker selected={tempProject.from_date} name='from_date' dateFormat='yyyy-MM-dd' onChange={date => handleProjectValue('from_date', date)} />{' '}
+          <DatePicker selected={tempProject.from_date} dateFormat='yyyy-MM-dd' onChange={date => handleProjectValue('from_date', date)} />{' '}
         </Col>
         <Col xs='auto'>
-          <DatePicker selected={tempProject.to_date} dateFormat='yyyy-MM-dd' name='to_date' onChange={date => handleProjectValue('to_date', date)} />
+          <DatePicker selected={tempProject.to_date} dateFormat='yyyy-MM-dd' onChange={date => handleProjectValue('to_date', date)} />
         </Col>
       </Form.Group>
       <Form.Group as={Row} className='mt-3 text-center'>

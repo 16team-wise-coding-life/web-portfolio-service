@@ -21,12 +21,12 @@ function ProjectCard({ project, setIsEditing, isEditable, handleDeleteClick }) {
       {isEditable && (
         <>
           <Col xs='auto' lg='1'>
-            <Button className='mr-3' variant='outline-info' size='sm' onClick={() => setIsEditing(edit => !edit)}>
+            <Button className='mr-3' variant='outline-info' size='sm' style={{ position: 'absolute', right: 60, marginRight: '10px' }} onClick={() => setIsEditing(edit => !edit)}>
               편집
             </Button>
           </Col>
           <Col xs='auto' lg='1'>
-            <Button className='mr-3' variant='outline-danger' size='sm' onClick={() => handleDeleteClick(project._id)}>
+            <Button className='mr-3' variant='outline-danger' size='sm' style={{ position: 'absolute', right: 3, marginRight: '10px' }} onClick={() => handleDeleteClick(project._id)}>
               삭제
             </Button>
           </Col>
