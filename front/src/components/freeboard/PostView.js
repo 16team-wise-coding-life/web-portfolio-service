@@ -57,7 +57,7 @@ function PostView() {
   };
   //
   return (
-    <Container>
+    <Container style={{ minHeight: '100vh' }}>
       <Card className='mb-3 justify-content-md-center'>
         <Card.Header>
           <Card.Title className='mb-3'>{postInfo.title}</Card.Title>

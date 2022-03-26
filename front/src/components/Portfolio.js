@@ -64,9 +64,9 @@ function Portfolio() {
   }
 
   return (
-    <Container fluid>
+    <Container fluid style={{ minHeight: '100vh' }}>
       <Row>
-        <Col md="3" lg="3">
+        <Col md='3' lg='3'>
           <User portfolioOwnerId={portfolioOwner.id} isEditable={isEditable} />
         </Col>
         <Col>

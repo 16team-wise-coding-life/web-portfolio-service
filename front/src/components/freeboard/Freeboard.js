@@ -42,7 +42,7 @@ function Freeboard() {
     return <FreeBoardSkeleton />;
   }
   return (
-    <Container style={{ position: 'relative' }}>
+    <Container style={{ position: 'relative', minHeight: '100vh' }}>
       <Container className='mt-3'>
         <ToggleButton className='mb-2' id='toggle-check' type='checkbox' variant='outline-primary' checked={checked} onChange={toggleCheck}>
           {checked ? '모든 게시글 보기' : '내가 쓴 게시글 보기'}

@@ -17,6 +17,7 @@ import PostView from './components/freeboard/PostView';
 import PostEditForm from './components/freeboard/PostEditForm';
 import { HeaderSkeleton } from './components/Skeletons';
 import Footer from './components/Footer';
+
 export const UserStateContext = createContext(null);
 export const DispatchContext = createContext(null);
 
