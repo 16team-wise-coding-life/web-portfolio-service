@@ -6,6 +6,11 @@ class Like {
     return createdNewLike;
   }
 
+  static async findAllByLikeId({ like_id }) {
+    const like = await LikeModel.find({ like_id: like_id });
+    return like;
+  }
+
   static async deleteLike({ unlike }) {
     const deletedLike = await LikeModel.findOneAndDelete(unlike);
     return deletedLike;
