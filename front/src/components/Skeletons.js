@@ -40,28 +40,21 @@ export const EducationSkeleton = () => {
           <Placeholder xs={1} size='lg' />
         </Placeholder>
         <Card.Text>
-          <Row className='align-items-center'>
-            <Col>
-              <Placeholder as='span' animation='glow'>
-                <Placeholder xs={2} size='lg' />
-              </Placeholder>
-              <br />
-              <Placeholder as='span' animation='glow' className='mb-3'>
-                <Placeholder xs={1} /> <Placeholder xs={1} />
-              </Placeholder>
-            </Col>
-          </Row>
-          <Row className='align-items-center'>
-            <Col>
-              <Placeholder as='span' animation='glow'>
-                <Placeholder xs={2} size='lg' />
-              </Placeholder>
-              <br />
-              <Placeholder as='span' animation='glow'>
-                <Placeholder xs={1} /> <Placeholder xs={1} />
-              </Placeholder>
-            </Col>
-          </Row>
+          <Placeholder as='span' animation='glow'>
+            <Placeholder xs={2} size='lg' />
+          </Placeholder>
+          <br />
+          <Placeholder as='span' animation='glow' className='mb-3'>
+            <Placeholder xs={1} /> <Placeholder xs={1} />
+          </Placeholder>
+          <br />
+          <Placeholder as='span' animation='glow'>
+            <Placeholder xs={2} size='lg' />
+          </Placeholder>
+          <br />
+          <Placeholder as='span' animation='glow'>
+            <Placeholder xs={1} /> <Placeholder xs={1} />
+          </Placeholder>
         </Card.Text>
       </Card.Body>
     </Card>
@@ -76,28 +69,21 @@ export const AwardSkeleton = () => {
           <Placeholder xs={1} size='lg' />
         </Placeholder>
         <Card.Text>
-          <Row className='align-items-center'>
-            <Col>
-              <Placeholder as='span' animation='glow'>
-                <Placeholder xs={1} size='lg' />
-              </Placeholder>
-              <br />
-              <Placeholder as='span' animation='glow' className='mb-3'>
-                <Placeholder xs={2} />
-              </Placeholder>
-            </Col>
-          </Row>
-          <Row className='align-items-center'>
-            <Col>
-              <Placeholder as='span' animation='glow'>
-                <Placeholder xs={1} size='lg' />
-              </Placeholder>
-              <br />
-              <Placeholder as='span' animation='glow' className='mb-3'>
-                <Placeholder xs={2} />
-              </Placeholder>
-            </Col>
-          </Row>
+          <Placeholder as='span' animation='glow'>
+            <Placeholder xs={1} size='lg' />
+          </Placeholder>
+          <br />
+          <Placeholder as='span' animation='glow' className='mb-3'>
+            <Placeholder xs={2} />
+          </Placeholder>
+          <br />
+          <Placeholder as='span' animation='glow'>
+            <Placeholder xs={1} size='lg' />
+          </Placeholder>
+          <br />
+          <Placeholder as='span' animation='glow' className='mb-3'>
+            <Placeholder xs={2} />
+          </Placeholder>
         </Card.Text>
       </Card.Body>
     </Card>
@@ -112,36 +98,29 @@ export const ProjectSkeleton = () => {
           <Placeholder xs={1} size='lg' />
         </Placeholder>
         <Card.Text>
-          <Row className='align-items-center'>
-            <Col>
-              <Placeholder as='span' animation='glow'>
-                <Placeholder xs={1} size='lg' />
-              </Placeholder>
-              <br />
-              <Placeholder as='span' animation='glow'>
-                <Placeholder xs={2} />
-              </Placeholder>
-              <br />
-              <Placeholder as='span' animation='glow' className='mb-3'>
-                <Placeholder xs={1} /> <Placeholder xs={1} />
-              </Placeholder>
-            </Col>
-          </Row>
-          <Row className='align-items-center'>
-            <Col>
-              <Placeholder as='span' animation='glow'>
-                <Placeholder xs={1} size='lg' />
-              </Placeholder>
-              <br />
-              <Placeholder as='span' animation='glow'>
-                <Placeholder xs={2} />
-              </Placeholder>
-              <br />
-              <Placeholder as='span' animation='glow' className='mb-3'>
-                <Placeholder xs={1} /> <Placeholder xs={1} />
-              </Placeholder>
-            </Col>
-          </Row>
+          <Placeholder as='span' animation='glow'>
+            <Placeholder xs={1} size='lg' />
+          </Placeholder>
+          <br />
+          <Placeholder as='span' animation='glow'>
+            <Placeholder xs={2} />
+          </Placeholder>
+          <br />
+          <Placeholder as='span' animation='glow' className='mb-3'>
+            <Placeholder xs={1} /> <Placeholder xs={1} />
+          </Placeholder>
+          <br />
+          <Placeholder as='span' animation='glow'>
+            <Placeholder xs={1} size='lg' />
+          </Placeholder>
+          <br />
+          <Placeholder as='span' animation='glow'>
+            <Placeholder xs={2} />
+          </Placeholder>
+          <br />
+          <Placeholder as='span' animation='glow' className='mb-3'>
+            <Placeholder xs={1} /> <Placeholder xs={1} />
+          </Placeholder>
         </Card.Text>
       </Card.Body>
     </Card>
@@ -156,36 +135,67 @@ export const CertificateSkeleton = () => {
           <Placeholder xs={1} size='lg' />
         </Placeholder>
         <Card.Text>
-          <Row className='align-items-center'>
-            <Col>
-              <Placeholder as='span' animation='glow'>
-                <Placeholder xs={1} size='lg' />
-              </Placeholder>
-              <br />
-              <Placeholder as='span' animation='glow'>
-                <Placeholder xs={2} />
-              </Placeholder>
-              <br />
-              <Placeholder as='span' animation='glow' className='mb-3'>
-                <Placeholder xs={1} />
-              </Placeholder>
-            </Col>
-          </Row>
-          <Row className='align-items-center'>
-            <Col>
-              <Placeholder as='span' animation='glow'>
-                <Placeholder xs={1} size='lg' />
-              </Placeholder>
-              <br />
-              <Placeholder as='span' animation='glow'>
-                <Placeholder xs={2} />
-              </Placeholder>
-              <br />
-              <Placeholder as='span' animation='glow'>
-                <Placeholder xs={1} />
-              </Placeholder>
-            </Col>
-          </Row>
+          <Placeholder as='span' animation='glow'>
+            <Placeholder xs={1} size='lg' />
+          </Placeholder>
+          <br />
+          <Placeholder as='span' animation='glow'>
+            <Placeholder xs={2} />
+          </Placeholder>
+          <br />
+          <Placeholder as='span' animation='glow' className='mb-3'>
+            <Placeholder xs={1} />
+          </Placeholder>
+          <br />
+          <Placeholder as='span' animation='glow'>
+            <Placeholder xs={1} size='lg' />
+          </Placeholder>
+          <br />
+          <Placeholder as='span' animation='glow'>
+            <Placeholder xs={2} />
+          </Placeholder>
+          <br />
+          <Placeholder as='span' animation='glow'>
+            <Placeholder xs={1} />
+          </Placeholder>
+        </Card.Text>
+      </Card.Body>
+    </Card>
+  );
+};
+
+export const FreeBoardSkeleton = () => {
+  return (
+    <Card border='light' className='mb-3'>
+      <Card.Body>
+        <Placeholder as={Card.Title} animation='glow'>
+          <Placeholder xs={2} size='lg' />
+          <Placeholder xs={2} size='lg' />
+        </Placeholder>
+        <Card.Text>
+          <Placeholder as='span' animation='glow'>
+            <Placeholder xs={12} size='lg' />
+          </Placeholder>
+          <br />
+          <Placeholder as='span' animation='glow'>
+            <Placeholder xs={12} />
+          </Placeholder>
+          <br />
+          <Placeholder as='span' animation='glow' className='mb-3'>
+            <Placeholder xs={12} />
+          </Placeholder>
+          <br />
+          <Placeholder as='span' animation='glow'>
+            <Placeholder xs={12} size='lg' />
+          </Placeholder>
+          <br />
+          <Placeholder as='span' animation='glow'>
+            <Placeholder xs={12} />
+          </Placeholder>
+          <br />
+          <Placeholder as='span' animation='glow'>
+            <Placeholder xs={12} />
+          </Placeholder>
         </Card.Text>
       </Card.Body>
     </Card>
