@@ -1,36 +1,36 @@
 import React from 'react';
-import { Button, Card, Col, Row } from 'react-bootstrap';
+import { Container, Button, Card, Col, Row } from 'react-bootstrap';
 import moment from 'moment';
 
 function CommentCard({ comment, setIsEditing, isEditable, handleDeleteClick }) {
   return (
     <>
-      <Card.Body>
-        <Card.Text>
-          <Row>
-            <Col>
-              <span>{comment.name}</span>
-              <dev style={{ color: 'grey' }}> / {moment(comment.created_at).format('YYYY-MM-DD HH:mm:ss')}</dev>
-              <br />
-              <span className="text-muted">{comment.content}</span>
-            </Col>
-            {isEditable && (
-              <>
-                <Col xs lg="1">
-                  <Button variant="outline-info" size="sm" className="mt-2" onClick={() => setIsEditing(true)}>
-                    편집
-                  </Button>
-                </Col>
-                <Col xs lg="1">
-                  <Button variant="outline-danger" size="sm" className="mt-2" onClick={() => handleDeleteClick(comment.id)}>
-                    삭제
-                  </Button>
-                </Col>
-              </>
-            )}
-          </Row>
+      <Row>
+        <Card.Text className='mt-3 m-2'>{comment.name}</Card.Text>
+        <Card.Text className='m-2' style={{ color: 'grey' }}>
+          {' '}
+          {moment(comment.created_at).format('YYYY-MM-DD HH:mm:ss')}
         </Card.Text>
-      </Card.Body>
+        <Card.Subtitle className='text-muted m-2'>{comment.content}</Card.Subtitle>
+      </Row>
+      {isEditable && (
+        <>
+          <Container style={{ position: 'relative' }} className='mt-3'>
+            <Row className='mb-3'>
+              <Col xs lg='1'>
+                <Button variant='outline-info' size='sm' className='mt-2' onClick={() => setIsEditing(true)}>
+                  편집
+                </Button>
+              </Col>
+              <Col xs lg='1'>
+                <Button variant='outline-danger' style={{ position: 'absolute', right: 8 }} size='sm' className='mt-2' onClick={() => handleDeleteClick(comment.id)}>
+                  삭제
+                </Button>
+              </Col>
+            </Row>
+          </Container>
+        </>
+      )}
     </>
   );
 }
