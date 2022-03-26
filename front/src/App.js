@@ -16,7 +16,7 @@ import PostAddForm from './components/freeboard/PostAddForm';
 import PostView from './components/freeboard/PostView';
 import PostEditForm from './components/freeboard/PostEditForm';
 import { HeaderSkeleton } from './components/Skeletons';
-
+import Footer from './components/Footer';
 export const UserStateContext = createContext(null);
 export const DispatchContext = createContext(null);
 
@@ -74,6 +74,7 @@ function App() {
             <Route path='/freeboard/edit/:postId' element={<PostEditForm />} />
             <Route path='*' element={<Portfolio />} />
           </Routes>
+          <Footer />
         </Router>
       </UserStateContext.Provider>
     </DispatchContext.Provider>
