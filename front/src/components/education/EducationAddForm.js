@@ -32,22 +32,23 @@ function EducationAddForm({ portfolioOwnerId, setEducations, setIsAdding }) {
   return (
     <Form onSubmit={handleSubmit}>
       <Form.Group controlId='educationAddSchool' className='mt-3'>
-        <Form.Control type='text' placeholder='학교 이름' name='school' value={tempEducation.school} onChange={e => handleEducationValue(e.target.name, e.target.value)} />
+        <Form.Control type='text' placeholder='학교 이름' name='school' value={tempEducation.school} onChange={e => handleEducationValue('school', e.target.value)} />
       </Form.Group>
       <Form.Group controlId='educationAddMajor' className='mt-3'>
-        <Form.Control type='text' placeholder='전공' name='major' value={tempEducation.major} onChange={e => handleEducationValue(e.target.name, e.target.value)} />
+        <Form.Control type='text' placeholder='전공' name='major' value={tempEducation.major} onChange={e => handleEducationValue('major', e.target.value)} />
       </Form.Group>
 
-      <div key={`inline-radio`} className='mb-3 mt-3'>
-        {positions.map(position => (
+      <div className='mb-3 mt-3'>
+        {positions.map((position, idx) => (
           <Form.Check
             inline
             label={position}
+            key={idx}
             type='radio'
             name='position'
             value={position}
             checked={tempEducation.position === position}
-            onChange={e => handleEducationValue(e.target.name, e.target.value)}
+            onChange={e => handleEducationValue('position', e.target.value)}
           />
         ))}
       </div>
