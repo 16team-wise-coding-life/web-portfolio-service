@@ -1,21 +1,26 @@
-import React from 'react';
-import { Button, Form, Card, Col, Row } from 'react-bootstrap';
+import React, { useState } from 'react';
+import { Button, Form, Col, Row } from 'react-bootstrap';
 import * as Api from '../../api';
 
 function AwardEditForm({ award, setAward, setIsEditing }) {
+  const { title, description, _id } = award;
+  const [tempAward, setTempAward] = useState({ title, description });
+
+  const handleAwardValue = (name, value) => {
+    setTempAward(prev => ({ ...prev, [name]: value }));
+  };
+
   const handleSubmit = async e => {
     e.preventDefault();
-
     try {
-      // title, description 정보 서버에 보내서 변경하기 (PUT -> awards/:id)
-      const res = await Api.put(`awards/${award.id}`, { title: award.title, description: award.description });
-      console.log(res.data);
-      setAward({
-        ...award,
-        title: res.data.title,
-        description: res.data.description,
-      });
-      setIsEditing(false);
+      if (window.confirm(`"${tempAward.title}" 수상이력을 수정하시겠습니까?`)) {
+        const { data } = await Api.put(`awards/${_id}`, tempAward);
+        setAward(prev => ({
+          ...prev,
+          ...data,
+        }));
+        setIsEditing(false);
+      }
     } catch (error) {
       console.log(error);
     }
@@ -25,22 +30,24 @@ function AwardEditForm({ award, setAward, setIsEditing }) {
     <>
       <Form onSubmit={handleSubmit}>
         <Form.Group controlId='awardEditTitle' className='mt-3'>
-          <Form.Control type='text' placeholder='수상내역' value={award.title} onChange={e => setAward({ ...award, title: e.target.value })} />
+          <Form.Control type='text' placeholder='수상내역' value={tempAward.title} onChange={e => handleAwardValue('title', e.target.value)} />
         </Form.Group>
 
         <Form.Group controlId='awardEditDescription' className='mt-3'>
-          <Form.Control type='text' placeholder='상세내역' value={award.description} onChange={e => setAward({ ...award, description: e.target.value })} />
+          <Form.Control type='text' placeholder='상세내역' value={tempAward.description} onChange={e => handleAwardValue('description', e.target.value)} />
         </Form.Group>
 
         <Form.Group as={Row} className='mt-3 text-center'>
-          <Col>
-            <Button variant='primary' type='submit' className='me-2'>
-              확인
-            </Button>
-            <Button variant='secondary' onClick={() => setIsEditing(false)}>
-              취소
-            </Button>
-          </Col>
+          <Row>
+            <Col sm='20'>
+              <Button variant='primary' type='submit' className='me-2'>
+                확인
+              </Button>
+              <Button variant='secondary' onClick={() => setIsEditing(false)}>
+                취소
+              </Button>
+            </Col>
+          </Row>
         </Form.Group>
       </Form>
     </>

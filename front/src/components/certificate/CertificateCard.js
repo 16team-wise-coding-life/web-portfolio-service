@@ -1,39 +1,38 @@
 import React from 'react';
 import { Card, Col, Row, Button } from 'react-bootstrap';
 
-function CertificateCard({ certificate, setIsEditing, isEditable }) {
-  const handleClick = e => {
-    e.preventDefault();
-    setIsEditing(true);
-  };
-
+function CertificateCard({ certificate, setIsEditing, isEditable, handleDeleteClick }) {
   const convertDate = date => {
     const seperatedDate = date.split(/T|-/);
     const [year, month, day] = seperatedDate;
     return `${year}-${month}-${day}`;
   };
 
-  const convertedDate = convertDate(certificate.when_date);
-
   return (
-    <Card.Text>
-      <Row className='align-items-center'>
-        <Col>
-          <span>{certificate.title}</span>
+    <Row className='align-items-center'>
+      <Col>
+        <Card.Text className='mb-2 mt-3'>{certificate.title}</Card.Text>
+        <Card.Subtitle className='text-muted'>
+          {certificate.description}
           <br />
-          <span className='text-muted'>{certificate.description}</span>
-          <br />
-          <span className='text-muted'>{convertedDate}</span>
-        </Col>
-        {isEditable && (
-          <Col xs lg='1'>
-            <Button variant='outline-info' size='sm' onClick={handleClick}>
+          {convertDate(certificate.when_date)}
+        </Card.Subtitle>
+      </Col>
+      {isEditable && (
+        <>
+          <Col xs='auto' lg='1'>
+            <Button className='mr-3' variant='outline-info' size='sm' style={{ position: 'absolute', right: 60, marginRight: '10px' }} onClick={() => setIsEditing(true)}>
               편집
             </Button>
           </Col>
-        )}
-      </Row>
-    </Card.Text>
+          <Col xs='auto' lg='1'>
+            <Button className='mr-3' variant='outline-danger' size='sm' style={{ position: 'absolute', right: 3, marginRight: '10px' }} onClick={() => handleDeleteClick(certificate._id)}>
+              삭제
+            </Button>
+          </Col>
+        </>
+      )}
+    </Row>
   );
 }
 

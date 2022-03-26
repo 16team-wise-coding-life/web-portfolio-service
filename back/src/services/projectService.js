@@ -21,26 +21,30 @@ class projectService {
       return { errorMessage };
     }
 
-    if (toUpdate.title) {
-      const fieldToUpdate = 'title';
-      const newValue = toUpdate.title;
-      project = await Project.update({ project_id, fieldToUpdate, newValue });
+    if (!toUpdate.title) {
+      toUpdate.title = project.title;
     }
-    if (toUpdate.description) {
-      const fieldToUpdate = 'description';
-      const newValue = toUpdate.description;
-      project = await Project.update({ project_id, fieldToUpdate, newValue });
+
+    if (!toUpdate.description) {
+      toUpdate.description = project.description;
     }
-    if (toUpdate.from_date) {
-      const fieldToUpdate = 'from_date';
-      const newValue = toUpdate.from_date;
-      project = await Project.update({ project_id, fieldToUpdate, newValue });
+
+    if (!toUpdate.from_date) {
+      toUpdate.from_date = project.from_date;
     }
-    if (toUpdate.to_date) {
-      const fieldToUpdate = 'to_date';
-      const newValue = toUpdate.to_date;
-      project = await Project.update({ project_id, fieldToUpdate, newValue });
+
+    if (!toUpdate.to_date) {
+      toUpdate.to_date = project.to_date;
     }
+
+    const newValues = {
+      title: toUpdate.title,
+      description: toUpdate.description,
+      from_date: toUpdate.from_date,
+      to_date: toUpdate.to_date,
+    };
+
+    project = await Project.update({ project_id, newValues });
 
     return project;
   }
@@ -54,6 +58,19 @@ class projectService {
     }
 
     return project;
+  }
+
+  // 삭제
+  static async deleteProject({ project_id }) {
+    const project = await Project.findById({ project_id });
+
+    if (!project) {
+      const errorMessage = '프로젝트 내역이 없습니다. 다시 한 번 확인해 주세요.';
+      return { errorMessage };
+    }
+    const res = await Project.delete({ project_id });
+
+    return res;
   }
 }
 

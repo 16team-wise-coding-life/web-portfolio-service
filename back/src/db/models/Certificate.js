@@ -11,9 +11,9 @@ class Certificate {
     return certificate;
   }
 
-  static async update({ certificate_id, fieldToUpdate, newValue }) {
+  static async update({ certificate_id, newValues }) {
     const filter = { _id: certificate_id };
-    const update = { [fieldToUpdate]: newValue };
+    const update = { $set: newValues };
     const option = { returnOriginal: false };
 
     const certificate = await CertificateModel.findOneAndUpdate(filter, update, option);
@@ -23,6 +23,12 @@ class Certificate {
   static async findAllByUserId({ user_id }) {
     const certificates = await CertificateModel.find({ user_id: user_id });
     return certificates;
+  }
+
+  static async delete({ certificate_id }) {
+    await CertificateModel.deleteOne({ _id: certificate_id });
+
+    return '삭제가 완료 되었습니다.';
   }
 }
 

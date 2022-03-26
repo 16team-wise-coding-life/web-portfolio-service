@@ -1,14 +1,16 @@
-import React, { useContext, useState, useEffect } from 'react';
+import React, { useContext, useState, useEffect, useMemo } from 'react';
 import { useNavigate, useParams } from 'react-router-dom';
-import { Container, Col, Row } from 'react-bootstrap';
+import { Container, Col, Row, Placeholder } from 'react-bootstrap';
 
 import { UserStateContext } from '../App';
 import * as Api from '../api';
 import User from './user/User';
 import Educations from './education/Educations';
 import Awards from './award/Awards';
-import Certificates from './certificate/Certificates';
 import Projects from './Project/Projects';
+import Certificates from './certificate/Certificates';
+import Guestbooks from './guestbook/Guestbooks';
+import { PortfolioSkeleton } from './Skeletons';
 
 function Portfolio() {
   const navigate = useNavigate();
@@ -19,6 +21,12 @@ function Portfolio() {
   // 아래 코드를 보면, isFetchCompleted가 false이면 "loading..."만 반환되어서, 화면에 이 로딩 문구만 뜨게 됨.
   const [isFetchCompleted, setIsFetchCompleted] = useState(false);
   const userState = useContext(UserStateContext);
+
+  const getIsEditable = (portfolioOwner, userState) => {
+    return portfolioOwner?.id === userState.user?.id;
+  };
+
+  const isEditable = useMemo(() => getIsEditable(portfolioOwner, userState), [portfolioOwner, userState]);
 
   const fetchPorfolioOwner = async ownerId => {
     // 유저 id를 가지고 "/users/유저id" 엔드포인트로 요청해 사용자 정보를 불러옴.
@@ -52,20 +60,21 @@ function Portfolio() {
   }, [params, userState, navigate]);
 
   if (!isFetchCompleted) {
-    return 'loading...';
+    return <PortfolioSkeleton />;
   }
 
   return (
     <Container fluid>
       <Row>
-        <Col md='3' lg='3'>
-          <User portfolioOwnerId={portfolioOwner.id} isEditable={portfolioOwner.id === userState.user?.id} />
+        <Col md="3" lg="3">
+          <User portfolioOwnerId={portfolioOwner.id} isEditable={isEditable} />
         </Col>
         <Col>
-          <Educations portfolioOwnerId={portfolioOwner.id} isEditable={portfolioOwner.id === userState.user?.id} />
-          <Awards portfolioOwnerId={portfolioOwner.id} isEditable={portfolioOwner.id === userState.user?.id} />
-          <Projects portfolioOwnerId={portfolioOwner.id} isEditable={portfolioOwner.id === userState.user?.id} />
-          <Certificates portfolioOwnerId={portfolioOwner.id} isEditable={portfolioOwner.id === userState.user?.id} />
+          <Educations portfolioOwnerId={portfolioOwner.id} isEditable={isEditable} />
+          <Awards portfolioOwnerId={portfolioOwner.id} isEditable={isEditable} />
+          <Projects portfolioOwnerId={portfolioOwner.id} isEditable={isEditable} />
+          <Certificates portfolioOwnerId={portfolioOwner.id} isEditable={isEditable} />
+          <Guestbooks cur_user_id={userState.user?.id} cur_user_name={userState.user?.name} cur_owner_id={portfolioOwner.id} />
         </Col>
       </Row>
     </Container>

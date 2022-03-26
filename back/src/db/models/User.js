@@ -21,13 +21,19 @@ class User {
     return users;
   }
 
-  static async update({ user_id, fieldToUpdate, newValue }) {
+  static async update({ user_id, newValues }) {
     const filter = { id: user_id };
-    const update = { [fieldToUpdate]: newValue };
+    const update = { $set: newValues };
     const option = { returnOriginal: false };
 
     const updatedUser = await UserModel.findOneAndUpdate(filter, update, option);
     return updatedUser;
+  }
+
+  static async delete({ user_id }) {
+    await UserModel.deleteOne({ id: user_id });
+
+    return '삭제가 완료 되었습니다.';
   }
 }
 

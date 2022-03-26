@@ -1,43 +1,49 @@
 import React, { useState } from 'react';
-import { Button, Form, Card, Col, Row } from 'react-bootstrap';
+import { Button, Form, Col, Row } from 'react-bootstrap';
 import * as Api from '../../api';
 
-function AwardAddForm({ awards, setAwards, portfolioOwnerId, setIsAdding }) {
-  const [title, setTitle] = useState('');
-  const [description, setDescription] = useState('');
+function AwardAddForm({ setAwards, portfolioOwnerId, setIsAdding }) {
+  const [tempAward, setTempAward] = useState({ title: '', description: '' });
 
-  const handleSubmit = e => {
+  const handleAwardValue = (name, value) => {
+    setTempAward(prev => ({ ...prev, [name]: value }));
+  };
+
+  const handleSubmit = async e => {
     e.preventDefault();
-
-    Api.post('award/create', {
-      user_id: portfolioOwnerId,
-      title,
-      description,
-    }).then(res => {
-      setAwards([...awards, res.data]);
+    try {
+      const res = await Api.post('award/create', {
+        user_id: portfolioOwnerId,
+        ...tempAward,
+      });
+      setAwards(prev => [...prev, res.data]);
       setIsAdding(false);
-    });
+    } catch (error) {
+      console.log(error);
+    }
   };
 
   return (
     <Form onSubmit={handleSubmit} className='mt-3'>
       <Form.Group controlId='awardAddTitle'>
-        <Form.Control type='text' placeholder='수상내역' value={title} onChange={e => setTitle(e.target.value)} />
+        <Form.Control type='text' placeholder='수상내역' value={tempAward.title} onChange={e => handleAwardValue('title', e.target.value)} />
       </Form.Group>
 
       <Form.Group controlId='awardAddDescription' className='mt-3'>
-        <Form.Control type='text' placeholder='상세내역' value={description} onChange={e => setDescription(e.target.value)} />
+        <Form.Control type='text' placeholder='상세내역' value={tempAward.description} onChange={e => handleAwardValue('description', e.target.value)} />
       </Form.Group>
 
       <Form.Group as={Row} className='mt-3 text-center'>
-        <Col>
-          <Button variant='primary' type='submit' className='me-2'>
-            확인
-          </Button>
-          <Button variant='secondary' onClick={() => setIsAdding(false)}>
-            취소
-          </Button>
-        </Col>
+        <Row>
+          <Col sm='20'>
+            <Button variant='primary' type='submit' className='me-2'>
+              확인
+            </Button>
+            <Button variant='secondary' onClick={() => setIsAdding(false)}>
+              취소
+            </Button>
+          </Col>
+        </Row>
       </Form.Group>
     </Form>
   );

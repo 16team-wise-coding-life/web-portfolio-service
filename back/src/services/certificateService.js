@@ -36,23 +36,25 @@ class certificateAuthService {
       return { errorMessage };
     }
 
-    if (toUpdate.title) {
-      const fieldToUpdate = 'title';
-      const newValue = toUpdate.title;
-      certificate = await Certificate.update({ certificate_id, fieldToUpdate, newValue });
+    if (!toUpdate.title) {
+      toUpdate.title = certificate.title;
     }
 
-    if (toUpdate.description) {
-      const fieldToUpdate = 'description';
-      const newValue = toUpdate.description;
-      certificate = await Certificate.update({ certificate_id, fieldToUpdate, newValue });
+    if (!toUpdate.description) {
+      toUpdate.description = certificate.description;
     }
 
-    if (toUpdate.when_date) {
-      const fieldToUpdate = 'when_date';
-      const newValue = toUpdate.when_date;
-      certificate = await Certificate.update({ certificate_id, fieldToUpdate, newValue });
+    if (!toUpdate.when_date) {
+      toUpdate.when_date = certificate.when_date;
     }
+
+    const newValues = {
+      title: toUpdate.title,
+      description: toUpdate.description,
+      when_date: toUpdate.when_date,
+    };
+
+    certificate = await Certificate.update({ certificate_id, newValues });
 
     return certificate;
   }
@@ -60,6 +62,19 @@ class certificateAuthService {
   static async getCertificates({ user_id }) {
     const certificates = await Certificate.findAllByUserId({ user_id });
     return certificates;
+  }
+
+  // 삭제
+  static async deleteCertificate({ certificate_id }) {
+    let certificate = await Certificate.findById({ certificate_id });
+
+    if (!certificate) {
+      const errorMessage = '자격증 내역이 없습니다. 다시 한 번 확인해 주세요.';
+      return { errorMessage };
+    }
+    const res = await Certificate.delete({ certificate_id });
+
+    return res;
   }
 }
 

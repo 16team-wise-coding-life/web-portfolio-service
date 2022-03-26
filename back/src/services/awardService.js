@@ -21,18 +21,19 @@ class awardService {
       return { errorMessage };
     }
 
-    if (toUpdate.title) {
-      const fieldToUpdate = 'title';
-      const newValue = toUpdate.title;
-      award = await Award.update({ award_id, fieldToUpdate, newValue });
+    if (!toUpdate.title) {
+      toUpdate.title = award.title;
+    }
+    if (!toUpdate.description) {
+      toUpdate.description = award.description;
     }
 
-    if (toUpdate.description) {
-      const fieldToUpdate = 'description';
-      const newValue = toUpdate.description;
-      award = await Award.update({ award_id, fieldToUpdate, newValue });
-    }
+    const newValues = {
+      title: toUpdate.title,
+      description: toUpdate.description,
+    };
 
+    award = await Award.update({ award_id, newValues });
     return award;
   }
 
@@ -45,6 +46,18 @@ class awardService {
     }
 
     return award;
+  }
+
+  static async deleteAward({ award_id }) {
+    const award = await Award.findById({ award_id });
+
+    if (!award) {
+      const errorMessage = '삭제할 수상 내역이 없습니다. 다시 한 번 확인해 주세요.';
+      return { errorMessage };
+    }
+
+    const res = await Award.delete({ award_id });
+    return res;
   }
 }
 

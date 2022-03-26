@@ -16,13 +16,18 @@ class Award {
     return awards;
   }
 
-  static async update({ award_id, fieldToUpdate, newValue }) {
+  static async update({ award_id, newValues }) {
     const filter = { _id: award_id };
-    const update = { [fieldToUpdate]: newValue };
+    const update = { $set: newValues };
     const option = { returnOriginal: false };
 
     const updatedAward = await AwardModel.findOneAndUpdate(filter, update, option);
     return updatedAward;
+  }
+
+  static async delete({ award_id }) {
+    await AwardModel.deleteOne({ _id: award_id });
+    return '삭제가 완료 되었습니다.';
   }
 }
 
