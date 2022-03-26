@@ -13,16 +13,18 @@ function CommentAddForm({ setComments, cur_user_id, cur_user_name, cur_board_id 
   const handleSubmit = async e => {
     e.preventDefault();
     try {
-      const { data: createdComment } = await Api.post(`freeboard/comment/create`, {
-        ...tempComment,
-        board_id: cur_board_id,
-        user_id: cur_user_id,
-        name: cur_user_name,
-      });
-      setComments(prev => [...prev, createdComment]);
-      handleCommentValue('content', '');
+      if (window.confirm(`댓글을 남기시겠습니까?`)) {
+        const { data: createdComment } = await Api.post(`freeboard/comment/create`, {
+          ...tempComment,
+          board_id: cur_board_id,
+          user_id: cur_user_id,
+          name: cur_user_name,
+        });
+        setComments(prev => [...prev, createdComment]);
+        handleCommentValue('content', '');
+      }
     } catch (error) {
-      console.log(error);
+      alert('댓글을 남기지 못했습니다.', error);
     }
   };
 
