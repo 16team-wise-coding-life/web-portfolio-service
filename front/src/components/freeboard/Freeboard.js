@@ -4,6 +4,7 @@ import { Container, Button, ListGroup, Row, Col, Card, ToggleButton } from 'reac
 
 import * as Api from '../../api';
 import { UserStateContext } from '../../App';
+import { FreeBoardSkeleton } from '../Skeletons';
 
 function Freeboard() {
   const navigate = useNavigate();
@@ -11,6 +12,7 @@ function Freeboard() {
   const [allPosts, setAllPosts] = useState([]);
   const [myPosts, setMyPosts] = useState([]);
   const [checked, setChecked] = useState(false);
+  const [isFetchCompleted, setIsFetchCompleted] = useState(false);
 
   const fetchPostsInfo = async () => {
     try {
@@ -18,6 +20,7 @@ function Freeboard() {
       setAllPosts(tempAllPosts);
       const { data: tempMyPosts } = await Api.get('freeboardlist', userState.user?.id);
       setMyPosts(tempMyPosts);
+      setIsFetchCompleted(true);
     } catch (error) {
       console.log(error);
     }
@@ -35,19 +38,22 @@ function Freeboard() {
     setChecked(!checked);
   };
 
+  if (!isFetchCompleted) {
+    return <FreeBoardSkeleton />;
+  }
   return (
-    <Container>
-      <Container className="mt-3">
-        <ToggleButton className="mb-2" id="toggle-check" type="checkbox" variant="outline-primary" checked={checked} onChange={toggleCheck}>
+    <Container style={{ position: 'relative' }}>
+      <Container className='mt-3'>
+        <ToggleButton className='mb-2' id='toggle-check' type='checkbox' variant='outline-primary' checked={checked} onChange={toggleCheck}>
           {checked ? '모든 게시글 보기' : '내가 쓴 게시글 보기'}
         </ToggleButton>
-        <Button variant="primary" style={{ position: 'absolute', right: 55, marginRight: '30px' }} onClick={() => navigate(`/freeboard/create`)}>
+        <Button variant='primary' style={{ position: 'absolute', right: 13 }} onClick={() => navigate(`/freeboard/create`)}>
           게시글 작성
         </Button>
       </Container>
-      <Card>
-        <Card.Header className="text-center">자유게시판</Card.Header>
-        <ListGroup variant="flush">
+      <Card className='mt-4'>
+        <Card.Header className='text-center'>자유게시판</Card.Header>
+        <ListGroup variant='flush'>
           {(checked ? myPosts : allPosts).map(post => (
             <ListGroup.Item key={post._id} onClick={() => navigate(`/freeboard/${post._id}`)}>
               <Row>
