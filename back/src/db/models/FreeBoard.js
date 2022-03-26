@@ -17,7 +17,7 @@ class FreeBoard {
   }
 
   static async findAllByUserId({ user_id }) {
-    const posts = await FreeBoardModel.find({ user_id: user_id });
+    const posts = await FreeBoardModel.find({ user_id: user_id }).sort({ updatedAt: -1 });
     return posts;
   }
 
