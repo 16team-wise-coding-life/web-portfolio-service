@@ -3,6 +3,7 @@ import { useNavigate, useLocation } from 'react-router-dom';
 import Nav from 'react-bootstrap/Nav';
 import { UserStateContext, DispatchContext } from '../App';
 import title from '../styles/title.png';
+
 function Header() {
   const navigate = useNavigate();
   const location = useLocation();
@@ -26,7 +27,7 @@ function Header() {
   return (
     <Nav activeKey={location.pathname}>
       <Nav.Item className='me-auto mb-5'>
-        <Nav.Link disabled>
+        <Nav.Link onClick={() => navigate('/')}>
           <img src={title} />
         </Nav.Link>
       </Nav.Item>
