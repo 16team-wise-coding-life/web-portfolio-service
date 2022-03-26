@@ -169,8 +169,14 @@ export const FreeBoardSkeleton = () => {
     <Card border='light' className='mb-3'>
       <Card.Body className='m-5 p-5'>
         <Placeholder as={Card.Title} animation='glow'>
-          <Placeholder xs={2} size='lg' />
-          <Placeholder xs={2} size='lg' />
+          <Row>
+            <Col>
+              <Placeholder xs={2} size='lg' />
+            </Col>
+            <Col>
+              <Placeholder xs={2} size='lg' />
+            </Col>
+          </Row>
         </Placeholder>
         <Card.Text>
           <Placeholder as='span' animation='glow'>

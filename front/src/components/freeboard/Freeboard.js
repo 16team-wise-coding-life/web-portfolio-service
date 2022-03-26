@@ -42,16 +42,16 @@ function Freeboard() {
     return <FreeBoardSkeleton />;
   }
   return (
-    <Container>
+    <Container style={{ position: 'relative' }}>
       <Container className='mt-3'>
         <ToggleButton className='mb-2' id='toggle-check' type='checkbox' variant='outline-primary' checked={checked} onChange={toggleCheck}>
           {checked ? '모든 게시글 보기' : '내가 쓴 게시글 보기'}
         </ToggleButton>
-        <Button variant='primary' style={{ position: 'absolute', right: 55, marginRight: '30px' }} onClick={() => navigate(`/freeboard/create`)}>
+        <Button variant='primary' style={{ position: 'absolute', right: 13 }} onClick={() => navigate(`/freeboard/create`)}>
           게시글 작성
         </Button>
       </Container>
-      <Card>
+      <Card className='mt-4'>
         <Card.Header className='text-center'>자유게시판</Card.Header>
         <ListGroup variant='flush'>
           {(checked ? myPosts : allPosts).map(post => (
