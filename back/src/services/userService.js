@@ -89,19 +89,24 @@ class userAuthService {
 
     if (!toUpdate.password) {
       toUpdate.password = user.password;
+    } else {
+      toUpdate.password = await bcrypt.hash(toUpdate.password, 10);
     }
 
     if (!toUpdate.description) {
       toUpdate.description = user.description;
     }
 
-    const hashedPassword = await bcrypt.hash(toUpdate.password, 10);
+    if (!toUpdate.image_url) {
+      toUpdate.image_url = user.image;
+    }
 
     const newValues = {
       name: toUpdate.name,
       email: toUpdate.email,
-      password: hashedPassword,
+      password: toUpdate.password,
       description: toUpdate.description,
+      image: toUpdate.image_url,
     };
 
     user = await User.update({ user_id, newValues });
@@ -119,6 +124,29 @@ class userAuthService {
     }
 
     return user;
+  }
+
+  static async setImage({ user_id, image_url }) {
+    var user = await User.findById({ user_id });
+
+    if (!user) {
+      const errorMessage = '가입 내역이 없습니다. 다시 한 번 확인해 주세요.';
+      return { errorMessage };
+    }
+
+    if (image_url) {
+      const fieldToUpdate = 'image';
+      const newValue = image_url;
+      user = await User.update({ user_id, fieldToUpdate, newValue });
+    }
+    return user;
+  }
+
+  // 삭제
+  static async deleteUser({ user_id }) {
+    const res = await User.delete({ user_id });
+
+    return res;
   }
 }
 

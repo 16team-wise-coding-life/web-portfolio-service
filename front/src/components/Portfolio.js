@@ -1,14 +1,16 @@
 import React, { useContext, useState, useEffect, useMemo } from 'react';
 import { useNavigate, useParams } from 'react-router-dom';
-import { Container, Col, Row } from 'react-bootstrap';
+import { Container, Col, Row, Placeholder } from 'react-bootstrap';
 
 import { UserStateContext } from '../App';
 import * as Api from '../api';
 import User from './user/User';
 import Educations from './education/Educations';
 import Awards from './award/Awards';
-import Certificates from './certificate/Certificates';
 import Projects from './Project/Projects';
+import Certificates from './certificate/Certificates';
+import Guestbooks from './guestbook/Guestbooks';
+import { PortfolioSkeleton } from './Skeletons';
 
 function Portfolio() {
   const navigate = useNavigate();
@@ -58,13 +60,13 @@ function Portfolio() {
   }, [params, userState, navigate]);
 
   if (!isFetchCompleted) {
-    return 'loading...';
+    return <PortfolioSkeleton />;
   }
 
   return (
     <Container fluid>
       <Row>
-        <Col md='3' lg='3'>
+        <Col md="3" lg="3">
           <User portfolioOwnerId={portfolioOwner.id} isEditable={isEditable} />
         </Col>
         <Col>
@@ -72,6 +74,7 @@ function Portfolio() {
           <Awards portfolioOwnerId={portfolioOwner.id} isEditable={isEditable} />
           <Projects portfolioOwnerId={portfolioOwner.id} isEditable={isEditable} />
           <Certificates portfolioOwnerId={portfolioOwner.id} isEditable={isEditable} />
+          <Guestbooks cur_user_id={userState.user?.id} cur_user_name={userState.user?.name} cur_owner_id={portfolioOwner.id} />
         </Col>
       </Row>
     </Container>

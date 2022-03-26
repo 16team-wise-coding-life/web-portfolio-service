@@ -29,6 +29,12 @@ class User {
     const updatedUser = await UserModel.findOneAndUpdate(filter, update, option);
     return updatedUser;
   }
+
+  static async delete({ user_id }) {
+    await UserModel.deleteOne({ id: user_id });
+
+    return '삭제가 완료 되었습니다.';
+  }
 }
 
 export { User };

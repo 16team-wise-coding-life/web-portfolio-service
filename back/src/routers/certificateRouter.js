@@ -87,7 +87,6 @@ certificateAuthRouter.get('/certificatelist/:user_id', async (req, res, next) =>
 certificateAuthRouter.delete('/certificates/:id', async (req, res, next) => {
   try {
     const certificate_id = req.params.id;
-    console.log(certificate_id);
     const deletedCertificate = await certificateAuthService.deleteCertificate({ certificate_id });
 
     if (deletedCertificate.errorMessage) {
