@@ -31,7 +31,7 @@ function UserCard({ user, setIsEditing, isEditable, isNetwork, isFollowing, hand
         {!isNetwork && !isEditable && <LikeButton isLiked={isLiked} handleLikeChange={handleLikeChange} howManyLiked={howManyLiked} />}
         {isNetwork && (
           <>
-            <Card.Link className='mt-3' href='#' onClick={() => navigate(`/users/${user.id}`)}>
+            <Card.Link className='mt-5' href='#' onClick={() => navigate(`/users/${user.id}`)} style={{ position: 'absolute', bottom: 5 }}>
               포트폴리오
             </Card.Link>
           </>
