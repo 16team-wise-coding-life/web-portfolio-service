@@ -18,15 +18,17 @@ function UserCard({ user, setIsEditing, isEditable, isNetwork, isFollowing, hand
         {isEditable && (
           <Col>
             <Row className='mt-3 text-center text-info'>
-              <Col sm={{ span: 20 }}>
+              <Col>
                 <Button variant='outline-info' size='sm' onClick={() => setIsEditing(true)}>
                   편집
                 </Button>
               </Col>
             </Row>
+            <Row>
+              <LikeButton isLiked={isLiked} handleLikeChange={handleLikeChange} howManyLiked={howManyLiked} />
+            </Row>
           </Col>
         )}
-
         {!isNetwork && !isEditable && <FollowingButton isFollowing={isFollowing} handleFollowChange={handleFollowChange} />}
         {!isNetwork && !isEditable && <LikeButton isLiked={isLiked} handleLikeChange={handleLikeChange} howManyLiked={howManyLiked} />}
         {isNetwork && (
