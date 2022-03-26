@@ -6,16 +6,12 @@ function CommentCard({ comment, setIsEditing, isEditable, handleDeleteClick }) {
   return (
     <>
       <Row>
-        <Card.Text className='mt-3 m-2'>{comment.name}</Card.Text>
-        <Card.Text className='m-2' style={{ color: 'grey' }}>
-          {' '}
-          {moment(comment.updatedAt).format('YYYY-MM-DD HH:mm:ss')}
-        </Card.Text>
+        <Card.Text className='m-2'>{comment.name}</Card.Text>
         <Card.Subtitle className='text-muted m-2'>{comment.content}</Card.Subtitle>
       </Row>
       {isEditable && (
         <>
-          <Container style={{ position: 'relative' }} className='mt-3'>
+          <Container style={{ position: 'relative' }}>
             <Row className='mb-3'>
               <Col xs lg='1'>
                 <Button variant='outline-info' size='sm' className='mt-2' onClick={() => setIsEditing(true)}>
