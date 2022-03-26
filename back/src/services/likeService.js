@@ -2,8 +2,8 @@ import { Like } from '../db';
 
 class likeService {
   static async addLike({ user_id, like_id }) {
-    const newlike = { user_id, like_id };
-    const createdNewLike = await Like.create({ newlike });
+    const newLike = { user_id, like_id };
+    const createdNewLike = await Like.create({ newLike });
     createdNewLike.errorMessage = null;
     return createdNewLike;
   }
