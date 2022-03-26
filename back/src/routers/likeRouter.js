@@ -30,7 +30,7 @@ likeRouter.post('/like/create', async (req, res, next) => {
 });
 
 // 좋아요 조회 API
-likeRouter.get('/like/:user_id', async (req, res, next) => {
+likeRouter.get('/likelist/:user_id', async (req, res, next) => {
   try {
     const like_id = req.params.user_id;
     const like = await likeService.getLike({ like_id });

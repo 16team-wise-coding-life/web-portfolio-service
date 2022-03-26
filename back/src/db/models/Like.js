@@ -12,7 +12,7 @@ class Like {
   }
 
   static async deleteLike({ unlike }) {
-    const deletedLike = await LikeModel.findOneAndDelete(unlike);
+    const deletedLike = await LikeModel.deleteMany(unlike);
     return deletedLike;
   }
 }
