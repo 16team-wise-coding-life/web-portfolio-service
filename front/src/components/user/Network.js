@@ -9,20 +9,28 @@ import { UserStateContext } from '../../App';
 function Network() {
   const navigate = useNavigate();
   const userState = useContext(UserStateContext);
+  const currUserId = userState.user?.id;
   // useState 훅을 통해 users 상태를 생성함.
   const [users, setUsers] = useState([]);
   const [followingUsers, setFollowingUsers] = useState([]);
-  const [checked, setChecked] = useState(false);
+  const [followerUsers, setFollowerUsers] = useState([]);
+  const [checked, setChecked] = useState('1');
   const [rendingUsers, setRendingUsers] = useState([]);
+
+  const radios = [
+    { name: '모든 사용자 보기', value: '1' },
+    { name: '내가 팔로우한 사용자 보기', value: '2' },
+    { name: '나를 팔로우한 사용자 보기', value: '3' },
+  ];
 
   const loadUserList = async () => {
     try {
       const { data: tempAllUsers } = await Api.get('userlist');
       setUsers(tempAllUsers);
-      const { data: tempFollowingUsers } = await Api.get(`followinglist/${userState.user?.id}`);
+      const { data: tempFollowingUsers } = await Api.get(`followinglist/${currUserId}`);
       setFollowingUsers(tempFollowingUsers);
-      console.log('tempusers', tempAllUsers);
-      console.log('tempfollowing', tempFollowingUsers);
+      const { data: tempFollowerUsers } = await Api.get(`followerlist/${currUserId}`);
+      setFollowerUsers(tempFollowerUsers);
     } catch (error) {
       console.log(error);
     }
@@ -38,24 +46,35 @@ function Network() {
   }, [userState, navigate]);
 
   useEffect(() => {
-    let tempUsers = users;
-    if (checked) {
+    let tempUsers = [];
+    if (checked === '1') {
+      tempUsers = users;
+    } else if (checked === '2') {
       tempUsers = followingUsers.map(followingUser => {
         return users.find(user => user.id === followingUser.following_id);
+      });
+    } else {
+      tempUsers = followerUsers.map(followerUser => {
+        return users.find(user => user.id === followerUser.user_id);
       });
     }
     setRendingUsers(tempUsers);
   }, [users, followingUsers, checked]);
 
-  const toggleCheck = () => {
-    setChecked(!checked);
+  const radioCheck = e => {
+    setChecked(e.currentTarget.value);
   };
 
   return (
     <Container fluid>
-      <ToggleButton className='mb-2' id='toggle-check' type='checkbox' variant='outline-primary' checked={checked} onChange={toggleCheck}>
+      {/* <ToggleButton className='mb-2' id='toggle-check' type='checkbox' variant='outline-primary' checked={checked} onChange={toggleCheck}>
         {checked ? '모든 사용자 보기' : '내가 팔로우한 사용자 보기'}
-      </ToggleButton>
+      </ToggleButton> */}
+      {radios.map((radio, idx) => (
+        <ToggleButton key={idx} id={`radio-${idx}`} type='radio' value={radio.value} variant='outline-primary' checked={checked === radio.value} onChange={radioCheck}>
+          {radio.name}
+        </ToggleButton>
+      ))}
       <Row xs='auto' className='jusify-content-center'>
         {rendingUsers.map(user => (
           <UserCard key={user.id} user={user} isNetwork />
