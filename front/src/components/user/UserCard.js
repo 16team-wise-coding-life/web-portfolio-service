@@ -17,15 +17,15 @@ function UserCard({ user, setIsEditing, isEditable, isNetwork, isFollowing, hand
         <Card.Text>{user?.description}</Card.Text>
         {isEditable && (
           <Col>
-            <Row className='mt-3 text-center text-info'>
+            <Row className='mt-3 text-info'>
               <Col>
-                <Button variant='outline-info' size='sm' onClick={() => setIsEditing(true)}>
+                <Button variant='outline-info' onClick={() => setIsEditing(true)}>
                   편집
                 </Button>
               </Col>
-            </Row>
-            <Row>
-              <LikeButton isLiked={isLiked} handleLikeChange={handleLikeChange} howManyLiked={howManyLiked} />
+              <Col>
+                <LikeButton isLiked={isLiked} handleLikeChange={handleLikeChange} howManyLiked={howManyLiked} />
+              </Col>
             </Row>
           </Col>
         )}
