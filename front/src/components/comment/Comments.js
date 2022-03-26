@@ -41,21 +41,17 @@ function Comments({ cur_user_id, cur_user_name, board_id }) {
   }, [cur_user_id, cur_user_name]);
 
   return (
-    <Card className="mb-3">
+    <Card className='mt-3 mb-3'>
       <Card.Body>
         <Card.Title>댓글</Card.Title>
-        <Card.Text>
-          <CommentAddForm setComments={setComments} cur_user_id={cur_user_id} cur_user_name={cur_user_name} cur_board_id={board_id} />
-        </Card.Text>
-        <Card.Text>
-          {comments.map(comment => {
-            return (
-              <Card key={comment._id}>
-                <Comment commentCard={comment} isEditable={checkIsEditable(comment.user_id)} handleDeleteClick={handleDeleteClick} />
-              </Card>
-            );
-          })}
-        </Card.Text>
+        <CommentAddForm setComments={setComments} cur_user_id={cur_user_id} cur_user_name={cur_user_name} cur_board_id={board_id} />
+        {comments.map(comment => {
+          return (
+            <Card className='mt-3' key={comment._id}>
+              <Comment commentCard={comment} isEditable={checkIsEditable(comment.user_id)} handleDeleteClick={handleDeleteClick} />
+            </Card>
+          );
+        })}
       </Card.Body>
     </Card>
   );

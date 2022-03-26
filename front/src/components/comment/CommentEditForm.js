@@ -25,13 +25,13 @@ function CommentEditForm({ comment, setComment, setIsEditing }) {
   };
 
   return (
-    <Form onSubmit={handleSubmit} className="mt-3">
-      <Form.Group className="mb-3" controlId="commentAdd">
+    <Form onSubmit={handleSubmit} className='mt-3'>
+      <Form.Group className='mb-3' controlId='commentAdd'>
         <Form.Label>{comment.name}</Form.Label>
-        <Form.Control as="textarea" rows={3} value={tempComment.content} onChange={e => handleCommentValue('content', e.target.value)} />
+        <Form.Control as='textarea' rows={3} value={tempComment.content} onChange={e => handleCommentValue('content', e.target.value)} />
       </Form.Group>
-      <Form.Group className="mt-3 text-center">
-        <Button variant="primary" type="submit" className="me-2">
+      <Form.Group className='mt-3 text-center'>
+        <Button variant='primary' type='submit' className='me-2'>
           수정
         </Button>
       </Form.Group>

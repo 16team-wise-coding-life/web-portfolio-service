@@ -27,13 +27,13 @@ function CommentAddForm({ setComments, cur_user_id, cur_user_name, cur_board_id 
   };
 
   return (
-    <Form onSubmit={handleSubmit} className="mt-3">
-      <Form.Group className="mb-3" controlId="commentAdd">
+    <Form onSubmit={handleSubmit} className='mt-3'>
+      <Form.Group className='mb-3' controlId='commentAdd'>
         <Form.Label>{cur_user_name}</Form.Label>
-        <Form.Control as="textarea" rows={3} placeholder="바르고 고운 댓글을 달아주세요 *^~^*" value={tempComment.content} onChange={e => handleCommentValue('content', e.target.value)} />
+        <Form.Control as='textarea' rows={3} placeholder='바르고 고운 댓글을 달아주세요 *^~^*' value={tempComment.content} onChange={e => handleCommentValue('content', e.target.value)} />
       </Form.Group>
-      <Form.Group className="mt-3 text-center">
-        <Button variant="primary" type="submit" className="me-2">
+      <Form.Group className='mt-3 text-center'>
+        <Button variant='primary' type='submit' className='me-2'>
           등록
         </Button>
       </Form.Group>
