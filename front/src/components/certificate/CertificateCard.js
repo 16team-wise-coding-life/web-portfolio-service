@@ -21,12 +21,12 @@ function CertificateCard({ certificate, setIsEditing, isEditable, handleDeleteCl
       {isEditable && (
         <>
           <Col xs='auto' lg='1'>
-            <Button className='mr-3' variant='outline-info' size='sm' onClick={() => setIsEditing(true)}>
+            <Button className='mr-3' variant='outline-info' size='sm' style={{ position: 'absolute', right: 60, marginRight: '10px' }} onClick={() => setIsEditing(true)}>
               편집
             </Button>
           </Col>
           <Col xs='auto' lg='1'>
-            <Button className='mr-3' variant='outline-danger' size='sm' onClick={() => handleDeleteClick(certificate._id)}>
+            <Button className='mr-3' variant='outline-danger' size='sm' style={{ position: 'absolute', right: 3, marginRight: '10px' }} onClick={() => handleDeleteClick(certificate._id)}>
               삭제
             </Button>
           </Col>
