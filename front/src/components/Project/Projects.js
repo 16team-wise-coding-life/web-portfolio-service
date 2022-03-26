@@ -3,10 +3,12 @@ import { Button, Card, Col, Row } from 'react-bootstrap';
 import * as Api from '../../api';
 import ProjectAddForm from './ProjectAddForm';
 import Project from './Project';
+import { ProjectSkeleton } from '../Skeletons';
 
 function Projects({ portfolioOwnerId, isEditable }) {
   const [projects, setProjects] = useState([]);
   const [isAdding, setIsAdding] = useState(false);
+  const [isFetchCompleted, setIsFetchCompleted] = useState(false);
 
   const handleDeleteClick = async id => {
     try {
@@ -24,9 +26,14 @@ function Projects({ portfolioOwnerId, isEditable }) {
     async function loadProjectList() {
       const res = await Api.get(`projectlist/${portfolioOwnerId}`);
       setProjects(res.data);
+      setIsFetchCompleted(true);
     }
     loadProjectList();
   }, [portfolioOwnerId]);
+
+  if (!isFetchCompleted) {
+    return <ProjectSkeleton />;
+  }
 
   return (
     <>

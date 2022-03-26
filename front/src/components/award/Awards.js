@@ -4,10 +4,12 @@ import { Card, Button, Row, Col } from 'react-bootstrap';
 import Award from './Award';
 import AwardAddForm from './AwardAddForm';
 import * as Api from '../../api';
+import { AwardSkeleton } from '../Skeletons';
 
 function Awards({ portfolioOwnerId, isEditable }) {
   const [isAdding, setIsAdding] = useState(false);
   const [awards, setAwards] = useState([]);
+  const [isFetchCompleted, setIsFetchCompleted] = useState(false);
 
   const handleDeleteClick = async _id => {
     try {
@@ -26,12 +28,17 @@ function Awards({ portfolioOwnerId, isEditable }) {
       try {
         const res = await Api.get(`awardlist/${portfolioOwnerId}`);
         setAwards(res.data);
+        setIsFetchCompleted(true);
       } catch (error) {
         console.log(error);
       }
     };
     loadAwards();
   }, [portfolioOwnerId]);
+
+  if (!isFetchCompleted) {
+    return <AwardSkeleton />;
+  }
 
   return (
     <>

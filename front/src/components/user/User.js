@@ -59,6 +59,7 @@ function User({ portfolioOwnerId, isEditable }) {
       setLikeList(newLikeList);
       checkLike(newLikeList);
       setHowManyLiked(newLikeList.length);
+      setIsFetchCompleted(true);
     } catch (error) {
       console.log(error);
     }
@@ -68,7 +69,6 @@ function User({ portfolioOwnerId, isEditable }) {
     loadUsers();
     loadFollowingLists();
     loadLikeList();
-    setIsFetchCompleted(true);
   }, [portfolioOwnerId]);
 
   const handleFollowChange = async isFollowing => {

@@ -3,10 +3,12 @@ import { Button, Card, Col, Row } from 'react-bootstrap';
 import * as Api from '../../api';
 import Education from './Education';
 import EducationAddForm from './EducationAddForm';
+import { EducationSkeleton } from '../Skeletons';
 
 function Educations({ portfolioOwnerId, isEditable }) {
   const [educations, setEducations] = useState([]);
   const [isAdding, setIsAdding] = useState(false);
+  const [isFetchCompleted, setIsFetchCompleted] = useState(false);
 
   const handleDeleteClick = async id => {
     try {
@@ -24,9 +26,14 @@ function Educations({ portfolioOwnerId, isEditable }) {
     async function loadEducationList() {
       const res = await Api.get(`educationlist/${portfolioOwnerId}`);
       setEducations(res.data);
+      setIsFetchCompleted(true);
     }
     loadEducationList();
   }, [portfolioOwnerId]);
+
+  if (!isFetchCompleted) {
+    return <EducationSkeleton />;
+  }
 
   return (
     <>

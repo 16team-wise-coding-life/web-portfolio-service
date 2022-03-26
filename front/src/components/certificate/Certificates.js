@@ -3,12 +3,13 @@ import { Card, Button, Row, Col } from 'react-bootstrap';
 
 import Certificate from './Certificate';
 import CertificateAddForm from './CertificateAddForm';
-
+import { CertificateSkeleton } from '../Skeletons';
 import * as Api from '../../api';
 
 function Certificates({ portfolioOwnerId, isEditable }) {
   const [isAdding, setIsAdding] = useState(false);
   const [certificates, setCertificates] = useState([]);
+  const [isFetchCompleted, setIsFetchCompleted] = useState(false);
 
   const handleDeleteClick = async _id => {
     try {
@@ -27,12 +28,17 @@ function Certificates({ portfolioOwnerId, isEditable }) {
       try {
         const res = await Api.get(`certificatelist/${portfolioOwnerId}`);
         setCertificates(res.data);
+        setIsFetchCompleted(true);
       } catch (error) {
         console.log(error);
       }
     };
     loadCertificates();
   }, [portfolioOwnerId]);
+
+  if (!isFetchCompleted) {
+    return <CertificateSkeleton />;
+  }
 
   return (
     <>
