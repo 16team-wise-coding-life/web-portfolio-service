@@ -4,7 +4,7 @@ import { EducationService } from '../services/educationService';
 import { login_required } from '../middlewares/login_required';
 
 const educationRouter = Router();
-certificateAuthRouter.use(login_required);
+educationRouter.use(login_required);
 
 educationRouter.post('/education/create', async (req, res, next) => {
   try {
