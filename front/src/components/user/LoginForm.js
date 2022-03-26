@@ -59,7 +59,9 @@ function LoginForm() {
     <Container>
       <Row className='justify-content-md-center mt-5'>
         <Col lg={8}>
-          <img src={main} />
+          <div style={{ textAlign: 'center' }}>
+            <img src={main} style={{ height: '400px', width: '500px' }} />
+          </div>
           <Form onSubmit={handleSubmit}>
             <Form.Group controlId='loginEmail'>
               <Form.Label>이메일 주소</Form.Label>
