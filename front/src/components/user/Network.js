@@ -5,6 +5,7 @@ import { Container, Row, ToggleButton } from 'react-bootstrap';
 import * as Api from '../../api';
 import UserCard from './UserCard';
 import { UserStateContext } from '../../App';
+import { NetworkSkeleton } from '../Skeletons';
 
 function Network() {
   const navigate = useNavigate();
@@ -16,6 +17,7 @@ function Network() {
   const [followerUsers, setFollowerUsers] = useState([]);
   const [checked, setChecked] = useState('1');
   const [rendingUsers, setRendingUsers] = useState([]);
+  const [isFetchCompleted, setIsFetchCompleted] = useState(false);
 
   const radios = [
     { name: '모든 사용자', value: '1' },
@@ -31,6 +33,7 @@ function Network() {
       setFollowingUsers(tempFollowingUsers);
       const { data: tempFollowerUsers } = await Api.get(`followerlist/${currUserId}`);
       setFollowerUsers(tempFollowerUsers);
+      setIsFetchCompleted(true);
     } catch (error) {
       console.log(error);
     }
@@ -65,6 +68,9 @@ function Network() {
     setChecked(e.currentTarget.value);
   };
 
+  if (!isFetchCompleted) {
+    return <NetworkSkeleton />;
+  }
   return (
     <Container fluid>
       {radios.map((radio, idx) => (
