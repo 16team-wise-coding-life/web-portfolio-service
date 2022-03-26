@@ -26,7 +26,7 @@ function Projects({ portfolioOwnerId, isEditable }) {
       setProjects(res.data);
     }
     loadProjectList();
-  }, []);
+  }, [portfolioOwnerId]);
 
   return (
     <>

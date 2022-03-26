@@ -26,7 +26,7 @@ function Educations({ portfolioOwnerId, isEditable }) {
       setEducations(res.data);
     }
     loadEducationList();
-  }, []);
+  }, [portfolioOwnerId]);
 
   return (
     <>
