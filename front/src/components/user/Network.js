@@ -18,9 +18,9 @@ function Network() {
   const [rendingUsers, setRendingUsers] = useState([]);
 
   const radios = [
-    { name: '모든 사용자 보기', value: '1' },
-    { name: '내가 팔로우한 사용자 보기', value: '2' },
-    { name: '나를 팔로우한 사용자 보기', value: '3' },
+    { name: '모든 사용자', value: '1' },
+    { name: '팔로잉', value: '2' },
+    { name: '팔로워', value: '3' },
   ];
 
   const loadUserList = async () => {
@@ -67,11 +67,8 @@ function Network() {
 
   return (
     <Container fluid>
-      {/* <ToggleButton className='mb-2' id='toggle-check' type='checkbox' variant='outline-primary' checked={checked} onChange={toggleCheck}>
-        {checked ? '모든 사용자 보기' : '내가 팔로우한 사용자 보기'}
-      </ToggleButton> */}
       {radios.map((radio, idx) => (
-        <ToggleButton key={idx} id={`radio-${idx}`} type='radio' value={radio.value} variant='outline-primary' checked={checked === radio.value} onChange={radioCheck}>
+        <ToggleButton key={idx} id={`radio-${idx}`} type='radio' value={radio.value} className='mb-3 me-1' variant='outline-primary' checked={checked === radio.value} onChange={radioCheck}>
           {radio.name}
         </ToggleButton>
       ))}
