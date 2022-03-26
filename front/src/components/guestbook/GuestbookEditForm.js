@@ -26,13 +26,13 @@ function GuestbookEditForm({ guestbook, setGuestbook, setIsEditing }) {
 
   return (
     <>
-      <Form onSubmit={handleSubmit} className="mt-3">
-        <Form.Group className="mb-3" controlId="commentAdd">
+      <Form onSubmit={handleSubmit} className='mt-3'>
+        <Form.Group className='mb-3' controlId='commentAdd'>
           <Form.Label>{guestbook.user_name}</Form.Label>
-          <Form.Control as="textarea" rows={3} value={tempGuestbook.content} onChange={e => handleGuestbookValue('content', e.target.value)} />
+          <Form.Control as='textarea' rows={3} value={tempGuestbook.content} onChange={e => handleGuestbookValue('content', e.target.value)} />
         </Form.Group>
-        <Form.Group className="mt-3 text-center">
-          <Button variant="primary" type="submit" className="me-2">
+        <Form.Group className='mt-3 text-center'>
+          <Button variant='primary' type='submit' className='me-2'>
             수정
           </Button>
         </Form.Group>

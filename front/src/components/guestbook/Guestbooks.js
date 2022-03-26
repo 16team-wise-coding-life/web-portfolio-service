@@ -41,13 +41,13 @@ function Guestbooks({ cur_user_id, cur_user_name, cur_owner_id }) {
   }, [cur_user_id, cur_user_name, cur_owner_id]);
 
   return (
-    <Card className="mt-3 mb-3">
+    <Card className='mt-3 mb-3'>
       <Card.Body>
         <Card.Title>방명록</Card.Title>
         {guestbooks.map(guestbook => {
           return (
-            <CardGroup className="pt-1 pb-4" key={guestbook._id}>
-              <Card border="light" style={{ width: '18rem' }}>
+            <CardGroup className='pt-1 pb-4' key={guestbook._id}>
+              <Card border='light' style={{ width: '18rem' }}>
                 <Guestbook guestbookCard={guestbook} isEditable={checkIsEditable(guestbook.user_id)} handleDeleteClick={handleDeleteClick} />
               </Card>
             </CardGroup>

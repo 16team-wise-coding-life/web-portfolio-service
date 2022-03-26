@@ -11,6 +11,11 @@ class Following {
     return following;
   }
 
+  static async findAllByFollowingId({ following_id }) {
+    const follower = await FollowingModel.find({ following_id: following_id });
+    return follower;
+  }
+
   static async deleteFollowing({ unfollow }) {
     const deletedFollowing = await FollowingModel.findOneAndDelete(unfollow);
     return deletedFollowing;
