@@ -10,19 +10,19 @@ function CommentCard({ comment, setIsEditing, isEditable, handleDeleteClick }) {
           <Row>
             <Col>
               <span>{comment.name}</span>
-              <dev style={{ color: 'grey' }}> / {moment(comment.created_at).format('YYYY-MM-DD HH:mm:ss')}</dev>
+              <dev style={{ color: 'grey' }}> / {moment(comment.updatedAt).format('YYYY-MM-DD HH:mm:ss')}</dev>
               <br />
-              <span className="text-muted">{comment.content}</span>
+              <span className='text-muted'>{comment.content}</span>
             </Col>
             {isEditable && (
               <>
-                <Col xs lg="1">
-                  <Button variant="outline-info" size="sm" className="mt-2" onClick={() => setIsEditing(true)}>
+                <Col xs lg='1'>
+                  <Button variant='outline-info' size='sm' className='mt-2' onClick={() => setIsEditing(true)}>
                     편집
                   </Button>
                 </Col>
-                <Col xs lg="1">
-                  <Button variant="outline-danger" size="sm" className="mt-2" onClick={() => handleDeleteClick(comment.id)}>
+                <Col xs lg='1'>
+                  <Button variant='outline-danger' size='sm' className='mt-2' onClick={() => handleDeleteClick(comment.id)}>
                     삭제
                   </Button>
                 </Col>
