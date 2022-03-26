@@ -60,10 +60,11 @@ function PostView() {
     <Container>
       <Card className='mb-3 justify-content-md-center'>
         <Card.Header>
-          <Card.Title>{postInfo.title}</Card.Title>
-          작성자 : {postInfo.name} <dev style={{ color: 'grey' }}> / {moment(postInfo.updatedAt).format('YYYY-MM-DD HH:mm:ss')}</dev>
+          <Card.Title className='mb-3'>{postInfo.title}</Card.Title>
+          <Card.Subtitle className='text-muted mb-3'>작성자 : {postInfo.name}</Card.Subtitle>
+          <Card.Subtitle className='text-muted mb-2'>{moment(postInfo.updatedAt).format('YYYY-MM-DD HH:mm:ss')}</Card.Subtitle>
         </Card.Header>
-        <Card.Body>
+        <Card.Body className='mt-3 mb-3'>
           {postInfo.content?.split('\n')?.map((line, index) => (
             <Card.Text key={index}>
               {line}
@@ -72,7 +73,7 @@ function PostView() {
           ))}
         </Card.Body>
         <Card.Footer className='text-center'>
-          <Button variant='primary' className='me-2' onClick={() => navigate(`/freeboard`)}>
+          <Button variant='outline-primary' className='me-2' onClick={() => navigate(`/freeboard`)}>
             목록
           </Button>
           {isEditable && (
@@ -81,7 +82,7 @@ function PostView() {
             </Button>
           )}
           {isEditable && (
-            <Button variant='primary' className='me-2' onClick={() => deleteNavigate()}>
+            <Button variant='danger' className='me-2' onClick={() => deleteNavigate()}>
               삭제
             </Button>
           )}
