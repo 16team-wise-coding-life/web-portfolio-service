@@ -10,13 +10,13 @@ function Educations({ portfolioOwnerId, isEditable }) {
 
   const handleDeleteClick = async id => {
     try {
-      if (window.confirm('프로젝트 항목을 삭제하시겠습니까?')) {
+      if (window.confirm('학력을 삭제하시겠습니까?')) {
         await Api.delete(`educations/${id}`);
         const res = await Api.get(`educationlist/${portfolioOwnerId}`);
         setEducations(res.data);
       }
     } catch (error) {
-      alert('프로젝트 항목을 삭제하지 못했습니다.', error);
+      alert('학력을 삭제하지 못했습니다.', error);
     }
   };
 
