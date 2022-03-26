@@ -56,7 +56,7 @@ function Freeboard() {
         <ListGroup variant='flush'>
           {(checked ? myPosts : allPosts).map(post => (
             <ListGroup.Item key={post._id} onClick={() => navigate(`/freeboard/${post._id}`)}>
-              <Row>
+              <Row style={{ cursor: 'pointer' }}>
                 <Col md={4}>{post.title}</Col> <Col md={{ span: 4, offset: 4 }}>{post.name}</Col>
               </Row>
             </ListGroup.Item>
