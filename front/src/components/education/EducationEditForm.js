@@ -35,15 +35,24 @@ function EducationEditForm({ currentEducation, setEducations, setIsEditing }) {
   return (
     <Form onSubmit={handleSubmit}>
       <Form.Group controlId='educationEditSchool' className='mt-3'>
-        <Form.Control type='text' placeholder='학교 이름' name='school' value={form.school} onChange={e => handleEducationEdit(e.target.name, e.target.value)} />
+        <Form.Control type='text' placeholder='학교 이름' name='school' value={form.school} onChange={e => handleEducationEdit('school', e.target.value)} />
       </Form.Group>
       <Form.Group controlId='educationEditMajor' className='mt-3'>
-        <Form.Control type='text' placeholder='전공' name='major' value={form.major} onChange={e => handleEducationEdit(e.target.name, e.target.value)} />
+        <Form.Control type='text' placeholder='전공' name='major' value={form.major} onChange={e => handleEducationEdit('major', e.target.value)} />
       </Form.Group>
 
-      <div key={`inline-radio`} className='mb-3 mt-3'>
-        {positions.map(position => (
-          <Form.Check inline label={position} type='radio' name='position' value={position} checked={form.position === position} onChange={e => handleEducationEdit(e.target.name, e.target.value)} />
+      <div className='mb-3 mt-3'>
+        {positions.map((position, idx) => (
+          <Form.Check
+            inline
+            label={position}
+            type='radio'
+            key={idx}
+            name='position'
+            value={position}
+            checked={form.position === position}
+            onChange={e => handleEducationEdit('position', e.target.value)}
+          />
         ))}
       </div>
 

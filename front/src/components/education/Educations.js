@@ -36,6 +36,7 @@ function Educations({ portfolioOwnerId, isEditable }) {
           {educations.map(education => (
             <Education key={education._id} education={education} setEducations={setEducations} isEditable={isEditable} handleDeleteClick={handleDeleteClick} />
           ))}
+
           {isEditable && (
             <Row className='mt-3 text-center mb-4'>
               <Col sm='20'>
@@ -43,6 +44,7 @@ function Educations({ portfolioOwnerId, isEditable }) {
               </Col>
             </Row>
           )}
+
           {isAdding && <EducationAddForm portfolioOwnerId={portfolioOwnerId} setEducations={setEducations} setIsAdding={setIsAdding} />}
         </Card.Body>
       </Card>
