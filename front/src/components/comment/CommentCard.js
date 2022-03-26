@@ -9,7 +9,7 @@ function CommentCard({ comment, setIsEditing, isEditable, handleDeleteClick }) {
         <Card.Text className='mt-3 m-2'>{comment.name}</Card.Text>
         <Card.Text className='m-2' style={{ color: 'grey' }}>
           {' '}
-          {moment(comment.created_at).format('YYYY-MM-DD HH:mm:ss')}
+          {moment(comment.updatedAt).format('YYYY-MM-DD HH:mm:ss')}
         </Card.Text>
         <Card.Subtitle className='text-muted m-2'>{comment.content}</Card.Subtitle>
       </Row>

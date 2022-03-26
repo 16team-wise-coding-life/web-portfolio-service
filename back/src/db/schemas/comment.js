@@ -1,28 +1,28 @@
 import { Schema, model, Mongoose } from 'mongoose';
 
-const CommentSchema = new Schema({
-  board_id: {
-    type: Schema.Types.ObjectId,
-    ref: 'FreeBoard',
+const CommentSchema = new Schema(
+  {
+    board_id: {
+      type: Schema.Types.ObjectId,
+      ref: 'FreeBoard',
+    },
+    user_id: {
+      type: String,
+      required: true,
+    },
+    name: {
+      type: String,
+      required: true,
+    },
+    content: {
+      type: String,
+      required: true,
+    },
   },
-  user_id: {
-    type: String,
-    required: true,
-  },
-  name: {
-    type: String,
-    required: true,
-  },
-  content: {
-    type: String,
-    required: true,
-  },
-  created_at: {
-    type: Date,
-    required: true,
-    default: Date.now(),
-  },
-});
+  {
+    timestamps: true,
+  }
+);
 
 const CommentModel = model('Comment', CommentSchema);
 
