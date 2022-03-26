@@ -5,6 +5,7 @@ import { Container, Row, ToggleButton } from 'react-bootstrap';
 import * as Api from '../../api';
 import UserCard from './UserCard';
 import { UserStateContext } from '../../App';
+import { NetworkSkeleton } from '../Skeletons';
 
 function Network() {
   const navigate = useNavigate();
@@ -14,6 +15,7 @@ function Network() {
   const [followingUsers, setFollowingUsers] = useState([]);
   const [checked, setChecked] = useState(false);
   const [rendingUsers, setRendingUsers] = useState([]);
+  const [isFetchCompleted, setIsFetchCompleted] = useState(false);
 
   const loadUserList = async () => {
     try {
@@ -21,6 +23,7 @@ function Network() {
       setUsers(tempAllUsers);
       const { data: tempFollowingUsers } = await Api.get(`followinglist/${userState.user?.id}`);
       setFollowingUsers(tempFollowingUsers);
+      setIsFetchCompleted(true);
     } catch (error) {
       console.log(error);
     }
@@ -49,6 +52,9 @@ function Network() {
     setChecked(!checked);
   };
 
+  if (!isFetchCompleted) {
+    return <NetworkSkeleton />;
+  }
   return (
     <Container fluid>
       <ToggleButton className='mb-2' id='toggle-check' type='checkbox' variant='outline-primary' checked={checked} onChange={toggleCheck}>
