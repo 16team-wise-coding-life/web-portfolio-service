@@ -13,6 +13,7 @@ function Network() {
   const [users, setUsers] = useState([]);
   const [followingUsers, setFollowingUsers] = useState([]);
   const [checked, setChecked] = useState(false);
+  const [rendingUsers, setRendingUsers] = useState([]);
 
   const loadUserList = async () => {
     try {
@@ -20,6 +21,8 @@ function Network() {
       setUsers(tempAllUsers);
       const { data: tempFollowingUsers } = await Api.get(`followinglist/${userState.user?.id}`);
       setFollowingUsers(tempFollowingUsers);
+      console.log('tempusers', tempAllUsers);
+      console.log('tempfollowing', tempFollowingUsers);
     } catch (error) {
       console.log(error);
     }
@@ -34,6 +37,16 @@ function Network() {
     loadUserList();
   }, [userState, navigate]);
 
+  useEffect(() => {
+    let tempUsers = users;
+    if (checked) {
+      tempUsers = followingUsers.map(followingUser => {
+        return users.find(user => user.id === followingUser.following_id);
+      });
+    }
+    setRendingUsers(tempUsers);
+  }, [users, followingUsers, checked]);
+
   const toggleCheck = () => {
     setChecked(!checked);
   };
@@ -44,13 +57,9 @@ function Network() {
         {checked ? '모든 사용자 보기' : '내가 팔로우한 사용자 보기'}
       </ToggleButton>
       <Row xs='auto' className='jusify-content-center'>
-        {checked
-          ? followingUsers.map(user => {
-              const followingId = user.following_id;
-              const followingUser = users.filter(user => user.id === followingId)[0];
-              return <UserCard key={followingUser._id} user={followingUser} isNetwork />;
-            })
-          : users.map(user => <UserCard key={user.id} user={user} isNetwork />)}
+        {rendingUsers.map(user => (
+          <UserCard key={user.id} user={user} isNetwork />
+        ))}
       </Row>
     </Container>
   );

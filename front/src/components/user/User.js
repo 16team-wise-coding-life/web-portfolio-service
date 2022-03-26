@@ -15,9 +15,11 @@ function User({ portfolioOwnerId, isEditable }) {
   const [isFollowing, setIsFollowing] = useState(false);
   const userState = useContext(UserStateContext);
 
-  const checkIsFollowing = (portfolioOwnerId, followingList) => {
+  const checkFollowing = (portfolioOwnerId, followingList) => {
     if (followingList.some(follow => follow.following_id === portfolioOwnerId)) {
       setIsFollowing(true);
+    } else {
+      setIsFollowing(false);
     }
   };
 
@@ -34,7 +36,7 @@ function User({ portfolioOwnerId, isEditable }) {
     try {
       const res = await Api.get(`followinglist/${userState.user.id}`);
       setFollowingList(res.data);
-      checkIsFollowing(portfolioOwnerId, followingList);
+      checkFollowing(portfolioOwnerId, res.data);
       setIsFetchCompleted(true);
     } catch (error) {
       console.log(error);
@@ -47,31 +49,22 @@ function User({ portfolioOwnerId, isEditable }) {
   }, [portfolioOwnerId]);
 
   const handleFollowChange = async isFollowing => {
-    // 팔로우하기
-    if (!isFollowing) {
-      try {
-        const res = await Api.post('following/create', {
-          user_id: userState.user.id,
-          following_id: portfolioOwnerId,
-        });
-        console.log(res.data);
-        loadFollowingLists();
-      } catch (error) {
-        console.log(error);
+    try {
+      const body = {
+        user_id: userState.user.id,
+        following_id: portfolioOwnerId,
+      };
+      if (!isFollowing) {
+        await Api.post('following/create', body);
+      } else {
+        // 팔로우 취소
+        await Api.delete('following/delete', '', body);
       }
-    } else {
-      // 팔로우 취소
-      try {
-        const res = await Api.body_delete('following/delete', {
-          user_id: userState.user.id,
-          following_id: portfolioOwnerId,
-        });
-        console.log(res.data);
-        loadFollowingLists();
-      } catch (error) {
-        console.log(error);
-      }
+      loadFollowingLists();
+    } catch (error) {
+      console.log(error);
     }
+    // 팔로우하기
   };
 
   if (!isFetchCompleted) {
