@@ -23,7 +23,7 @@ function UserEditForm({ user, setIsEditing, setUser }) {
   };
 
   const isEmailValid = validateEmail(email);
-  const isPasswordValid = password.length >= 4 || password.length == 0;
+  const isPasswordValid = password.length >= 4 || password.length === 0;
   const isPasswordSame = password === confirmPassword;
   const isNameValid = name.length >= 2;
   const isFormValid = isEmailValid && isNameValid && isPasswordValid && isPasswordSame;
