@@ -29,13 +29,25 @@ followingRouter.post('/following/create', async (req, res, next) => {
   }
 });
 
-// 모든팔로우 조회 API
+// 모든팔로잉 조회 API
 followingRouter.get('/followinglist/:user_id', async (req, res, next) => {
   try {
     const user_id = req.params.user_id;
     const following = await followingService.getFollowing({ user_id });
 
     res.status(200).send(following);
+  } catch (error) {
+    next(error);
+  }
+});
+
+// 모든팔로워 조회 API
+followingRouter.get('/followerlist/:user_id', async (req, res, next) => {
+  try {
+    const following_id = req.params.user_id;
+    const follower = await followingService.getFollower({ following_id });
+
+    res.status(200).send(follower);
   } catch (error) {
     next(error);
   }
