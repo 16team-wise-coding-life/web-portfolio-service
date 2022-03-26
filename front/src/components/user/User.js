@@ -59,7 +59,6 @@ function User({ portfolioOwnerId, isEditable }) {
       setLikeList(newLikeList);
       checkLike(newLikeList);
       setHowManyLiked(newLikeList.length);
-      console.log(howManyLiked);
     } catch (error) {
       console.log(error);
     }
