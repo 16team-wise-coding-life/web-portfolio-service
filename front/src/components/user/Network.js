@@ -21,8 +21,6 @@ function Network() {
       setUsers(tempAllUsers);
       const { data: tempFollowingUsers } = await Api.get(`followinglist/${userState.user?.id}`);
       setFollowingUsers(tempFollowingUsers);
-      console.log('tempusers', tempAllUsers);
-      console.log('tempfollowing', tempFollowingUsers);
     } catch (error) {
       console.log(error);
     }

@@ -13,6 +13,9 @@ function User({ portfolioOwnerId, isEditable }) {
   const [isFetchCompleted, setIsFetchCompleted] = useState(false);
   const [followingList, setFollowingList] = useState([]);
   const [isFollowing, setIsFollowing] = useState(false);
+  const [likeList, setLikeList] = useState([]);
+  const [isLiked, setIsLiked] = useState(false);
+  const [howManyLiked, setHowManyLiked] = useState();
   const userState = useContext(UserStateContext);
 
   const checkFollowing = (portfolioOwnerId, followingList) => {
@@ -20,6 +23,14 @@ function User({ portfolioOwnerId, isEditable }) {
       setIsFollowing(true);
     } else {
       setIsFollowing(false);
+    }
+  };
+
+  const checkLike = likeList => {
+    if (likeList.some(like => like.user_id === userState.user.id)) {
+      setIsLiked(true);
+    } else {
+      setIsLiked(false);
     }
   };
 
@@ -37,7 +48,18 @@ function User({ portfolioOwnerId, isEditable }) {
       const res = await Api.get(`followinglist/${userState.user.id}`);
       setFollowingList(res.data);
       checkFollowing(portfolioOwnerId, res.data);
-      setIsFetchCompleted(true);
+    } catch (error) {
+      console.log(error);
+    }
+  };
+
+  const loadLikeList = async () => {
+    try {
+      const { data: newLikeList } = await Api.get(`likelist/${portfolioOwnerId}`);
+      setLikeList(newLikeList);
+      checkLike(newLikeList);
+      setHowManyLiked(newLikeList.length);
+      console.log(howManyLiked);
     } catch (error) {
       console.log(error);
     }
@@ -46,6 +68,8 @@ function User({ portfolioOwnerId, isEditable }) {
   useEffect(() => {
     loadUsers();
     loadFollowingLists();
+    loadLikeList();
+    setIsFetchCompleted(true);
   }, [portfolioOwnerId]);
 
   const handleFollowChange = async isFollowing => {
@@ -67,6 +91,23 @@ function User({ portfolioOwnerId, isEditable }) {
     // 팔로우하기
   };
 
+  const handleLikeChange = async isLiked => {
+    try {
+      const body = {
+        user_id: userState.user.id,
+        like_id: portfolioOwnerId,
+      };
+      if (!isLiked) {
+        await Api.post('like/create', body);
+      } else {
+        await Api.delete('like/delete', '', body);
+      }
+      loadLikeList();
+    } catch (error) {
+      console.log(error);
+    }
+  };
+
   if (!isFetchCompleted) {
     return <UserSkeleton />;
   }
@@ -76,7 +117,16 @@ function User({ portfolioOwnerId, isEditable }) {
       {isEditing ? (
         <UserEditForm user={user} setIsEditing={setIsEditing} setUser={setUser} />
       ) : (
-        <UserCard user={user} setIsEditing={setIsEditing} isEditable={isEditable} isFollowing={isFollowing} handleFollowChange={handleFollowChange} />
+        <UserCard
+          user={user}
+          setIsEditing={setIsEditing}
+          isEditable={isEditable}
+          isFollowing={isFollowing}
+          handleFollowChange={handleFollowChange}
+          isLiked={isLiked}
+          handleLikeChange={handleLikeChange}
+          howManyLiked={howManyLiked}
+        />
       )}
     </>
   );
