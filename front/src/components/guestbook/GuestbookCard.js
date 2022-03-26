@@ -7,7 +7,14 @@ function GuestbookCard({ guestbook, setIsEditing, isEditable, handleDeleteClick 
       <Row className='align-items-center'>
         <Col>
           <Card.Header className='mt-2'>"{guestbook.user_name}"님이 들렀다 가셨어요.</Card.Header>
-          <Card.Subtitle className='text-muted mt-2 mb-3'>{guestbook.content}</Card.Subtitle>
+          <Card.Subtitle className='text-muted mt-2 mb-3'>
+            {guestbook.content?.split('\n')?.map((line, index) => (
+              <Card.Text key={index}>
+                {line}
+                <br />
+              </Card.Text>
+            ))}
+          </Card.Subtitle>
         </Col>
       </Row>
       {isEditable && (
