@@ -2,7 +2,7 @@ import React, { useContext } from 'react';
 import { useNavigate, useLocation } from 'react-router-dom';
 import Nav from 'react-bootstrap/Nav';
 import { UserStateContext, DispatchContext } from '../App';
-
+import title from '../styles/title.png';
 function Header() {
   const navigate = useNavigate();
   const location = useLocation();
@@ -26,7 +26,9 @@ function Header() {
   return (
     <Nav activeKey={location.pathname}>
       <Nav.Item className='me-auto mb-5'>
-        <Nav.Link disabled> 슬기로운 코딩생활 + 슬기로운 포트폴리오 관리!</Nav.Link>
+        <Nav.Link disabled>
+          <img src={title} />
+        </Nav.Link>
       </Nav.Item>
       <Nav.Item>
         <Nav.Link onClick={() => navigate('/')}>나의 페이지</Nav.Link>
