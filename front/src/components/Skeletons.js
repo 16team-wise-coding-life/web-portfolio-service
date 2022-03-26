@@ -167,7 +167,7 @@ export const CertificateSkeleton = () => {
 export const FreeBoardSkeleton = () => {
   return (
     <Card border='light' className='mb-3'>
-      <Card.Body>
+      <Card.Body className='m-5 p-5'>
         <Placeholder as={Card.Title} animation='glow'>
           <Placeholder xs={2} size='lg' />
           <Placeholder xs={2} size='lg' />
