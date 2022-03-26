@@ -4,8 +4,9 @@ import { EducationService } from '../services/educationService';
 import { login_required } from '../middlewares/login_required';
 
 const educationRouter = Router();
+certificateAuthRouter.use(login_required);
 
-educationRouter.post('/education/create', login_required, async (req, res, next) => {
+educationRouter.post('/education/create', async (req, res, next) => {
   try {
     if (is.emptyObject(req.body)) {
       throw new Error('headers의 Content-Type을 application/json으로 설정해주세요');
@@ -29,7 +30,7 @@ educationRouter.post('/education/create', login_required, async (req, res, next)
   }
 });
 
-educationRouter.get('/educations/:id', login_required, async (req, res, next) => {
+educationRouter.get('/educations/:id', async (req, res, next) => {
   try {
     const education_id = req.params.id;
     const currentEducationInfo = await EducationService.getEducationInfo({
@@ -45,7 +46,7 @@ educationRouter.get('/educations/:id', login_required, async (req, res, next) =>
   }
 });
 
-educationRouter.put('/educations/:id', login_required, async (req, res, next) => {
+educationRouter.put('/educations/:id', async (req, res, next) => {
   try {
     const education_id = req.params.id;
     const school = req.body.school ?? null;
@@ -66,7 +67,7 @@ educationRouter.put('/educations/:id', login_required, async (req, res, next) =>
   }
 });
 
-educationRouter.get('/educationlist/:user_id', login_required, async (req, res, next) => {
+educationRouter.get('/educationlist/:user_id', async (req, res, next) => {
   try {
     const user_id = req.params.user_id;
     const educations = await EducationService.getEducations({ user_id });
@@ -77,7 +78,7 @@ educationRouter.get('/educationlist/:user_id', login_required, async (req, res, 
   }
 });
 
-educationRouter.delete('/educations/:id', login_required, async (req, res, next) => {
+educationRouter.delete('/educations/:id', async (req, res, next) => {
   try {
     const education_id = req.params.id;
     const deletedEducation = await EducationService.deleteEducation({
