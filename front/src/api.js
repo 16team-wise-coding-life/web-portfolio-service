@@ -65,7 +65,6 @@ async function form_put(endpoint, formData) {
 }
 
 async function body_delete(endpoint, body) {
-  console.log(body);
   console.log(`DELETE 요청 ${serverUrl + endpoint}`);
   return axios.delete(serverUrl + endpoint, {
     body: { body },

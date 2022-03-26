@@ -50,8 +50,8 @@ function Comments({ cur_user_id, cur_user_name, board_id }) {
         <Card.Text>
           {comments.map(comment => {
             return (
-              <Card>
-                <Comment key={comment._id} commentCard={comment} isEditable={checkIsEditable(comment.user_id)} handleDeleteClick={handleDeleteClick} />
+              <Card key={comment._id}>
+                <Comment commentCard={comment} isEditable={checkIsEditable(comment.user_id)} handleDeleteClick={handleDeleteClick} />
               </Card>
             );
           })}
