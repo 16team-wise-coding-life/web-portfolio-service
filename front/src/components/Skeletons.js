@@ -219,3 +219,30 @@ export const PortfolioSkeleton = () => {
     </Container>
   );
 };
+
+export const NetworkSkeleton = () => {
+  return (
+    <Container fluid>
+      <Row>
+        <Col md='3' lg='3'>
+          <UserSkeleton />
+        </Col>
+        <Col md='3' lg='3'>
+          <UserSkeleton />
+        </Col>
+        <Col md='3' lg='3'>
+          <UserSkeleton />
+        </Col>
+        <Col md='3' lg='3'>
+          <UserSkeleton />
+        </Col>
+        <Col md='3' lg='3'>
+          <UserSkeleton />
+        </Col>
+        <Col md='3' lg='3'>
+          <UserSkeleton />
+        </Col>
+      </Row>
+    </Container>
+  );
+};
