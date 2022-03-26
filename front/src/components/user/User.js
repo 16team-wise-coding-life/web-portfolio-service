@@ -54,7 +54,6 @@ function User({ portfolioOwnerId, isEditable }) {
           user_id: userState.user.id,
           following_id: portfolioOwnerId,
         });
-        console.log(res.data);
         loadFollowingLists();
       } catch (error) {
         console.log(error);
@@ -66,7 +65,6 @@ function User({ portfolioOwnerId, isEditable }) {
           user_id: userState.user.id,
           following_id: portfolioOwnerId,
         });
-        console.log(res.data);
         loadFollowingLists();
       } catch (error) {
         console.log(error);
