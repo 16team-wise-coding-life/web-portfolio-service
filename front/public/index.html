@@ -21,6 +21,33 @@
       work correctly both with client-side routing and a non-root public URL.
       Learn how to configure a non-root public URL by running `npm run build`.
     -->
+    <style>
+      #root {
+        width: 100vw;
+        height: 100vh;
+        background: linear-gradient(-45deg, #596c86, #b7c9d9, #f1e2ff, #376ba7);
+        background-repeat: no-repeat;
+        background-size: 400% 400%;
+        position: relative;
+        animation: backgroundChange 20s ease-in-out infinite;
+        justify-content: center;
+        align-items: center;
+        overflow: hidden;
+      }
+
+      @keyframes backgroundChange {
+        0% {
+          background-position: 0 50%;
+        }
+        50% {
+          background-position: 100% 50%;
+        }
+        100% {
+          background-position: 0 50%;
+        }
+      }
+    </style>
+
     <title>슬기로운 코딩생활 :: 포트폴리오 사이트</title>
   </head>
   <body>
