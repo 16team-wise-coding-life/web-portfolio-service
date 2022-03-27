@@ -72,7 +72,7 @@ function Network() {
     return <NetworkSkeleton />;
   }
   return (
-    <Container fluid>
+    <Container fluid style={{ minHeight: '100vh' }}>
       {radios.map((radio, idx) => (
         <ToggleButton key={idx} id={`radio-${idx}`} type='radio' value={radio.value} className='mb-3 me-1' variant='outline-primary' checked={checked === radio.value} onChange={radioCheck}>
           {radio.name}
